@@ -1,0 +1,162 @@
+@media screen and (min-width: 1000px) {
+
+}
+/* FONT STYLE */
+
+/* larger name title */
+h1 {
+	margin: 0;
+	margin-bottom: 100px;
+	font-size: 2.8vw;
+  	color: black;
+}
+
+/* homepage project name */
+h2 {
+	font-family: 'Merriweather', serif;
+	margin: 0;
+	margin-top: 15px;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+/* FULL SCREEN ORGANIZATION */
+
+/* NAV SECTION STYLE */
+
+.nav {
+	width: 37vw;
+	max-width: 700px;
+	padding: 70px 80px;
+   text-align: left;
+}
+
+.nav p {
+	display: block;
+}
+
+/* about navigation */
+.about {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	padding: 80px;
+  	width: auto;
+  	min-width: 0;
+  	display: inline-block;
+	transform: none;
+	opacity: 1;
+}
+
+/* the small text with contact info */
+.detail {
+  font-size: .8em;
+  color: grey;
+  margin-top: 100px;
+  display: block;
+}
+
+/* Text about accepting offers */
+p span {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* CONTENT FLOW USING FLEX (flow class is in main css) */
+
+/* project card styling */
+.project {
+	padding-top: 3vw;
+	width: 33.3%;
+	min-width: 290px;
+	padding-right: 3vw;
+	box-sizing: border-box;
+	text-align: center;
+	flex-grow: 1;
+	position: relative;
+}
+
+.project img.hoverimg {
+	position: absolute;
+	left: 0;
+	top: calc(3vw);
+	width: calc(100% - 3vw);
+	height: inherit;
+	opacity: 0;
+	display: inline;
+}
+
+.project img, .project p, .project h2 {
+	transition-duration: 300ms;
+}
+
+img {
+	width: 100%;
+  height: inherit;
+}
+
+.project p {
+	font-size: .9em;
+	color: grey;
+}
+
+/* hover style */
+.project:hover p, .project:hover h2 {
+	opacity: 1;
+}
+
+.project:hover .hoverimg {
+	opacity: 1;
+}
+/* MOBILE SCREEN HOMESCREEN ADJUSTMENTS */
+
+@media screen and (max-width: 1000px) {
+   /* NAV SECTION MOBILE - nav becomes 100% width */
+
+	.nav {
+		width: 100vw;
+		padding: 0;
+		padding-bottom: 80px;
+      max-width: none;
+      text-align: left;
+	}
+
+   /* adjustment to David Duyker header */
+   h1 {
+     font-size: 2.3em;
+     text-align: left;
+     max-width: 100%;
+     margin: 0;
+	  padding: 30px;
+   }
+
+	.nav p {
+		/* display: none; */
+		padding: 32px 30px 48px 30px;
+	}
+
+	.detail {
+		margin: 0;
+	}
+
+	/* FLOW attributes in stylesheet.css, project here due to scope */
+
+   /* project tiles in home page flow on mobile */
+   .project {
+   	padding: 0 30px 80px 30px;
+   	margin: 0;
+   }
+
+	.project:hover img.hoverimg {
+		display:none;
+	}
+
+   /* about placement adjustment */
+   .about {
+     position:relative;
+     padding: 30px;
+     text-align: center;
+	  min-height: inherit;
+	  height: auto;
+   }
+}
