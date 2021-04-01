@@ -1,3 +1,3 @@
 # davidduyker.com
 
-remote server test
+portfolio deployment test
