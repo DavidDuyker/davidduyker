@@ -85,6 +85,7 @@ h4 {
 	color: var(--text);
 	font-size: 1.4em;
 	font-weight: 800;
+	letter-spacing: 0.07rem;
 }
 /* h4 on the resume page are right justified */
 .resume {
@@ -225,6 +226,7 @@ ul li p {
 	color: var(--text-secondary);
 	font-weight: 800;
 	line-height: 1rem;
+	letter-spacing: 0.08rem;
 }
 
 /* Hidden link to resume only visable on mobile */
