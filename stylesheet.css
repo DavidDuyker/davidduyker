@@ -1,9 +1,32 @@
+/* Variables */
+:root {
+	/* Basic lightmode color variables */
+	--base-hue: 0;
+	--base-sat: 0%;
+	--base-lit-fg: 15%;
+	--base-lit-bg: calc(100% - (var(--base-lit-fg) / 10));
+
+	/* Lightmode is based on basic hsl variabels */
+	--text: hsl(var(--base-hue), var(--base-sat), var(--base-lit-fg));
+	/* Lightens the text by 15% */
+	--text-secondary: hsl(var(--base-hue), var(--base-sat), calc(15% + var(--base-lit-fg)));
+	/* Interactive text elements are 30% lighter than dark */
+	--interactive: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit-fg) + 30%));
+	/* In lightmode the element reciving an interaction like hover or click will be same as dark */
+	--active: var(--text);
+	/* color is based off the distance of basic color compared to extream */
+	--bg-0: hsl(var(--base-hue), var(--base-sat), var(--base-lit-bg));
+	/* The lines (including borders on images for contrast) are  */
+	--line: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit-bg) - 20%));
+}
+
+/* universal styles */
 body {
 	font-family: 'Raleway', sans-serif;
 	margin: 0;
 	overflow-y: scroll;
-	overflow-x: auto;
-	background-color: #FAFAFA;
+	overflow-x: hidden;
+	background-color: var(--bg-0);
 }
 
 /* Font Style */
@@ -17,14 +40,14 @@ h1 {
 	margin-right: auto;
 	margin-left: auto;
 	display: inline-block;
-	color: #737373;
+	color: var(--interactive);
 	transition-duration: .4s;
 	text-transform: uppercase;
 }
 
 #breadcrumb {
 	font-family: 'Merriweather', serif;
-	color: #737373;
+	color: var(--interactive);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -36,7 +59,7 @@ h1 {
 h2 {
 	font-size: 5em;
 	font-weight: 800;
-	color: #262626;
+	color: var(--text);
 	margin-top: 20vh;
 	overflow: hidden;
 }
@@ -45,7 +68,7 @@ h2 {
 	font-family: 'Merriweather', serif;
 	font-size: 1.75em;
 	line-height: 1.6;
-	color: #4D4D4D;
+	color: var(--text-secondary);
 }
 
 /* section header */
@@ -53,13 +76,13 @@ h3 {
 	font-family: 'Merriweather', serif;
 	font-size: 4em;
 	line-height: 1.8;
-	color: #4D4D4D;
+	color: var(--text);
 	font-weight: 700;
 }
 
 h4 {
 	text-transform: uppercase;
-	color: #4D4D4D;
+	color: var(--text);
 	font-size: 1.4em;
 	font-weight: 800;
 }
@@ -70,7 +93,7 @@ h4 {
 
 /* footer site map text */
 h5 {
-	color: #737373;
+	color: var(--text);
 	font-size: 20px;
 	line-height: 100%;
 	font-weight: 500;
@@ -78,8 +101,8 @@ h5 {
 
 /* paragraph basic style */
 p {
-	font-weight: 300;
-	color: #565656;
+	font-weight: 400;
+	color: var(--text-secondary);
 	font-size: 1em;
 	line-height: 1.8;
 	margin: 0;
@@ -99,7 +122,7 @@ p .italic {
 
 /* links are bold and fade darker */
 a {
-	color: inherit;
+	color: var(--interactive);;
 	text-decoration: none;
 	transition-duration: .1s;
 	font-weight: 700;
@@ -107,11 +130,11 @@ a {
 
 /* style code sections */
 code {
-	border: 1.5px solid hsl(199, 0%, 80%);
+	border: 1.5px solid var(--line);
 	border-radius: 4px;
 	padding: .2rem .3rem;
 	font-size: 1.1em;
-	background-color: hsl(0, 0%, 93%);
+	background-color: hsla( 0, 0%, 50%, 0.1);
 }
 
 /* ordered list styles with inside and little larger gap */
@@ -120,14 +143,14 @@ ol {
 	list-style-type: decimal-leading-zero;
 	margin: 0;
 	font-weight: 400;
-	color: #565656;
+	color: var(--text-secondary);
 }
 
 ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	color: #565656;
+	color: var(--text-secondary);
 }
 
 ol li {
@@ -178,36 +201,37 @@ ul li p {
 }
 
 .nav a {
-	color: #737373;
+	color: var(--text-secondary);
 }
 
 .about {
-	bottom: 0;
+	bottom: -1em;
 	left: 0;
-	width: 10vw;
+	/* width: 10vw;
 	height: 10vw;
 	min-height: 120px;
-	min-width: 120px;
-	padding: 3vw;
+	min-width: 120px; */
+	margin: 3vw;
 	position: fixed;
 	text-align: left;
-	box-sizing: border-box;
+	box-sizing: content-box;
+	transform-origin: top left;
 	transform: rotate(-90deg);
 	vertical-align: middle;
 	display: inline-block;
 	transition-duration: inherit;
 	text-transform: uppercase;
-	font-size: 1.2em;
-	color: #737373;
+	font-size: 1.2rem;
+	color: var(--text-secondary);
 	font-weight: 800;
-	line-height: 0;
+	line-height: 1rem;
 }
 
 /* Hidden link to resume only visable on mobile */
 .mobileResume {
 	font-size: 1.2em;
 	line-height: 1.6;
-	color: #737373;
+	color: var(--interactive);
 	display: none;
 }
 
@@ -252,7 +276,7 @@ ul li p {
 	flex-flow: row wrap;
 	justify-content: flex-start;
 	align-items: flex-start;
-	border: solid #bdbdbd 2px;
+	border: solid var(--line) 2px;
 	border-radius: 5px;
 	margin: 72px 0 18px 0;
 }
@@ -263,8 +287,8 @@ ul li p {
 }
 
 /* footer active */
-.active {
-	color: black;
+.active a {
+	color: var(--text);
 }
 
 .active::before {
@@ -363,7 +387,7 @@ video {
 .hrzLine {
 	height: 2px;
 	width: 100%;
-	background-color: #bdbdbd;
+	background-color: var(--line);
 	margin: 18px;
 	box-sizing: border-box;
 }
@@ -379,7 +403,7 @@ video {
 	margin-top: -10px;
 	font-style: italic;
 	font-size: .75em;
-	color: #737373;
+	color: var(--text-secondary);
 }
 
 /* buttons! */
@@ -442,7 +466,7 @@ html.is-rendering .transition-about {
 		text-align: left;
 		display: inline-block;
 		vertical-align: middle;
-		color: #737373;
+		color: var(--text);
 	}
 
 	h2 {
@@ -666,4 +690,16 @@ html.is-animating .transition-fade {
 
 html.is-rendering .transition-fade {
 	transition-delay: .5s;
+}
+
+/* DARKMODE */
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Basic lightmode color variables */
+		--base-hue: 0;
+		--base-sat: 0%;
+		--base-lit-fg: 92%;
+		--base-lit-bg: calc(100% - var(--base-lit-fg));
+	}
 }
