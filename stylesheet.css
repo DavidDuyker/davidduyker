@@ -647,7 +647,7 @@ html.is-rendering .transition-about {
 
 /* hover style */
 a:hover, h1:hover {
-	color: black;
+	color: var(--text-secondary);
 }
 
 .button:hover {
