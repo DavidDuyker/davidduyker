@@ -17,7 +17,7 @@
 	/* color is based off the distance of basic color compared to extream */
 	--bg-0: hsl(var(--base-hue), var(--base-sat), var(--base-lit-bg));
 	/* The lines (including borders on images for contrast) are  */
-	--line: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit-bg) - 20%));
+	--line: hsl(var(--base-hue), var(--base-sat), 50%);
 }
 
 /* universal styles */
@@ -701,7 +701,10 @@ html.is-rendering .transition-fade {
 		/* Basic lightmode color variables */
 		--base-hue: 0;
 		--base-sat: 0%;
-		--base-lit-fg: 92%;
-		--base-lit-bg: calc(100% - var(--base-lit-fg));
+		--base-lit-fg: 90%;
+		--base-lit-bg: calc(100% - var(--base-lit-fg) + 5%);
+
+		/* color is based off the distance of basic color compared to extream */
+		--bg-0: hsl(200, 20%, var(--base-lit-bg));
 	}
 }
