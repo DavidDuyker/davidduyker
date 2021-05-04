@@ -702,9 +702,9 @@ html.is-rendering .transition-fade {
 		--base-hue: 0;
 		--base-sat: 0%;
 		--base-lit-fg: 90%;
-		--base-lit-bg: calc(100% - var(--base-lit-fg) + 5%);
+		--base-lit-bg: calc(100% - var(--base-lit-fg));
 
 		/* color is based off the distance of basic color compared to extream */
-		--bg-0: hsl(200, 20%, var(--base-lit-bg));
+		--bg-0: hsl(200, 10%, var(--base-lit-bg));
 	}
 }
