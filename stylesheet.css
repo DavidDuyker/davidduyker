@@ -23,6 +23,7 @@
 /* universal styles */
 body {
 	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
 	margin: 0;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -102,7 +103,7 @@ h5 {
 
 /* paragraph basic style */
 p {
-	font-weight: 400;
+	font-weight: 500;
 	color: var(--text-secondary);
 	font-size: 1em;
 	line-height: 1.8;
@@ -143,7 +144,7 @@ ol {
 	list-style-position: inside;
 	list-style-type: decimal-leading-zero;
 	margin: 0;
-	font-weight: 400;
+	font-weight: 500;
 	color: var(--text-secondary);
 }
 
@@ -698,7 +699,7 @@ html.is-rendering .transition-fade {
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		/* Basic lightmode color variables */
+		/* Basic color variables updated for dark mode */
 		--base-hue: 0;
 		--base-sat: 0%;
 		--base-lit-fg: 90%;
