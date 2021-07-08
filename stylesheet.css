@@ -355,7 +355,6 @@ video {
 /* half width columns */
 .col-6 {
 	width: 50%;
-	display: inline-block;
 	vertical-align: top;
 }
 
