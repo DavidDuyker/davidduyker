@@ -9,10 +9,13 @@ curl_setopt($ch, CURLOPT_URL, $dropbox_url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $data = curl_exec($ch);
 curl_close($ch);
+echo 'Downloaded data: ' . $data . "\n";
 
 // save the zip file to disk
 $temp_file = tempnam(sys_get_temp_dir(), 'dropbox_zip');
+echo 'Temporary file path: ' . $temp_file . "\n";
 file_put_contents($temp_file, $data);
+echo 'Saved data to file: ' . file_get_contents($temp_file) . "\n";
 
 // extract the contents of the zip file
 $zip = new ZipArchive;
