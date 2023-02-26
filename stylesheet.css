@@ -192,7 +192,7 @@ ul li p {
 	min-width: 120px;
 	box-sizing: border-box;
 	vertical-align: middle;
-	transition-duration: 0.3s;
+	/* transition-duration: 0.3s; */
 	z-index: 100;
 }
 
