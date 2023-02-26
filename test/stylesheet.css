@@ -1,7 +1,17 @@
 img {
+   width: 100%;
+   border-radius: 4px;
+   overflow: hidden;
+   box-sizing: border-box;
+}
+
+.frame {
+   border: rgba(126, 126, 126, 0.168) solid 1px;
+   border-radius: 12px;
+   padding: 8px;
    max-width: 300px;
    width: 90vw;
-   border: rgba(126, 126, 126, 0.168) solid 1px;
-   border-radius: 8px;
-   padding: 8px;
+   display: flex;
+   background-color: white;
+   box-shadow: 0 4px 4px 1px rgba(0, 0, 0, 0.05);
 }
