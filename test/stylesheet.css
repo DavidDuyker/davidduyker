@@ -1,0 +1,7 @@
+img {
+   max-width: 500px;
+   width: 90vw;
+   border: rgba(126, 126, 126, 0.168) solid 1px;
+   border-radius: 8px;
+   padding: 8px;
+}
