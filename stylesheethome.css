@@ -83,13 +83,24 @@ p span {
 	display: inline;
 }
 
+.project .hovertext {
+	position: absolute;
+	top: 37%;
+	color: white;
+	width: calc(100% - 3vw);
+	padding: 0 10%;
+	box-sizing: border-box;
+	font-size: 1.4em;
+	opacity: 0;
+}
+
 .project img, .project p, .project h2 {
 	transition-duration: 300ms;
 }
 
 img {
 	width: 100%;
-  height: inherit;
+	height: inherit;
 }
 
 .project p {
@@ -102,7 +113,7 @@ img {
 	opacity: 1;
 }
 
-.project:hover .hoverimg {
+.project:hover .hoverimg, .project:hover .hovertext {
 	opacity: 1;
 }
 /* MOBILE SCREEN HOMESCREEN ADJUSTMENTS */
