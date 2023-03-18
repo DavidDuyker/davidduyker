@@ -1,28 +1,64 @@
 img {
    width: 100%;
-   border-radius: 4px;
+   border-radius: 8px;
    overflow: hidden;
    box-sizing: border-box;
 }
 
 .frame #overlay {
    position: absolute;
-   width: 150px;
+   max-width: 150px;
    right: 15px;
    top: 10px;
    rotate: 3deg;
    opacity: 0.7;
 }
 
+#body {
+   perspective: 800px;
+}
+
+#message {
+   max-width: 200px;
+   position: absolute;
+   padding: 24px;
+   right: 200px;
+   left: 0;
+   margin: 0 auto;
+}
+
+#message a {
+   color: black;
+   transition-duration: 300ms;
+
+   padding: 2px;
+   margin: -2px;
+}
+
+#message a:hover {
+   background: rgba(0, 0, 0, 0.05);
+   border-radius: 4px;
+}
+
 .frame {
    border: rgba(126, 126, 126, 0.168) solid 1px;
-   border-radius: 12px;
+   margin: 0 auto;
+   border-radius: 8px;
    max-width: 300px;
-   width: 90vw;
+   width: 100%;
    display: flex;
    background-color: white;
-   box-shadow: 0 4px 4px 1px rgba(0, 0, 0, 0.05);
+   box-shadow: 5px 6px 4px 0px rgba(0, 0, 0, 0.223);
    position: relative;
-   rotate: -15deg;
-   transform-origin: top left;
+   transform: rotateX(65deg) rotateY(0deg) rotateZ(12deg);
+   transform-style: preserve-3d;
+   transform-origin: 110% 110% 0px;
+   transition-duration: 300ms;
+   transition-delay: 150ms;
+}
+.frame:hover {
+   box-shadow: 0px 40px 40px 40px hsla(0, 0%, 0%, 0.05);
+   transform: rotateX(3deg) rotateY(-5deg) rotateZ(2deg);
+   transform-style: preserve-3d;
+   transition-duration: 300ms;
 }
