@@ -5,13 +5,24 @@ img {
    box-sizing: border-box;
 }
 
+.frame #overlay {
+   position: absolute;
+   width: 150px;
+   right: 15px;
+   top: 10px;
+   rotate: 3deg;
+   opacity: 0.7;
+}
+
 .frame {
    border: rgba(126, 126, 126, 0.168) solid 1px;
    border-radius: 12px;
-   padding: 8px;
    max-width: 300px;
    width: 90vw;
    display: flex;
    background-color: white;
    box-shadow: 0 4px 4px 1px rgba(0, 0, 0, 0.05);
+   position: relative;
+   rotate: -15deg;
+   transform-origin: top left;
 }
