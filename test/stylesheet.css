@@ -50,6 +50,7 @@ img {
    background-color: white;
    box-shadow: 5px 6px 4px 0px rgba(0, 0, 0, 0.223);
    position: relative;
+   bottom: 0;
    transform: rotateX(65deg) rotateY(0deg) rotateZ(12deg);
    transform-style: preserve-3d;
    transform-origin: 110% 110% 0px;
