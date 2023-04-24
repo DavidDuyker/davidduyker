@@ -2,27 +2,28 @@
 <html lang="en">
 <head>
 	<!-- Site Descriptions -->
-	<meta name="description" content="Seattle based designer.">
-	<meta name="keywords" content="David Duyker,HTML,CSS,JavaScript,industrial,ID,Seattle,design,VCD,ID,IXD">
-	<meta name="title" content="David Duyker | designer">
-	<meta name="author" content="David Duyker">
 	<meta name="viewport" content="width=device-width, user-scalable=yes">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="title" content="">
+	<meta name="author" content="">
 	<title>David Duyker</title>
 	<link rel="shortcut icon" href="/favicon@2x.png">
 	<!-- iOS -->
 	<link rel="apple-touch-icon" href="/favicon-120.png">
 
+	<!-- REPEATED -->
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheethome.css">
-	<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Raleway:ital,wght@0,300;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
-
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,350,0,0" />
+	
 	<!-- Script -->
-	<script defer src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>
-	<script defer src="/node_modules/@swup/scroll-plugin/dist/SwupScrollPlugin.min.js" type="text/javascript"></script>
-	<script defer src="/node_modules/@swup/head-plugin/dist/SwupHeadPlugin.min.js" type="text/javascript"></script>
-	<script defer src="/script.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+
 	<!-- Start of Woopra Code -->
 	<script>
 		(function(){
@@ -34,150 +35,95 @@
 		woopra.track();
 	</script>
 	<!-- End of Woopra Code -->
-	<meta name="theme-color" content="#ffffff">
+
+	<!-- md generate code -->
+	<script>
+		function generateMarkdown() {
+		  const contentFlow = document.querySelector('.content-flow').innerHTML;
+		  const converter = new showdown.Converter();
+		  const markdown = converter.makeMarkdown(contentFlow);
+		  const blob = new Blob([markdown], { type: 'text/markdown' });
+		  const url = URL.createObjectURL(blob);
+		  const link = document.createElement('a');
+		  link.download = 'README.md';
+		  link.href = url;
+		  link.click();
+		}
+	  </script>
+
+	<!-- active tab code -->
+	<script>
+		window.addEventListener('load', function () {
+			var currentUrl = window.location.pathname;
+			var navItems = document.querySelectorAll('.nav-item');
+			navItems.forEach(function (navItem) {
+				var navButtonHref = navItem.querySelector('.nav-button').getAttribute('href');
+				if (currentUrl === navButtonHref) {
+					navItem.classList.add('active');
+				}
+			});
+		});
+
+	</script>
 </head>
 
 <body>
-	<div class="nav">
-		<a href="/"><h1>
-			David&nbsp;Duyker
-		</h1></a>
-		<div class="transition-fade">
-			<p>
-				I am a Product Designer trying to make the world a better place one <code>[px/rem/;/stitch/smile]</code> at a time.<br>
-				<br>
-				I want to bringing design to small nonprofits and "do good" organizations. Recently I synthesized some of my experience into some quick tips.<br>
-				Check it out on <a href="https://dduyker.medium.com/">Medium &#8594;</a><br>
-				<br>
-				dduyker<span class="no-display">this goes in the middle</span>@gm<span class="no-display">this goes in the middle</span>ail.com<br>
-				206.<span class="no-display">this goes in the middle</span>953.<span class="no-display">this goes in the middle</span>1178<br>
-				<a href="/resume">résumé &#8594;</a><br>
-			</p>
-		</div>
-		<div class="transition-about">
-			<a class="about" href="/about">About</a>
+	<div id="page-background"></div>
+	<div id="page-wrapper">
+		<div id="page">
+			<div class="column column-left">
+				<div class="nav-header">
+					<p class="nav-title">davidduyker.html</p>
+				</div>
+				<div id="nav">
+					<div class="divider"></div>
+					<div class="nav-item" id="home">
+						<a class="button icon-button" href="#" onclick="generateMarkdown()">
+							<span class="material-symbols-outlined">download</span>
+						</a>						  
+						<a class="button nav-button" href="/">README.md</a>
+					</div>
+					<div class="nav-item" id="repaircycle">
+						<div class="icon-button"></div>
+						<a class="button nav-button" href="/projects/">projects.html</a>
+					</div>
+					<div class="nav-item" id="postcard">
+						<div class="icon-button"></div>
+						<a class="button nav-button" href="/postcard/">postcard.png</a>
+					</div>
+					<div class="nav-item" id="links">
+						<a class="button icon-button" href="#" onclick="generateMarkdown()">
+							<span class="material-symbols-outlined">download</span>
+						</a>
+						<a class="button nav-button" href="/links/">links.md</a>
+					</div>
+					<div class="divider"></div>
+					<div class="nav-item">
+						<a class="button nav-button" href="https://read.cv/davidd" target="_blank">
+							resume.cv
+							<span class="material-symbols-outlined">open_in_new</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- END REPEATED -->
+			<div class="column column-right">
+				<div class="content-flow">
+					<h1>Hi, I'm David Duyker</h1>
+					<p>Seattle based designer with a for knack creative solutions. Collaborative and always curious.</p>
+					<h2>Currently</h2>
+					<p>Designing at <a class="open-in-new" href="https://nzero.com" target="_blank">nZero</a>, helping organizations reach their climate goals through near-realtime data. During my time I’ve been fortunate to wear many design hats and partner closely with many talented desigers, engineers, and PMs.</p>
+					<h2>Availability</h2>
+					<p>Open to part-time freelance and consulting</p>
+					<img class="content-image" src="/old_site/about/2.png"/>
+					<!-- <hr/>
+					<h2>Freelance and Consulting Services</h2>
+					<h3>Specities</h3>
+					<p>Design Systems 0->1 & scalling, Web and Application Design & Consulting, User and Product research.</p>
+					<p>For inquiries or Reach out at hello@davidduyker.com to chat.</p> -->
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<!-- <div id="swup" class="transition-fade"><div class="flow">
-		<div class="project"><a href="/projects/repaircycle">
-			<img
-				srcset="thumbs/repaircycle@2x.jpg 2x,
-				thumbs/repaircycle.jpg 1x"
-			src="thumbs/repaircycle.jpg" width="341" height="468" >
-			<img class="hoverimg"
-				srcset="thumbs/repaircyclehover@2x.jpg 2x,
-				thumbs/repaircyclehover.jpg 1x"
-			src="thumbs/repaircyclehover.jpg" width="341" height="468" >
-			<h2>
-				The RepairCycle
-			</h2>
-			<p>
-				UX + ID
-			</p></a>
-		</div>
-		<div class="project"><a href="/projects/SmashRun">
-			<img
-				srcset="thumbs/smashrun@2x.jpg 2x,
-				thumbs/smashrun.jpg 1x"
-			src="thumbs/smashrun.jpg" width="341" height="468" >
-			<img class="hoverimg"
-				srcset="thumbs/smashrunhover@2x.jpg 2x,
-				thumbs/smashrunhover.jpg 1x"
-			src="thumbs/smashrunhover.jpg" width="341" height="468" >
-			<h2>
-				Smash Run
-			</h2>
-			<p>
-				UI + IA + UX
-			</p></a>
-		</div>
-		<div class="project"><a href="/projects/reverv">
-			<img
-				srcset="thumbs/reverv@2x.jpg 2x,
-				thumbs/reverv.jpg 1x"
-			src="thumbs/reverv.jpg" width="341" height="468" >
-			<img class="hoverimg"
-				srcset="thumbs/revervhover@2x.jpg 2x,
-				thumbs/revervhover.jpg 1x"
-			src="thumbs/revervhover.jpg" width="341" height="468" >
-			<h2>
-				Reverv
-			</h2>
-			<p>
-				ID + UI
-			</p></a>
-		</div>
-		<div class="project"><a href="/projects/ia">
-			<img
-				srcset="thumbs/ai@2x.jpg 2x,
-				thumbs/ai.jpg 1x"
-			src="thumbs/ai.jpg" width="341" height="468" >
-			<img class="hoverimg"
-				srcset="thumbs/iahover@2x.jpg 2x,
-				thumbs/iahover.jpg 1x"
-			src="thumbs/iahover.jpg" width="341" height="468" >
-			<h2>
-				Industrial Alchemy
-			</h2>
-			<p>
-				UI + UX
-			</p></a>
-		</div>
-		<div class="project"><a href="/projects/refresh">
-			<img
-				srcset="thumbs/refresh@2x.jpg 2x,
-				thumbs/refresh.jpg 1x"
-			src="thumbs/refresh.jpg" width="341" height="468" >
-			<img class="hoverimg"
-				srcset="thumbs/refreshhover@2x.jpg 2x,
-				thumbs/refreshhover.jpg 1x"
-			src="thumbs/refreshhover.jpg" width="341" height="468" >
-			<h2>
-				Refresh
-			</h2>
-			<p>
-				ID + UX
-			</p></a>
-		</div>
-		<div class="project"><a href="/projects/allatable">
-			<img
-				srcset="thumbs/allatable@2x.jpg 2x,
-				thumbs/allatable.jpg 1x"
-			src="thumbs/allatable.jpg" width="341" height="468" >
-			<img class="hoverimg"
-				srcset="thumbs/allatablehover@2x.jpg 2x,
-				thumbs/allatablehover.jpg 1x"
-			src="thumbs/allatablehover.jpg" width="341" height="468" >
-			<h2>
-				Alla Table
-			</h2>
-			<p>
-				ID
-			</p></a>
-		</div>
-		<div class="project"><a href="/projects/webdev">
-			<img
-				srcset="thumbs/website@2x.jpg 2x,
-				thumbs/website.jpg 1x"
-			src="thumbs/website.jpg" width="341" height="468" >
-			<img class="hoverimg"
-				srcset="thumbs/webdevhover@2x.jpg 2x,
-				thumbs/webdevhover.jpg 1x"
-			src="thumbs/webdevhover.jpg" width="341" height="468" >
-			<h2>
-				Personal Website
-			</h2>
-			<p>
-				UI
-			</p></a>
-		</div>
-		<div class="project">
-
-		</div>
-		<div class="project">
-
-		</div>
-		<div class="spacer col-12"></div>
-	</div></div> -->
+</body>
 </html>

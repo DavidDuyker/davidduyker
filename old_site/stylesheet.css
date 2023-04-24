@@ -1,0 +1,711 @@
+/* Variables */
+:root {
+	/* Basic lightmode color variables */
+	--base-hue: 0;
+	--base-sat: 0%;
+	--base-lit-fg: 15%;
+	--base-lit-bg: calc(100% - (var(--base-lit-fg) / 10));
+
+	/* Lightmode is based on basic hsl variabels */
+	--text: hsl(var(--base-hue), var(--base-sat), var(--base-lit-fg));
+	/* Lightens the text by 15% */
+	--text-secondary: hsl(var(--base-hue), var(--base-sat), calc(15% + var(--base-lit-fg)));
+	/* Interactive text elements are 30% lighter than dark */
+	--interactive: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit-fg) + 30%));
+	/* In lightmode the element reciving an interaction like hover or click will be same as dark */
+	--active: var(--text);
+	/* color is based off the distance of basic color compared to extream */
+	--bg-0: hsl(var(--base-hue), var(--base-sat), var(--base-lit-bg));
+	/* The lines (including borders on images for contrast) are  */
+	--line: hsl(var(--base-hue), var(--base-sat), 50%);
+}
+
+/* universal styles */
+body {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	margin: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	background-color: var(--bg-0);
+	box-sizing: border-box;
+}
+
+/* Font Style */
+
+/* David Duyker header */
+h1 {
+	margin: 0;
+	font-weight: 800;
+	font-size: 1.6vw;
+	text-align: left;
+	margin-right: auto;
+	margin-left: auto;
+	display: inline-block;
+	color: var(--interactive);
+	transition-duration: .4s;
+	text-transform: uppercase;
+}
+
+#breadcrumb {
+	font-family: 'Merriweather', serif;
+	color: var(--interactive);
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 5vw 3vw;
+	font-weight: 400;
+}
+
+/* page title */
+h2 {
+	font-size: 5em;
+	font-weight: 800;
+	color: var(--text);
+	margin-top: 20vh;
+	overflow: hidden;
+}
+
+.subheader {
+	font-family: 'Merriweather', serif;
+	font-size: 1.75em;
+	line-height: 1.6;
+	color: var(--text-secondary);
+}
+
+/* section header */
+h3 {
+	font-family: 'Merriweather', serif;
+	font-size: 4em;
+	line-height: 1.8;
+	color: var(--text);
+	font-weight: 700;
+}
+
+h4 {
+	text-transform: uppercase;
+	color: var(--text);
+	font-size: 1.4em;
+	font-weight: 800;
+	letter-spacing: 0.07rem;
+}
+/* h4 on the resume page are right justified */
+.resume {
+	text-align: right;
+}
+
+/* footer site map text */
+h5 {
+	color: var(--text);
+	font-size: 20px;
+	line-height: 100%;
+	font-weight: 500;
+}
+
+/* paragraph basic style */
+p {
+	font-weight: 500;
+	color: var(--text-secondary);
+	font-size: 1em;
+	line-height: 1.8;
+	margin: 0;
+}
+
+/* paragraph bolding */
+p span {
+	font-weight: 700;
+
+}
+
+/* paragraph italic */
+p .italic {
+	font-weight: 400;
+	font-style: italic;
+}
+
+/* links are bold and fade darker */
+a {
+	color: var(--interactive);;
+	text-decoration: none;
+	transition-duration: .1s;
+	font-weight: 700;
+}
+
+/* style code sections */
+code {
+	border: 1.5px solid var(--line);
+	border-radius: 4px;
+	padding: .2rem .3rem;
+	font-size: 1.1em;
+	background-color: hsla( 0, 0%, 50%, 0.1);
+}
+
+/* ordered list styles with inside and little larger gap */
+ol {
+	list-style-position: inside;
+	list-style-type: decimal-leading-zero;
+	margin: 0;
+	font-weight: 500;
+	color: var(--text-secondary);
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	color: var(--text-secondary);
+}
+
+ol li {
+	font-weight: 800;
+}
+
+/* standard space for the blocks */
+li p {
+	padding-bottom: 18px;
+}
+
+ ul li {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+ul li:before {
+  content: "+";
+  padding-right: 8px;
+}
+
+/* move the list item symbol to the same line */
+ul li p {
+	display: inline;
+}
+
+/* FULL SCREEN ORGANIZATION */
+
+/* NAV SECTION STYLE */
+
+.nav {
+	position: fixed;
+	padding: 3vw;
+	width: 10vw;
+	height: 100vh;
+	min-width: 120px;
+	box-sizing: border-box;
+	vertical-align: middle;
+	/* transition-duration: 0.3s; */
+	z-index: 100;
+}
+
+/* non dipsplay element */
+.nav p {
+	display: none;
+	opacity: 1;
+	transition-duration: inherit;
+}
+
+.nav a {
+	color: var(--text-secondary);
+}
+
+.about {
+	bottom: -1em;
+	left: 0;
+	/* width: 10vw;
+	height: 10vw;
+	min-height: 120px;
+	min-width: 120px; */
+	margin: 3vw;
+	position: fixed;
+	text-align: left;
+	box-sizing: content-box;
+	transform-origin: top left;
+	transform: rotate(-90deg);
+	vertical-align: middle;
+	display: inline-block;
+	transition-duration: inherit;
+	text-transform: uppercase;
+	font-size: 1.2rem;
+	color: var(--text-secondary);
+	font-weight: 800;
+	line-height: 1rem;
+	letter-spacing: 0.08rem;
+}
+
+/* Hidden link to resume only visable on mobile */
+.mobileResume {
+	font-size: 1.2em;
+	line-height: 1.6;
+	color: var(--interactive);
+	display: none;
+}
+
+/* MAIN CONTENT SCROLLER */
+.content {
+	width: 100%;
+	max-width: 1208px;
+	margin: 0 auto;
+	padding: 20vh 100px 0 100px;
+	box-sizing: border-box;
+	vertical-align: top;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: start;
+	position: relative;
+}
+
+/* Main page content with flow div */
+.flow {
+	width: 62vw;
+	position: absolute;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	right: 0;
+	margin-bottom: 80px;
+   align-content: stretch;
+   padding: 0;
+   max-width: none;
+}
+
+/* The site map styles that are on all pages but home */
+#siteMap {
+	width: 100%;
+	/* takes up 100% height from last horizontal line */
+	height: calc(100vh - 36px);
+	min-height: 650px;
+	box-sizing: border-box;
+	padding: 13vh 0 8vh 0;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	border: solid var(--line) 2px;
+	border-radius: 5px;
+	margin: 72px 0 18px 0;
+}
+
+#siteMap p {
+	font-family: 'Merriweather', serif;
+	font-weight: 400;
+}
+
+/* footer active */
+.active a {
+	color: var(--text);
+}
+
+.active::before {
+	content: "→ ";
+}
+
+/* default behavior for items */
+img {
+	width: 100%;
+	border-radius: 3px;
+}
+
+video {
+	width: 100%;
+}
+
+/* COLUMNS CLASSES */
+
+/* column defaults */
+.col {
+	padding: 18px 18px;
+	box-sizing: border-box;
+	vertical-align: top;
+	margin: 0;
+}
+
+/* nested columns */
+.col-contain {
+	box-sizing: border-box;
+	vertical-align: top;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+/* mostly for spacers */
+.col-1 {
+	width: 8.3%;
+   width: calc(100% / 12);
+}
+
+/* 1/4 columns */
+.col-3 {
+	width: 25%;
+}
+
+/* third width columns */
+.col-4 {
+	width: 33.33%;
+   width: calc(100% / 3);
+}
+
+.col-5 {
+	width: 41%;
+   width: calc(100% / 12 * 5);
+}
+
+/* half width columns */
+.col-6 {
+	width: 50%;
+	vertical-align: top;
+}
+
+.col-7 {
+	width: 58%;
+   width: calc(100% / 12 * 7);
+}
+
+/* two thirds width column */
+.col-8 {
+	width: 33.33%;
+   width: calc(100% / 1.5);
+}
+
+/* 100% width column */
+.col-12 {
+	width: 100%;
+}
+
+/* spacer height */
+.spacer {
+	height: 72px;
+	box-sizing: border-box;
+}
+
+/* mobile layout help */
+.spacer-mobile-only {
+	display: none;
+}
+
+/* horizontal line */
+.hrzLine {
+	height: 2px;
+	width: 100%;
+	background-color: var(--line);
+	margin: 18px;
+	box-sizing: border-box;
+}
+
+/* responsive column breaks for flowing text */
+.split {
+	column-count: 2;
+}
+
+/* captions are closer to their image and italic */
+.caption {
+	padding-top: 0;
+	margin-top: -10px;
+	font-style: italic;
+	font-size: .75em;
+	color: var(--text-secondary);
+}
+
+/* buttons! */
+a.button {
+	box-sizing: border-box;
+	padding: 18px 32px;
+	border-radius: 4px;
+	border: solid #038ded 2px;
+	vertical-align: middle;
+	text-align: center;
+	transition-duration: .3s;
+	color: #038ded;
+	margin: 9px 18px;
+}
+
+a.button p {
+	color: inherit;
+	font-weight: 700;
+}
+
+/* mobile only SWUP priming */
+.transition-about {
+	opacity: 1;
+	transition-duration: .3s;
+	transition-delay: 0;
+}
+
+html.is-animating .transition-about {
+	opacity: .9;
+}
+
+html.is-rendering .transition-about {
+	transition-delay: 0;
+}
+
+/* MOBILE SCREEN ORGANIZATION - divs become 100% width and have a width*/
+
+@media screen and (max-width: 1000px) {
+	/* NAV SECTION MOBILE - nav becomes 100% width */
+	.nav {
+		width: 100vw;
+		padding: 30px;
+		padding-bottom: 100px;
+		vertical-align: top;
+		height: auto;
+		position: relative;
+	}
+
+	/* link on about page to resume visabile on mobile */
+	.mobileResume {
+		display: inline-block;
+		margin-top: 50px;
+	}
+
+	/* adustment to David Duyker header */
+	h1 {
+		font-size: 2em;
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		display: inline-block;
+		vertical-align: middle;
+		color: var(--text);
+	}
+
+	h2 {
+		font-size: 3em;
+	}
+
+	h3 {
+		font-size: 2.5em;
+	}
+
+	h5 {
+		font-size: 16px;
+	}
+
+	#breadcrumb {
+		color: #737373;
+		width: 100%;
+		position: relative;
+		padding: 0;
+		margin-top: -100px;
+		font-weight: 500;
+		margin-left: 30px;
+	}
+
+	/* h4 on the resume page are left justified on mobile*/
+	.resume {
+		text-align: left;
+	}
+
+	/* CONTENT MOBILE */
+
+	.content {
+		width: 100vw;
+		display: flex;
+		right: 0;
+		padding: 0;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		box-sizing: border-box;
+	}
+
+	/* mobile home page flow style */
+	.flow {
+		width: 100vw;
+		display: flex;
+		right: 0;
+		flex-flow: row wrap;
+		justify-content: center;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	/* mobile sitemap footer */
+	#siteMap {
+		width: 100%;
+		height: auto;
+		min-height: 100vh;
+		box-sizing: border-box;
+		padding: 10vh 0 0 0;
+		border: none;
+		border-radius: 0;
+		border-top: 2px #bdbdbd solid;
+	}
+
+	#siteMap .col-3, #siteMap .col-4 {
+		padding-bottom: 10vh;
+	}
+
+	.hrzLine {
+		margin: 18px 30px;
+	}
+
+	.spacer-mobile-only {
+		height: 72px;
+		box-sizing: border-box;
+	}
+
+	a.button {
+		margin: 0 auto;
+	}
+
+	.col {
+		padding: 18px 30px;
+	}
+
+	/* full width */
+	.content > img.col-12 {
+		padding: 0 0 18px 0;
+	}
+
+	/* Reduce Columns */
+	.col-1 {
+		display: none;
+	}
+
+	.col, .col-contain {
+		width: 100%;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	img.col {
+		display: block;
+		max-width: 500px;
+		width: 100%;
+		height: auto;
+	}
+
+	img.col-12 {
+		max-width: 100%;
+	}
+
+	iframe.col {
+		max-width: 100%;
+	}
+
+	/* mobile reformating to remove excess items */
+	.no-display {
+		display: none;
+	}
+
+	/* mobile only SWUP */
+	.transition-about {
+		opacity: 1;
+		transition-duration: .25s;
+		transition-delay: 0;
+	}
+
+	html.is-animating .transition-about {
+		opacity: 0;
+	}
+
+	html.is-rendering .transition-about {
+		transition-delay: .5s;
+	}
+
+	.about {
+		opacity: 0;
+		display: none;
+		transform: rotate(0deg);
+	}
+}
+
+/* ALL COLUMNS GO TO 100% */
+@media screen and (max-width: 630px) {
+	/* column goes to 100% width in the content div */
+	.col, .col-contain, .col-contain .col {
+		width: 100%;
+	}
+
+	/* two column columns become 1 */
+	.split {
+		column-count: 1;
+	}
+
+	/* MOBILE FONT SIZING */
+	h2 {
+		font-size: 2.8em;
+	}
+
+	h3 {
+		font-size: 2em;
+	}
+
+	.subheader {
+		font-size: 1.4em;
+	}
+
+	iframe.col {
+		height: 812px;
+		width: 380px;
+	}
+}
+
+/* HOVER STYLES THE OVERIDE */
+
+/* hover style */
+a:hover, h1:hover {
+	color: var(--text-secondary);
+}
+
+.button:hover {
+	background-color: #B6DEF8;
+	color: #038ded;
+}
+
+h5 a:hover::after {
+	content: " →";
+}
+
+h5.active a:hover::after {
+	content: "";
+}
+
+/* links to other peoples portfolios */
+.shoutout {
+	font-weight: 300;
+	text-decoration: underline;
+}
+
+/* NO DISPLAY */
+
+/* removing the junk in the phone and email */
+.nav .no-display {
+	display: none;
+}
+
+/* SWUP STYLES */
+
+.transition-fade {
+	opacity: 1;
+	transition-duration: 0.25s;
+	transition-delay: 0;
+	/* transform: translateY(0); */
+}
+
+html.is-animating .transition-fade {
+	opacity: 0;
+	/* transform: translateY(50vh); */
+}
+
+html.is-rendering .transition-fade {
+	transition-delay: .5s;
+}
+
+/* DARKMODE */
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Basic color variables updated for dark mode */
+		--base-hue: 0;
+		--base-sat: 0%;
+		--base-lit-fg: 90%;
+		--base-lit-bg: calc(100% - var(--base-lit-fg));
+
+		/* color is based off the distance of basic color compared to extream */
+		--bg-0: hsl(200, 10%, var(--base-lit-bg));
+	}
+}
