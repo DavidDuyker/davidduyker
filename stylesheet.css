@@ -12,7 +12,7 @@ div, a {
 }
 
 /* Typography */
-p {
+p, li {
     margin: 0;
     font-size: clamp(.875rem, 3vw, 1rem);
     font-weight: 400;
