@@ -4,6 +4,7 @@ body {
     --action-active: hsla(0,0%,0%,0.08);
     font-family: 'Inter', sans-serif;
     background-color: hsl(0, 0%, 95%);
+    position: relative;
 }
 
 div, a {
@@ -13,36 +14,36 @@ div, a {
 /* Typography */
 p {
     margin: 0;
-    font-size: 16px;
+    font-size: clamp(.875rem, 3vw, 1rem);
     font-weight: 400;
-    line-height: 24px;
+    line-height: 1.5rem;
     letter-spacing: 0em;
     text-align: left;
 }
 
 h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: clamp(1.3rem, 6vw, 2rem);
     font-weight: 700;
-    line-height: 40px;
+    line-height: 2.5rem;
     letter-spacing: 0em;
     text-align: left;
 }
 
 h2 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 4.5vw, 1.5rem);
     font-weight: 700;
-    line-height: 32px;
+    line-height: 2rem;
     letter-spacing: 0em;
     text-align: left;
 }
 
 h3 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 4vw, 1.25rem);
     font-weight: 700;
-    line-height: 24px;
+    line-height: 1.5rem;
     letter-spacing: 0em;
     text-align: left;
 }
@@ -129,12 +130,12 @@ img {
 #page-background {
     background-image: url(./assets/random.png);
     background-repeat: repeat;
-    /* background-size: 100%; */
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 0;
     z-index: -100;
     opacity: 0.08;
 }
@@ -268,7 +269,7 @@ a:hover + .nav-button {
 }
 
 .content-flow {
-    flex-basis: min(60ch, 100%);
+    flex-basis: min(48ch, 100%);
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
@@ -317,4 +318,38 @@ a:hover + .nav-button {
 /* Projects Page */
 .email-protect {
     display: none;
+}
+
+/* MOBILE */
+
+@media only screen and (max-width: 48rem) {
+    #page {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #page-background {
+        height: fill;
+    }
+
+    #page-wrapper {
+        height: auto;
+    }
+
+    .column-left {
+        border: none;
+        border-bottom: 1px solid var(--action-hover);
+        align-items: center;
+    }
+
+    .column-left > * {
+        max-width: 48ch;
+        width: 100%;
+    }
+
+    .column-right {
+        flex-basis: auto;
+    }
+
+    
 }
