@@ -350,6 +350,8 @@ a:hover + .nav-button {
     .column-right {
         flex-basis: auto;
     }
-
     
+    .button {
+        outline: 1px solid var(--action-active)
+    }
 }
