@@ -18,7 +18,7 @@
 		function copyToClipboard() {
 		  var email = "dduyker@gmail.com";
 		  var emailText = email.innerText;
-		  navigator.clipboard.writeText(emailText);
+		  navigator.clipboard.writeText(email);
 		}
 	</script>
 
@@ -47,18 +47,38 @@
 
 	<!-- md generate code -->
 	<script>
-		function generateMarkdown() {
-		  const contentFlow = document.querySelector('.content-flow').innerHTML;
-		  const converter = new showdown.Converter();
-		  const markdown = converter.makeMarkdown(contentFlow);
-		  const blob = new Blob([markdown], { type: 'text/markdown' });
-		  const url = URL.createObjectURL(blob);
-		  const link = document.createElement('a');
-		  link.download = 'README.md';
-		  link.href = url;
-		  link.click();
+		function generateMarkdownFromIndex(htmlPath, fileName) {
+		  fetch(`${htmlPath}index.html`)
+			.then(response => response.text())
+			.then(html => {
+			  const parser = new DOMParser();
+			  const doc = parser.parseFromString(html, 'text/html');
+			  const contentFlow = doc.querySelector('.content-flow');
+			  
+			  // replace relative image paths with absolute URLs
+			  const images = contentFlow.querySelectorAll('img');
+			  images.forEach(img => {
+				const src = img.getAttribute('src');
+				if (src && !src.startsWith('http')) {
+				  const absoluteUrl = new URL(src, 'https://davidduyker.com').href;
+				  img.setAttribute('src', absoluteUrl);
+				}
+			  });
+	  
+			  const converter = new showdown.Converter();
+			  const markdown = converter.makeMarkdown(contentFlow.innerHTML);
+			  const blob = new Blob([markdown], { type: 'text/markdown' });
+			  const url = URL.createObjectURL(blob);
+			  const link = document.createElement('a');
+			  link.download = `${fileName}.md`;
+			  link.href = url;
+			  link.click();
+			});
 		}
 	  </script>
+	
+	
+	  
 
 	<!-- active tab code -->
 	<script>
@@ -72,7 +92,6 @@
 				}
 			});
 		});
-
 	</script>
 </head>
 
@@ -87,7 +106,7 @@
 				<div id="nav">
 					<div class="divider"></div>
 					<div class="nav-item" id="home">
-						<a class="button icon-button" href="#" onclick="generateMarkdown()">
+						<a class="button icon-button" href="#" onclick="generateMarkdownFromIndex('/', 'README')">
 							<span class="material-symbols-outlined">download</span>
 						</a>						  
 						<a class="button nav-button" href="/">README.md</a>
@@ -101,7 +120,7 @@
 						<a class="button nav-button" href="/postcard/">postcard.png</a>
 					</div>
 					<div class="nav-item" id="links">
-						<a class="button icon-button" href="#" onclick="generateMarkdown()">
+						<a class="button icon-button" href="#" onclick="generateMarkdownFromIndex('/links/', 'links')">
 							<span class="material-symbols-outlined">download</span>
 						</a>
 						<a class="button nav-button" href="/links/">links.md</a>
@@ -120,7 +139,7 @@
 				<div class="content-flow">
 					<h1>Projects</h1>
 					<hr />
-					<h2><a href="repaircycle/index.html">Repair Cycle</a></h2>
+					<h2><a href="repaircycle/">Repair Cycle</a></h2>
 					<p>Passion project doing clothing repair around the city from a bike trailer in 2019.</p>
 					<hr />
 					<h2><a href="/postcard/">Postcard</a></h2>
@@ -130,7 +149,6 @@
 					<p>Link available by request. Reach out at dduy<span class="email-protect">123</span>ker@gmail.com
 						<button class="button icon-button" onclick="copyToClipboard()"><span class="material-symbols-outlined">content_copy</span></button>
 					</p>
-					<!-- <p><a class="open-in-new" href="figma.com">Portfolio</a> <em>(password)</em></p> -->
 				</div>
 			</div>
 		</div>
