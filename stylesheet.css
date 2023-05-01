@@ -275,7 +275,7 @@ a:hover + .nav-button {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    padding: 48px 0;
+    padding: 40px 0;
 }
 
 /* Page Content [postcard, projects]*/
