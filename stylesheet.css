@@ -242,7 +242,7 @@ ol {
 }
 
 a:hover + .nav-button {
-    background-color:  var(--action-hover);
+    background-color:  var(--action-hover) !important;
 }
 
 .nav-item:hover .nav-button span {
