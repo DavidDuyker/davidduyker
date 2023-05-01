@@ -83,7 +83,7 @@ button span {
 }
 
 .button:hover {
-    background-color: var(--action-hover);
+    background-color: var(--action-hover) !important;
     color: black;
 }
 
@@ -242,7 +242,7 @@ ol {
 }
 
 a:hover + .nav-button {
-    background-color:  var(--action-hover) !important;
+    background-color:  var(--action-hover);
 }
 
 .nav-item:hover .nav-button span {
