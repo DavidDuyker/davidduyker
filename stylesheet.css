@@ -20,8 +20,6 @@
     }
 } */
 
-/* New Test */
-
 body {
     --gradient-top-left: hsl(calc(var(--gradient-hue) + 185), 100%, 50%);
     --gradient-top-right: hsl(calc(var(--gradient-hue) + 65), 100%, 50%);
@@ -194,9 +192,9 @@ img {
 div:after {
     background: var(--gradient-bottom-right);
     z-index: -100;
-    bottom: -60vh;
-    right: -60vw;
-    box-shadow: 0 0 1000vh 30vw var(--gradient-bottom-right);
+    bottom: -100vh;
+    right: -100vw;
+    box-shadow: 0 0 100vh 50vw var(--gradient-bottom-right);
     opacity: 1;
     border-radius: 100%;
 }
