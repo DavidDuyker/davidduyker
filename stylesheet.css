@@ -47,7 +47,7 @@ p, li {
 }
 
 h1 {
-    margin: 0;
+    margin: 1rem 0 0 0;
     font-size: clamp(1.3rem, 6vw, 2rem);
     font-weight: 700;
     line-height: 2.5rem;
@@ -56,7 +56,7 @@ h1 {
 }
 
 h2 {
-    margin: 0;
+    margin: 1rem 0 0 0;
     font-size: clamp(1.1rem, 4.5vw, 1.5rem);
     font-weight: 700;
     line-height: 2rem;
@@ -242,6 +242,7 @@ hr {
     border-style: none;
     border-top: solid 1px var(--action-hover);
     width: 100%;
+    margin: 1rem 0 0 0;
 }
 
 ol {
@@ -334,7 +335,7 @@ a:hover + .nav-button {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
     padding: 40px 0;
 }
 
