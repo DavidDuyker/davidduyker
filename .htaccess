@@ -1,6 +1,9 @@
 Redirect 301 /about/ /
 Redirect 301 /about /
 
+Redirect 301 /projects/ /work
+Redirect 301 /projects /work
+
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
