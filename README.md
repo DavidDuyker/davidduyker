@@ -1,4 +1,5 @@
-![null](<https://davidduyker.com/assets/david.jpg>)# David Duyker
+![null](<https://davidduyker.com/assets/david.jpg>)
+# David Duyker
 
 Product Designer based in Seattle, WA.
 
