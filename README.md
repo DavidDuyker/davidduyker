@@ -1,7 +1,12 @@
-# davidduyker.com
+![null](<https://davidduyker.com/assets/david.jpg>)# David Duyker
 
-## Current Projects
+Product Designer based in Seattle, WA.
 
-## Upcoming Changes
-- Darkmode
-- Accessibility
+## Currently
+
+Sr. Product Designer at [nZero](<https://nzero.com>), helping organizations reach their climate goals with better data.
+
+## Availability
+
+Open to part-time freelance and consulting
+
