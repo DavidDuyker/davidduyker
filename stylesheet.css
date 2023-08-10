@@ -73,6 +73,11 @@ h3 {
     text-align: left;
 }
 
+.quote {
+    padding-left: 8px;
+    border-left: 2px solid pink;
+}
+
 /* Buttons and links */
 button {
     border: none;
