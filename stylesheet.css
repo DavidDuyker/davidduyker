@@ -37,7 +37,7 @@ div, a {
 }
 
 /* Typography */
-p, li {
+p, li, q, footer {
     margin: 0;
     font-size: clamp(.9rem, 3vw, 1rem);
     font-weight: 400;
@@ -73,9 +73,13 @@ h3 {
     text-align: left;
 }
 
-.quote {
+blockquote {
     padding-left: 16px;
     border-left: 4px solid pink;
+}
+
+footer {
+    font-style: italic;
 }
 
 /* Buttons and links */
