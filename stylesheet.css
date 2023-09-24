@@ -27,7 +27,7 @@ body {
     --gradient-bottom-right: hsl(0, 0%, 100%);
     margin: 0;
     animation: hue-animation 120s linear infinite;
-    font-family: 'Inter', sans-serif;
+    font-family: 'inter', sans-serif;
     background-color: hsl(0, 0%, 98%);
     position: relative;
 }
@@ -335,7 +335,7 @@ a:hover + .nav-button {
     overflow: auto;
     border: solid 1px var(--action-active);
     border-radius: 6px;
-    background-color: hsla(0, 0%, 100%, 0.4);
+    background-color: hsla(0, 0%, 100%, 0.6);
 }
 
 .content-flow {
