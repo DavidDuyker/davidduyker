@@ -333,7 +333,6 @@ a:hover + .nav-button {
     min-height: 0;
     max-height: 100%;
     overflow: auto;
-    border: solid 1px var(--action-active);
     border-radius: 6px;
     background-color: hsla(0, 0%, 100%, 0.6);
 }
