@@ -1,7 +1,7 @@
 :root {
     --action-hover: hsla(0,0%,0%,0.12);
     --action-active: hsla(0,0%,0%,0.08);
-    --gradient-weight: 0.13;
+    --gradient-weight: 0.17;
     --gradient-hue: 0;
 }
 /* 
