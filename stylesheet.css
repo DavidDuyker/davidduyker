@@ -1,7 +1,7 @@
 :root {
     --action-hover: hsla(0,0%,0%,0.12);
     --action-active: hsla(0,0%,0%,0.08);
-    --gradient-weight: 0.17;
+    --gradient-weight: 1;
     --gradient-hue: 0;
 }
 /* 
@@ -21,9 +21,9 @@
 } */
 
 body {
-    --gradient-top-left: hsl(calc(var(--gradient-hue) + 185), 100%, 50%);
-    --gradient-top-right: hsl(calc(var(--gradient-hue) + 65), 100%, 50%);
-    --gradient-bottom-left: hsl(calc(var(--gradient-hue) + 305), 100%, 50%);
+    --gradient-top-left: hsl(calc(var(--gradient-hue) + 185), 100%, 92%);
+    --gradient-top-right: hsl(calc(var(--gradient-hue) + 65), 100%, 92%);
+    --gradient-bottom-left: hsl(calc(var(--gradient-hue) + 305), 100%, 92%);
     --gradient-bottom-right: hsl(0, 0%, 100%);
     margin: 0;
     animation: hue-animation 120s linear infinite;
