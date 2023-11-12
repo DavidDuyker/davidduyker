@@ -1,9 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Ubuntu:wght@400;700&display=swap");
-
 :root {
   --action-hover: hsla(0, 0%, 0%, 0.12);
   --action-active: hsla(0, 0%, 0%, 0.08);
   --gradient-weight: 1;
+  --gradient-lightness: 88%;
   --gradient-hue: 0;
 }
 
@@ -24,9 +23,9 @@ to {
 } */
 
 body {
-  --gradient-top-left: hsl(calc(var(--gradient-hue) + 185), 100%, 92%);
-  --gradient-top-right: hsl(calc(var(--gradient-hue) + 65), 100%, 92%);
-  --gradient-bottom-left: hsl(calc(var(--gradient-hue) + 305), 100%, 92%);
+  --gradient-top-left: hsl(calc(var(--gradient-hue) + 185), 100%, var(--gradient-lightness));
+  --gradient-top-right: hsl(calc(var(--gradient-hue) + 65), 100%, var(--gradient-lightness));
+  --gradient-bottom-left: hsl(calc(var(--gradient-hue) + 305), 100%, var(--gradient-lightness));
   --gradient-bottom-right: hsl(0, 0%, 100%);
   margin: 0;
   animation: hue-animation 120s linear infinite;
@@ -177,8 +176,8 @@ img {
   border-radius: 6px;
   border: solid 1px var(--action-hover);
   overflow: hidden;
-  margin: 0 -8px;
-  max-width: calc(100% + 16px);
+  /* margin: 0 -8px;
+  max-width: calc(100% + 16px); */
 }
 
 /* Page Setup */
@@ -425,7 +424,7 @@ a:hover + .nav-button {
 
 .storyCover {
   max-width: calc(100% + 32px);
-  margin: 2rem -16px 0.5rem -16px;
+  margin: 2rem -16px 0.6rem -16px;
   border-radius: 8px;
   border: solid var(--action-hover) 1px;
 }
