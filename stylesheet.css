@@ -236,7 +236,6 @@ div:after {
 }
 
 #page-wrapper {
-  padding: 16px;
   height: 100vh;
   width: 100vw;
   box-sizing: border-box;
@@ -255,6 +254,7 @@ div:after {
   align-content: stretch;
   flex-wrap: wrap;
   overflow: hidden;
+  padding: 16px;
 }
 
 .column {
