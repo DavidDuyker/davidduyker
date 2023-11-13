@@ -16,9 +16,12 @@
     <!-- REPEATED -->
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Ubuntu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,350,0,0"
@@ -101,11 +104,12 @@
             // Replace relative URLs in links with absolute URLs
             const links = contentFlow.querySelectorAll("a");
             links.forEach((link) => {
-                const href = link.getAttribute("href");
-                if (href && !href.startsWith("http")) {
-                    const absoluteUrl = new URL(href, "https://davidduyker.com").href;
-                    link.setAttribute("href", absoluteUrl);
-                }
+              const href = link.getAttribute("href");
+              if (href && !href.startsWith("http")) {
+                const absoluteUrl = new URL(href, "https://davidduyker.com")
+                  .href;
+                link.setAttribute("href", absoluteUrl);
+              }
             });
 
             const converter = new showdown.Converter();
@@ -200,65 +204,113 @@
         </div>
         <!-- END REPEATED -->
         <div class="column column-right">
-            <div class="content-flow">
-                <h1>David Duyker</h1>
-                <p>Product Designer | Creative | Primarily: Pacific Time</p>
-                <h2>About</h2>
-                <p>An experienced senior product designer with expertise in design systems, user experience design, and sustainability. I am passionate about creative expression through physical and digital experiences.</p>
-                <h2>Professional Experience</h2>
-                <p><b>Currently</b> — Senior Product Designer @<a href="https://nzero.com">nZero</a> where I'm helping organizations achieve their climate goals with better data and analysis tools.</p>
-                <p><b>Previous</b> roles at Kinaptic, Barn2Door, and Industrial Alchemy, and freelance work.</p>
-                <p><a class="open-in-new" href="https://read.cv/davidd">View resume at read.cv</a></p>
-                <h2>Notable Projects</h2>
-                <a href="/work/"><img class="content-image" src="/assets/littleHero.jpg"></a>
-                <ul>
-                    <li>
-                      UI/UX Overhaul of Core App – <a class="open-in-new" href="https://www.linkedin.com/posts/nzerocarbonmanagement_uidesign-carbonmanagement-netzero-activity-7092566277726056448-PYa1?utm_source=share&amp;utm_medium=member_desktop" target="_blank">Announcement</a>
-                    </li>
-                    <li>
-                      Reporting Tools – <a class="open-in-new" href="https://www.linkedin.com/posts/nzerocarbonmanagement_sustainabilityreporting-netzero-esg-activity-7036751688027774976-_poX?utm_source=share&amp;utm_medium=member_desktop" target="_blank">Announcment</a>
-                    </li>
-                    <li>
-                      Public Data Portals – <a class="open-in-new" href="https://nzero.com/knowledge-hub/how-the-biggest-little-city-in-the-world-is-leading-carbon-transparency/" target="_blank">Announcement</a>
-                    </li>
-                    <li>
-                        RepairCycle – <a class="open-in-new" href="https://www.instagram.com/repaircycle_seattle/" target="_blank">Public Link</a>
-                      </li>
-                  </ul>
-                <p>Read more: <a href="/work">Stories from my Design Practice</a></p>
-                <h2>Working With Me</h2>
-                <p>Here's what some of my lovely colleagues have said about working with me:</p>
-                <blockquote>
-                    <p>
-                      "I really appreciate how open and generous David has been with
-                      his time and knowledge... He's always willing to make time for a
-                      meeting or a working session and I appreciate it big time."
-                    </p>
-                    <footer>—Coworker (Design)</footer>
-                  </blockquote>
-                  <blockquote>
-                    <p>
-                      "[David] is great at the "why" for the designs. This comes in
-                      handy in sprint planning with all the devs asking a lot of whys
-                      for the design we're looking at."
-                    </p>
-                    <footer>—Coworker (Developer)</footer>
-                  </blockquote>
-                  <blockquote>
-                    <p>
-                      "[David's] knowledge of design and understanding of how coding and MUI come together are very powerful which adds to his ability to communicate effectively to myself and other devs."
-                    </p>
-                    <footer>—Coworker (Developer)</footer>
-                  </blockquote>
-                  <blockquote>
-                    <p>
-                      "David always keeps the end user in mind, displaying a depth of
-                      empathy that results in product features that are truly
-                      human-centered."
-                    </p>
-                    <footer>—Coworker (Design)</footer>
-                  </blockquote>
-            </div>
+          <div class="content-flow">
+            <h1>David Duyker</h1>
+            <p>Product Designer | Creative | Primarily: Pacific Time</p>
+            <h2>About</h2>
+            <p>
+              An experienced senior product designer with expertise in design
+              systems, user experience design, and sustainability. I am
+              passionate about creative expression through physical and digital
+              experiences.
+            </p>
+            <h2>Professional Experience</h2>
+            <p>
+              <b>Currently</b> — Senior Product Designer @<a
+                href="https://nzero.com"
+                >nZero</a
+              >
+              where I'm helping organizations achieve their climate goals with
+              better data and analysis tools.
+            </p>
+            <p>
+              <b>Previous</b> roles at Kinaptic, Barn2Door, and Industrial
+              Alchemy, and freelance work.
+            </p>
+            <p>
+              <a class="open-in-new" href="https://read.cv/davidd"
+                >View resume at read.cv</a
+              >
+            </p>
+            <h2>Notable Projects</h2>
+            <img class="content-image" src="/assets/littleHero.jpg" />
+            <a class="button" href="/work/">work.html</a>
+            <ul>
+              <li>
+                UI/UX Overhaul of Core App –
+                <a
+                  class="open-in-new"
+                  href="https://www.linkedin.com/posts/nzerocarbonmanagement_uidesign-carbonmanagement-netzero-activity-7092566277726056448-PYa1?utm_source=share&amp;utm_medium=member_desktop"
+                  target="_blank"
+                  >Announcement</a
+                >
+              </li>
+              <li>
+                Reporting Tools –
+                <a
+                  class="open-in-new"
+                  href="https://www.linkedin.com/posts/nzerocarbonmanagement_sustainabilityreporting-netzero-esg-activity-7036751688027774976-_poX?utm_source=share&amp;utm_medium=member_desktop"
+                  target="_blank"
+                  >Announcment</a
+                >
+              </li>
+              <li>
+                Public Data Portals –
+                <a
+                  class="open-in-new"
+                  href="https://nzero.com/knowledge-hub/how-the-biggest-little-city-in-the-world-is-leading-carbon-transparency/"
+                  target="_blank"
+                  >Announcement</a
+                >
+              </li>
+              <li>
+                RepairCycle –
+                <a
+                  class="open-in-new"
+                  href="https://www.instagram.com/repaircycle_seattle/"
+                  target="_blank"
+                  >Public Link</a
+                >
+              </li>
+            </ul>
+            <h2>Working With Me</h2>
+            <p>
+              Here's what some of my lovely colleagues have said about working
+              with me:
+            </p>
+            <blockquote>
+              <p>
+                "I really appreciate how open and generous David has been with
+                his time and knowledge... He's always willing to make time for a
+                meeting or a working session and I appreciate it big time."
+              </p>
+              <footer>—Coworker (Design)</footer>
+            </blockquote>
+            <blockquote>
+              <p>
+                "[David] is great at the "why" for the designs. This comes in
+                handy in sprint planning with all the devs asking a lot of whys
+                for the design we're looking at."
+              </p>
+              <footer>—Coworker (Developer)</footer>
+            </blockquote>
+            <blockquote>
+              <p>
+                "[David's] knowledge of design and understanding of how coding
+                and MUI come together are very powerful which adds to his
+                ability to communicate effectively to myself and other devs."
+              </p>
+              <footer>—Coworker (Developer)</footer>
+            </blockquote>
+            <blockquote>
+              <p>
+                "David always keeps the end user in mind, displaying a depth of
+                empathy that results in product features that are truly
+                human-centered."
+              </p>
+              <footer>—Coworker (Design)</footer>
+            </blockquote>
+          </div>
         </div>
       </div>
     </div>
