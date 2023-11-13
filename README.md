@@ -16,7 +16,8 @@ An experienced senior product designer with expertise in design systems, user ex
 
 ## Notable Projects
 
-![null](<https://davidduyker.com/assets/littleHero.jpg>)[work.html](<https://davidduyker.com/work/>)-  UI/UX Overhaul of Core App – [Announcement](<https://www.linkedin.com/posts/nzerocarbonmanagement_uidesign-carbonmanagement-netzero-activity-7092566277726056448-PYa1?utm_source=share&utm_medium=member_desktop>)
+![null](<https://davidduyker.com/assets/littleHero.jpg>)[work.html](<https://davidduyker.com/work/>)
+-  UI/UX Overhaul of Core App – [Announcement](<https://www.linkedin.com/posts/nzerocarbonmanagement_uidesign-carbonmanagement-netzero-activity-7092566277726056448-PYa1?utm_source=share&utm_medium=member_desktop>)
 -  Reporting Tools – [Announcment](<https://www.linkedin.com/posts/nzerocarbonmanagement_sustainabilityreporting-netzero-esg-activity-7036751688027774976-_poX?utm_source=share&utm_medium=member_desktop>)
 -  Public Data Portals – [Announcement](<https://nzero.com/knowledge-hub/how-the-biggest-little-city-in-the-world-is-leading-carbon-transparency/>)
 -  RepairCycle – [Public Link](<https://www.instagram.com/repaircycle_seattle/>)
