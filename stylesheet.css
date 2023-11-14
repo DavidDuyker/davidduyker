@@ -401,10 +401,6 @@ a:hover + .nav-button {
   border: 1px var(--action-hover) solid;
 }
 
-.content-flow .button:after {
-  content: " →";
-}
-
 /* Page Content [README, postcard, projects]*/
 
 /* README Page */
