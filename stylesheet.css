@@ -518,7 +518,7 @@ a:hover + .nav-button {
   }
 
   .button {
-    outline: 1px solid var(--action-active);
+    border: 1px solid var(--action-active);
     background-color: hsla(0, 0%, 100%, 0.4);
   }
 }
