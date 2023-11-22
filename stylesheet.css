@@ -1,6 +1,7 @@
 :root {
   --action-hover: hsla(0, 0%, 0%, 0.12);
   --action-active: hsla(0, 0%, 0%, 0.08);
+  --page-background: rgba(255, 255, 255, 0.5);
   --gradient-weight: 1;
   --gradient-lightness: 88%;
   --gradient-hue: 0;
@@ -383,7 +384,7 @@ a:hover + .nav-button {
   max-height: 100%;
   overflow: auto;
   border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--page-background);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Lora", serif;
 }
@@ -464,7 +465,7 @@ a:hover + .nav-button {
   padding: 16px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--page-background);
 }
 
 .storyCover {
