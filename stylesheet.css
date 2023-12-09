@@ -446,6 +446,8 @@ a:hover + .nav-button {
 .work {
   background: none;
   box-shadow: none;
+  margin: -16px;
+  max-height: 100vh;
 }
 
 .email-protect {
