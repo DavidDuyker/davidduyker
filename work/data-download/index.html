@@ -101,6 +101,17 @@
               }
             });
 
+            // Replace relative URLs in links with absolute URLs
+            const links = contentFlow.querySelectorAll("a");
+            links.forEach((link) => {
+              const href = link.getAttribute("href");
+              if (href && !href.startsWith("http")) {
+                const absoluteUrl = new URL(href, "https://davidduyker.com")
+                  .href;
+                link.setAttribute("href", absoluteUrl);
+              }
+            });
+
             const converter = new showdown.Converter();
             const markdown = converter.makeMarkdown(contentFlow.innerHTML);
             const blob = new Blob([markdown], { type: "text/markdown" });
@@ -178,16 +189,21 @@
               >
                 resume.cv
                 <span class="material-symbols-outlined">open_in_new</span>
+                <div class="preview">
+                  <img src="/assets/preview.jpg" />
+                  <p>read.cv/davidduyker</p>
+                </div>
               </a>
             </div>
             <div class="nav-item">
               <a
                 class="button nav-button"
                 href="https://davidduyker.bearblog.dev/"
+                >writing.blog
+                <span class="material-symbols-outlined">
+                  subdirectory_arrow_right
+                </span></a
               >
-                writing.blog
-                <span class="material-symbols-outlined">open_in_new</span>
-              </a>
             </div>
           </div>
         </div>

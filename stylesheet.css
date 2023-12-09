@@ -1,6 +1,7 @@
 :root {
   --action-hover: hsla(0, 0%, 0%, 0.12);
   --action-active: hsla(0, 0%, 0%, 0.08);
+  --divider: hsla(0, 0%, 0%, 0.08);
   --page-background: rgba(255, 255, 255, 0.5);
   --gradient-weight: 1;
   --gradient-lightness: 88%;
@@ -292,7 +293,7 @@ div:after {
 
 .divider {
   width: 100%;
-  background-color: var(--action-hover);
+  background-color: var(--divider);
   height: 1px;
 }
 
@@ -370,10 +371,16 @@ a:hover + .nav-button {
   color: hsl(0, 0%, 0%);
 }
 
+.active .nav-button {
+  background-color: var(--action-active);
+}
+
+/* Preview menu item external link */
 .nav-item .preview {
   visibility: hidden;
   display: flex;
   flex-direction: column;
+  gap: 4px;
   opacity: 0.0;
   position: absolute;
   right: -224px;
@@ -386,6 +393,7 @@ a:hover + .nav-button {
   overflow: hidden;
   background-color: hsla(0, 0%, 100%, 0.5);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -398,13 +406,17 @@ a:hover + .nav-button {
   padding: 0;
 }
 
+.nav-item p {
+  width: 100%;
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: hsl(0, 0%, 32%);
+}
+
 .nav-button:hover .preview {
   visibility: visible;
   opacity: 1;
-}
-
-.active .nav-button {
-  background-color: var(--action-active);
 }
 
 /* Content Column */
@@ -544,6 +556,10 @@ a:hover + .nav-button {
   .column-left .icon-button,
   .column-left #postcard {
     display: none;
+  }
+
+  .nav-button:hover .preview {
+    visibility: hidden;
   }
 
   .column-right {
