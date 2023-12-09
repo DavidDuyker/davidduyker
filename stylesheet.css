@@ -384,8 +384,8 @@ a:hover + .nav-button {
   gap: 4px;
   opacity: 0.0;
   position: absolute;
-  right: -224px;
-  width: 216px;
+  right: -30px;
+  width: 40px;
   z-index: 100;
   transition-delay: 50ms;
   transition-duration: 200ms;
@@ -418,6 +418,8 @@ a:hover + .nav-button {
 .nav-button:hover .preview {
   visibility: visible;
   opacity: 1;
+  right: -224px;
+  width: 216px;
 }
 
 /* Content Column */
