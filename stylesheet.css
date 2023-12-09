@@ -43,6 +43,7 @@ a {
 
 ul {
   margin: .5rem 0;
+  padding-left: 24px;
 }
 
 /* Typography */
@@ -492,6 +493,8 @@ a:hover + .nav-button {
 .work {
   background: none;
   box-shadow: none;
+  margin: -16px;
+  max-height: 100vh;
 }
 
 .email-protect {
@@ -567,8 +570,21 @@ a:hover + .nav-button {
     padding: 16px;
   }
 
+  .content-flow {
+    padding: 0;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
   .button {
     border: 1px solid var(--action-active);
     background-color: hsla(0, 0%, 100%, 0.4);
+  }
+
+  .work {
+    margin: 0;
+    max-height: 100%;
   }
 }
