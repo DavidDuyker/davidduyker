@@ -452,6 +452,10 @@ a:hover + .nav-button {
   border: 1px var(--action-hover) solid;
 }
 
+.content-flow .icon-button {
+  border: none;
+}
+
 /* Page Content [README, postcard, projects]*/
 
 /* README Page */
@@ -496,6 +500,7 @@ a:hover + .nav-button {
   background: none;
   box-shadow: none;
   margin: -16px;
+  padding: calc(16px + 24px);
   max-height: 100vh;
 }
 
