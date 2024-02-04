@@ -460,6 +460,16 @@ a:hover + .nav-button {
 
 /* README Page */
 
+/* TLDraw page */
+.tldraw .content-flow {
+  flex-basis: 100%;
+  padding: 0;
+}
+
+.tldraw {
+  align-items: stretch;
+}
+
 /* Postcard Page */
 .content-flow {
   perspective: 800px;
