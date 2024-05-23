@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Ubuntu:wght@400;700&display=swap');
+
+:root {
+    --width: 720px;
+  
+  /* font updates from david */
+    --font-main: 'lora', sans-serif;
+    --font-secondary: 'ubuntu', sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #222;
+    --text-color: #444;
+    --link-color: #3273dc;
+    --visited-color:  #3273dc;
+    --code-background-color: #f2f2f2;
+    --code-color: #222;
+    --blockquote-color: #222;
+}
+
+body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+}
+
+a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+nav a {
+    margin-right: 8px;
+}
+
+strong, b {
+    color: var(--heading-color);
+}
+
+button {
+    margin: 0;
+    cursor: pointer;
+}
+
+main {
+    line-height: 1.6;
+}
+
+table {
+    width: 100%;
+}
+
+hr {
+    border: 0;
+    border-top: 1px dashed;
+}
+
+img {
+    max-width: 100%;
+}
+
+code {
+    font-family: monospace;
+    padding: 2px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+}
+
+blockquote {
+    border-left: 1px solid #999;
+    color: var(--code-color);
+    padding-left: 20px;
+    font-style: italic;
+}
+
+footer {
+    padding: 25px 0;
+    text-align: center;
+}
+
+.title:hover {
+    text-decoration: none;
+}
+
+.inline {
+    width: auto !important;
+}
+
+.highlight, .code {
+    padding: 1px 15px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+}
+
+/* blog post list */
+ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+}
+
+ul.blog-posts li {
+    display: flex;
+}
+
+ul.blog-posts li span {
+    flex: 0 0 130px;
+}
+
+ul.blog-posts li a:visited {
+    color: var(--visited-color);
+}
+
+/* David Additions */
+
+/* texture background */
+body:before {
+  content: '';
+  background: url(https://davidduyker.com/assets/random.png);
+  background-size: 100px;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: -99;
+  opacity: 0.1;
+}
+
+body {
+  box-sizing: border-box;
+  height: 100%;
+  min-width: 100vw;
+  overflow: scroll;
+  background: none;
+}
+
+/* Gradient Background */
+html {
+  background: linear-gradient(to left bottom, hsl(65, 100%, 88%), hsl(305, 100%, 88%));
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  overflow: hidden;
+}
+
+html:before, html:after{
+  content:'';
+  position: fixed;
+  width:100%;
+  height:100%;
+}
+
+html:before{
+  background: hsl(185, 100%, 92%);
+  box-shadow: 50vw 50vh 50vh 0 hsl(185, 100%, 88%);
+  z-index: -100;
+  top: -100vh;
+  left: -100vw;
+  opacity: 1;
+  border-radius: 100%;
+}
+
+/* Preview Images */
+.preview {
+  border: solid lightGrey 1px;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: grey;
+  font-weight: 800;
+  margin: 0 auto;
+  background: white;
+}
+
+.preview:hover {
+  background: hsl(0, 0%, 96%)
+}
+
+.previewImg {
+  border-radius: .5rem;
+}
+
+/* Footer default and update override */
+footer {
+  padding: unset;
+  text-align: unset;
+  max-height: 20px;
+}
+
+body > footer {
+  padding: 16px !important;
+  text-align: left;
+  font-style: italic;
+  font-size: .8rem;
+  color: grey;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+/* Quote Styling */
+blockquote {
+  padding-left: 16px;
+  border-left: 4px solid pink;
+}
+
+/* Blog List */
+ul.blog-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+main {
+  min-height: 70vh;
+}
+
+li span, main>p {
+  display: none;
+}
+
+.blog-posts a, .blog-posts a:visited {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.blog-posts a:before {
+  content:'→ ';
+}
+
+/* Link Styling */
+:root {
+  --link-color: rgb(0, 140, 153);
+  --visited-color: rgb(0, 140, 153);
+}
+
+/* Navigation and header Styling */
+nav {
+  border-top: 1px solid hsla(0, 0%, 0%, .2);
+  padding-top: 8px;
+}
+
+header .title {
+  padding: 8px 0 0 8px;
+  line-height: 100%;
+}
+
+nav p {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+nav p a {
+  color: hsla(0, 0%, 0%, .9);
+  border-radius: 4px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 4px 8px;
+}
+
+.home nav p a:last-child {
+  background-color:  hsla(0, 0%, 0%, .1);
+}
+
+nav p a:hover {
+  background-color: hsla(0, 0%, 0%, .2) !important;
+  text-decoration: none;
+}
+
+a {
+  border-radius: 4px;
+  margin: -2px -4px;
+  padding: 2px 4px;
+  transition-duration: 150ms;
+}
+
+a:hover {
+  background-color: hsl(185.1deg 100% 30% / 16%);
+}
+
+.title:hover {
+    text-decoration: none;
+  background-color: none;
+}
+
+/* Page Layout*/
+
+body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  height: 100vh;
+  padding-bottom: 0;
+  padding: 16px;
+}
+
+header {
+  flex-basis: min(24ch, 100%);
+  flex-grow: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0;
+}
+
+header > * {
+  margin: 8px 24px 8px 8px;
+}
+
+header p a {
+  margin: 0;
+}
+
+h1 {
+  margin: -1rem 0 .5rem 0;
+  line-height: 2.5rem;
+}
+
+main {
+  padding: 64px 24px;
+  box-sizing: border-box;
+  margin: 0;
+  flex-direction: column;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-basis: 30ch;
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  font-family: "Lora", serif;
+}
+
+main > * {
+  max-width: 30rem;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+footer {
+  min-width: 100%;
+}
+
+.title h1 {
+  font-size: 1rem;
+  margin: 0;
+  font-family: var(--font-secondary);
+  line-height: 1rem;
+}
+
+@media only screen and (max-width: 48rem) {
+  main {
+    padding: 16px;
+    flex-basis: auto;
+    max-height: unset;
+  }
+  
+  body {
+    align-content: flex-start;
+  }
+  
+  html {
+    height: auto;
+  }
+}
