@@ -51,7 +51,9 @@ body {
     z-index: 100;
 }
 
-header, main > div, footer {
+header,
+main>div,
+footer {
     width: 100%;
     max-width: 34.5rem;
     margin: 0 auto;
@@ -60,18 +62,17 @@ header, main > div, footer {
     gap: 1.5rem;
 }
 
-body > script {
+body>script {
     display: none;
 }
 
-body > * > * {
-}
+body>*>* {}
 
 body::before {
     content: "";
     position: fixed;
     z-index: -100;
-    background-image: url(assets/dlbg.png);
+    background-image: url(https://davidduyker.com/update/assets/dlbg.png);
     background-size: 0.75rem;
     background-position: top;
     width: 100%;
@@ -101,7 +102,8 @@ h2 {
 }
 
 p,
-ul, footer span {
+ul,
+footer span {
     font-family: 'rubik', sans-serif;
     line-height: 1.5rem;
     font-size: 1rem;
@@ -120,8 +122,8 @@ li a {
 
 li a:hover {
     background: linear-gradient(0deg, hsla(191, 100%, 50%, 0.258) 0% 50%, transparent 51% 100%);
-    margin: -.2rem -.375rem;
-    padding: .2rem .375rem;
+    margin: 0 -.75rem;
+    padding: 0 .75rem;
 }
 
 li span {
@@ -142,31 +144,30 @@ p a {
 <body class="home">
     <header>
         <a class="title" href="/">
-            <h1>Mixed Medium
+            <h1>
+                Mixed Medium
             </h1>
         </a>
         <nav>
-            <p>
-                <a href="/">All Posts</a>
-            </p>
+            <p><a href="/">All Posts</a></p>
         </nav>
     </header>
     <main>
         <div>
+            <hr>
             <p>My name is David. I'm a Seattle-based product designer. I do a mix of designing in both digital and
                 physical mediums.</p>
-            <p>
-                <strong>MixedMedium</strong>
-                is a space where I share <em>mostly</em>
-                short thoughts about design, making, and creativity.
-            </p>
+            <p><strong>MixedMedium</strong> is a space where I share <em>mostly</em> short thoughts about design,
+                making, and creativity.</p>
+            <hr>
             <h2 id="posts">Posts</h2>
             <p>
             <ul class="embedded blog-posts">
                 <li>
                     <span>
                         <i>
-                            <time datetime="2024-02-04">04 Feb, 2024
+                            <time datetime="2024-02-04">
+                                04 Feb, 2024
                             </time>
                         </i>
                     </span>
@@ -175,7 +176,8 @@ p a {
                 <li>
                     <span>
                         <i>
-                            <time datetime="2023-11-20">20 Nov, 2023
+                            <time datetime="2023-11-20">
+                                20 Nov, 2023
                             </time>
                         </i>
                     </span>
@@ -184,7 +186,8 @@ p a {
                 <li>
                     <span>
                         <i>
-                            <time datetime="2023-09-18">18 Sep, 2023
+                            <time datetime="2023-09-18">
+                                18 Sep, 2023
                             </time>
                         </i>
                     </span>
@@ -193,7 +196,8 @@ p a {
                 <li>
                     <span>
                         <i>
-                            <time datetime="2020-12-28">28 Dec, 2020
+                            <time datetime="2020-12-28">
+                                28 Dec, 2020
                             </time>
                         </i>
                     </span>
