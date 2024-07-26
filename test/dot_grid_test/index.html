@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="/favicon@2x.png">
+    <title>Home David Duyker Grid Test</title>
+
+    <style>
+        .dot-grid {
+            position: fixed;
+            /* Keeps the grid in place during scrolling */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* Allow interaction with content below */
+            z-index: -1;
+            /* Keep it behind the content */
+            right: 0;
+            max-width: 40rem;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .dot {
+            width: 0.5px;
+            /* Start with small dots */
+            height: 1px;
+            background-color: #333;
+            /* Or your preferred color */
+            border-radius: 0%;
+            /* Change from 50% to 0% for a square shape */
+            position: absolute;
+            transition: width 150ms ease-out;
+            /* Add a transition */
+        }
+
+        .content {
+            max-width: 40rem;
+            margin: 0 auto;
+        }
+
+        .horizontal-line {
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        h1 {
+            height: 30px;
+        }
+
+        p {
+            margin: 24px 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="dot-grid"></div>
+    <div class="content">
+        <div class="horizontal-line"></div>
+        <div id="content">
+            <div class="section">
+              <h1>
+                <span class="left">DAVID</span> <span class="right">DUYKER</span>
+              </h1>
+              <p>
+                Product designer focused on sustainability and humanitarian design.
+                Expertise in user-experience design, design research, design systems,
+                and sustainability.
+              </p>
+            </div>
+            <div class="horizontal-line"></div>
+            <div class="section">
+              <h2>LINKS</h2>
+              <div class="row">
+                <p>Writing</p>
+                <p class="col-8">
+                  <a href="https://www.davidduyker.com"
+                    >Messy Stacking Design Research</a
+                  ><br /><a href="https://www.davidduyker.com"
+                    >Digital Design Tips for Grassroots Activists</a
+                  ><br /><a href="https://davidduyker.bearblog.dev/">More Writing →</a>
+                </p>
+              </div>
+              <div class="row">
+                <p>David Docs</p>
+                <p class="col-8">
+                  <a href="https://www.davidduyker.com">README.md</a><br /><a
+                    href="https://www.davidduyker.com"
+                    >Resume — read.cv</a
+                  >
+                </p>
+              </div>
+              <div class="row">
+                <p>Recommended</p>
+                <p class="col-8">
+                  <a href="https://www.davidduyker.com">Why We Interface by Ehsan</a>
+                </p>
+              </div>
+            </div>
+            <div class="horizontal-line"></div>
+            <div class="section">
+              <h2>Experience</h2>
+              <div class="row">
+                <p>2024</p>
+                <p class="col-8">
+                  Global Product Designer<br />USCIS — Refugee and Asylum
+                  Directorate<br />(Contractor – Alpha Omega Integrations)
+                </p>
+              </div>
+              <div class="row">
+                <p>2021 – 2023</p>
+                <p class="col-8">
+                  Senior Product Designer<br /><a href="https://nzero.com"
+                    >NZero (prev. LEDGER8760)</a
+                  >
+                </p>
+              </div>
+            </div>
+            
+        <div class="horizontal-line"></div>
+            <div class="section">
+              <h2>Archive</h2>
+              <div class="row">
+                <p>
+                  <a href="/old">2023 Personal Website (previous site version)</a>
+                </p>
+              </div>
+              <div class="row">
+                <p>2019 Personal Website (depriated)</p>
+              </div>
+            </div>
+          </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dotGrid = document.querySelector('.dot-grid');
+            const dots = [];
+            const dotSpacing = 12;
+            const threshold = 6;
+
+            // Create dots and position them
+            for (let i = 0; i < Math.ceil(dotGrid.clientWidth / dotSpacing); i++) {
+                for (let j = 0; j < Math.ceil(window.innerHeight / dotSpacing); j++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    dot.style.left = (i) * dotSpacing + "px";
+                    dot.style.top = (j) * dotSpacing + "px";
+                    dotGrid.appendChild(dot);
+                    dots.push(dot);
+                }
+            }
+
+            const horizontalLines = document.querySelectorAll('.horizontal-line');
+            const linePositions = [];  // Store initial line positions
+
+            // Get initial line positions
+            horizontalLines.forEach(line => {
+                linePositions.push(line.offsetTop);
+            });
+
+            function debounce(func, wait) {
+                let timeout;
+                return function (...args) {
+                    const context = this;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), wait);
+                };
+            }
+
+            // Animation on scroll
+            window.addEventListener('scroll', debounce(() => {
+                const scrollY = window.scrollY;
+
+                dots.forEach(dot => {
+                    dot.style.width = '0.5px';
+                    dot.style.height = '1px';
+                });
+
+                horizontalLines.forEach((line, index) => {
+                    const lineTop = linePositions[index] - scrollY; // Calculate relative top
+                    const lineBottom = lineTop + line.offsetHeight;
+
+                    // Find dots closest to the horizontal line
+                    const closestDots = dots.filter(dot => {
+                        const dotTop = dot.offsetTop;
+                        return dotTop >= (lineTop - threshold) && dotTop <= (lineBottom + threshold);
+                    });
+
+                    closestDots.forEach(dot => {
+                        const dotTop = dot.offsetTop;
+                        const distanceToLine = Math.min(Math.abs(dotTop - lineTop), Math.abs(dotTop - lineBottom));
+                        const scale = Math.max(0, 1 - distanceToLine / threshold);
+                        dot.style.width = scale * 48 + 'px';
+                        dot.style.height = '1px';
+                    });
+                });
+            }, 12)); // Adjust the debounce delay as needed
+        });
+    </script>
+</body>
+
+</html>
