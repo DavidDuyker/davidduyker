@@ -9,6 +9,8 @@ body {
 
 header, footer {
     padding: 20px;
+    max-width: 40ch;
+    margin: auto;
 }
 
 header {
@@ -56,4 +58,16 @@ li {
 /* Map Style */
 iframe {
     max-width: 100%;
+}
+
+/* Image Style */
+img {
+    max-width: 100%;
+}
+
+#isabelle {
+    border-radius: 12px;
+    box-shadow: 0px 40px 40px 40px hsla(0, 0%, 0%, 0.05);
+   transform: rotateX(3deg) rotateY(-5deg) rotateZ(2deg);
+   transform-style: preserve-3d;
 }
