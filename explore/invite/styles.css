@@ -21,6 +21,8 @@ section {
     margin: auto;
 }
 
+/* Text Styles */
+
 h1 {
     font-family: 'Dancing Script', cursive;
 }
@@ -49,4 +51,9 @@ ul {
 li {
     text-decoration: none;
     line-height: 150%;
+}
+
+/* Map Style */
+iframe {
+    max-width: 100%;
 }
