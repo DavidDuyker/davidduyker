@@ -85,7 +85,7 @@ img {
     display: flex;
     flex-direction: row;
     max-width: 100vw;
-    margin: 0 min(-1em, calc((100vw - 40ch) / -2));
+    margin: 0 clamp(calc(-304px - 2rem), calc((100vw - 40ch) / -2), -1rem);
     overflow: auto;
     margin-top: 1em;
 }
@@ -94,6 +94,7 @@ img {
     border-radius: 1em;
     width: 80%;
     margin: 0 0 0 1em;
+    max-width: 35ch;
 }
 
 .images img:last-child {
