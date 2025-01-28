@@ -3,7 +3,7 @@
   --action-active: hsla(0, 0%, 0%, 0.08);
   --divider: hsla(0, 0%, 0%, 0.08);
   --page-background: rgba(255, 255, 255, 0.5);
-  --gradient-background: rgb(240, 188, 110);
+  /* --gradient-background: rgb(240, 188, 110);
   --gradient-weight: 1;
   --gradient-lightness: 80%;
   --gradient-hue: 0;
@@ -11,7 +11,7 @@
   --gradient-top-left: hsl(calc(var(--gradient-hue) + 185), 100%, calc(var(--gradient-lightness) + 0%));
   --gradient-top-right: hsl(calc(var(--gradient-hue) + 60), 100%, var(--gradient-lightness));
   --gradient-bottom-left: hsl(calc(var(--gradient-hue) + 305), 100%, var(--gradient-lightness));
-  --gradient-bottom-right: hsl(0, 0%, 100%);
+  --gradient-bottom-right: hsl(0, 0%, 100%); */
 
 
 }
@@ -229,78 +229,16 @@ img {
 }
 
 .gradient {
-  /* opacity: var(--gradient-weight);
-  background: linear-gradient(
-    to left bottom,
-    var(--gradient-top-right),
-    var(--gradient-bottom-left)
-  ); */
-
-
-  background-color:var(--gradient-background);
-  background-image:
-    radial-gradient(at 8% 92%, var(--gradient-bottom-left) 0px, transparent 70%),
-    radial-gradient(at 92% 92%, var(--gradient-bottom-right) 0px, transparent 50%),
-    radial-gradient(at 92% 8%, var(--gradient-top-right) 0px, transparent 70%),
-    radial-gradient(at 8% 8%, var(--gradient-top-left) 0px, transparent 70%);
-
-  background-image:
-    radial-gradient(at 0% 100%, var(--gradient-bottom-left) 0px, var(--gradient-bottom-left) 30%, transparent 50%),
-    radial-gradient(at 100% 100%, var(--gradient-bottom-right) 0px, var(--gradient-bottom-right) 20%, transparent 30%),
-    radial-gradient(at 100% 0%, var(--gradient-top-right) 0px, var(--gradient-top-right) 30%, transparent 50%),
-    radial-gradient(at 8% 8%, var(--gradient-top-left) 0px, transparent 70%),
-    radial-gradient(at 0% 0%, var(--gradient-top-left) 0px, var(--gradient-top-left) 40%, transparent 70%);
-
-  background-image:
-    radial-gradient(at 0% 100% in hsl shorter hue, var(--gradient-bottom-left) 0px, var(--gradient-bottom-left) 30%, transparent 50%),
-    radial-gradient(at 100% 100% in hsl shorter hue, var(--gradient-bottom-right) 0px, var(--gradient-bottom-right) 20%, transparent 30%),
-    radial-gradient(at 100% 0% in hsl longer hue, var(--gradient-top-right) 0px, var(--gradient-top-right) 30%, transparent 50%),
-    radial-gradient(at 8% 8% in hsl shorter hue, var(--gradient-top-left) 0px, transparent 70%),
-    radial-gradient(at 0% 0% in hsl shorter hue, var(--gradient-top-left) 0px, var(--gradient-top-left) 40%, transparent 70%);
-
-    background-image: 
-    radial-gradient(at 100% 100%, var(--gradient-bottom-right) 0px, var(--gradient-bottom-right) 30%, transparent 50%),
-    linear-gradient(to top left, var(--gradient-bottom-right) 0px, transparent 50%),
-    linear-gradient(to top, var(--gradient-bottom-left) 0px, var(--gradient-bottom-left) 30%, transparent 70%),
-    linear-gradient(to right, var(--gradient-top-left) 0px, transparent 50%, var(--gradient-top-right) 100%);
-
     background-color:#ff99ad;
-background-image:
-radial-gradient(at 23% 46%, hsla(52,100%,90%,1) 0px, transparent 50%),
-radial-gradient(at 42% 86%, hsla(126,100%,90%,1) 0px, transparent 50%),
-radial-gradient(at 95% 39%, hsla(345,100%,90%,1) 0px, transparent 50%),
-radial-gradient(at 38% 80%, hsla(79,100%,90%,1) 0px, transparent 50%),
-radial-gradient(at 90% 74%, hsla(313,100%,90%,1) 0px, transparent 50%),
-radial-gradient(at 6% 0%, hsla(200,100%,90%,1) 0px, transparent 50%),
-radial-gradient(at 37% 24%, hsla(268,100%,90%,1) 0px, transparent 50%);
+    background-image:
+    radial-gradient(at 23% 46%, hsla(52,100%,90%,1) 0px, transparent 50%),
+    radial-gradient(at 42% 86%, hsla(126,100%,90%,1) 0px, transparent 50%),
+    radial-gradient(at 95% 39%, hsla(345,100%,90%,1) 0px, transparent 50%),
+    radial-gradient(at 38% 80%, hsla(79,100%,90%,1) 0px, transparent 50%),
+    radial-gradient(at 90% 74%, hsla(313,100%,90%,1) 0px, transparent 50%),
+    radial-gradient(at 6% 0%, hsla(200,100%,90%,1) 0px, transparent 50%),
+    radial-gradient(at 37% 24%, hsla(268,100%,90%,1) 0px, transparent 50%);
 }
-
-/* .gradient:before,
-.gradient:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-} */
-/* .gradient:before {
-  background: var(--gradient-top-left);
-  box-shadow: 50vw 50vh 50vh 0 var(--gradient-top-left);
-  z-index: -100;
-  top: -100vh;
-  left: -100vw;
-  opacity: 1;
-  border-radius: 100%;
-} */
-
-/* div:after {
-  background: var(--gradient-bottom-right);
-  box-shadow: -50vw -50vh 50vh 0 var(--gradient-bottom-right);
-  z-index: -100;
-  bottom: -100vh;
-  right: -100vw;
-  opacity: 1;
-  border-radius: 100%;
-} */
 
 #page-wrapper {
   height: 100vh;
@@ -466,18 +404,18 @@ a:hover + .nav-button {
 
 /* Content Column */
 .column-right {
-  flex-grow: 1;
+  flex-basis: min(48ch, 100%);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  flex-basis: 30ch;
   min-height: 0;
   max-height: 100%;
   overflow: auto;
-  border-radius: 6px;
+  border-radius: 16px;
   background-color: var(--page-background);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Lora", serif;
+  margin: 0 auto;
 }
 
 .content-flow {
@@ -487,7 +425,7 @@ a:hover + .nav-button {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 40px 0;
+  padding: 24px;
 }
 
 .content-flow .button {

@@ -34,7 +34,7 @@ body {
 #content {
   max-width: var(--content-width);
   margin: 0 auto 0 auto;
-  padding: 4.5rem 0.75rem 12rem 0.75rem;
+  padding: 9rem 0.75rem 120rem 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 4.5rem;
@@ -55,6 +55,13 @@ h1 {
   font-weight: 500;
 }
 
+#sticky-header {
+  position: fixed;
+  top: 10px;
+  width: 100vw;
+  background-color: white;
+  z-index: 100;
+}
 
 /* tweek to align with grid */
 .h1-first, .h1-second {
@@ -62,8 +69,47 @@ h1 {
 }
 
 .h1-second {
-  padding-left: calc(var(--grid-size) * 23);
+  padding-left: calc(100% - 8ch);
   /* margin-left: 10.28rem; */
+}
+
+@supports (animation-range: 0vh 10vh) {
+  h1 {
+    animation: header-scale ease forwards;
+    animation-timeline: scroll();
+    animation-range: 0vh 10vh;
+  }
+
+}
+
+@supports (animation-range: 0vh 20vh) {
+  .h1-second {
+    animation: second-line-padding cubic-bezier(1, -1.354, 0.425, 1.183) forwards;
+    animation-timeline: scroll();
+    animation-range: 0vh 20vh;
+  }
+}
+
+@keyframes header-scale {
+  from {
+    margin: 0.5625rem 0 calc(.75rem - 0.5625rem) 0;
+    line-height: 3rem;
+    font-size: 3.0625rem;
+  }
+  to {
+    margin: 0;
+    line-height: 1rem;
+    font-size: 1rem;
+  }
+}
+
+@keyframes second-line-padding {
+  from {
+    padding-left: calc(var(--grid-size) * 23);
+  }
+  to {
+    padding-left: 5ch;
+  }
 }
 
 /* Headers */
