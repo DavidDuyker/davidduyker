@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Font Load -->
+<meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
     <!-- Site Descriptions -->
+
     <meta name="viewport" content="width=device-width, user-scalable=yes" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta
@@ -18,12 +27,17 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
-    />
+    
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0">
+      <defs>
+          <filter id="distort">
+              <feTurbulence baseFrequency="1.5 1.5" numOctaves="20" seed="1">
+                </feTurbulence>
+              <feDisplacementMap in="SourceGraphic" scale="1"></feDisplacementMap>
+          </filter>
+      </defs>
+    </svg>
 
     <!-- Start of Woopra Code -->
     <script>
@@ -77,13 +91,28 @@
   </head>
 
   <body>
+    <div class="texture" style="
+      position: fixed;
+      z-index: -100;
+      inset: 0;
+      mix-blend-mode: darken;
+      opacity: 16%;
+      background: url('data:image/svg+xml,%3Csvg viewBox=%270 0 369 369%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%271.5%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E');
+      pointer-events: none;
+    "></div>
     <div class="content-flow">
       <div id="introduction" class="section width-text">
         <div class="title-lockup">
-          <img class="profile-image" src="assets/profile.jpg" alt="" />
+          <div class="profile-image">
+            <img src="assets/profile.jpg" alt="" />
+          </div>
           <div>
             <h1>David Duyker</h1>
-            <div class="tag-line"><p>Software Designer </p> <p class="spin"> ＊ </p> <p> Product Craftsman</p></div>
+            <div class="tag-line">
+              <p>Software Designer</p>
+              <p class="spin">＊</p>
+              <p>Product Craftsman</p>
+            </div>
           </div>
         </div>
         <div class="intro-paragraph">
@@ -208,8 +237,17 @@
             starting here with these posts.
           </p>
           <ul>
-            <li><a href="">Messy Stacking Design Research</a></li>
-            <li><a href="">Digital Design Tips for Grassroots Activists</a></li>
+            <li>
+              <a href="https://davidduyker.bearblog.dev/design-research-pile/"
+                >Messy Stacking Design Research</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://medium.com/@dduyker/10-digital-design-tips-for-grass-roots-activists-fc4620a1edaf"
+                >Digital Design Tips for Grassroots Activists</a
+              >
+            </li>
           </ul>
         </div>
         <div>
@@ -219,21 +257,30 @@
             too.
           </p>
           <ul>
-            <li><a href="https://whydoweinterface.com/">Why do we interface by Ehsan</a></li>
+            <li>
+              <a href="https://whydoweinterface.com/"
+                >Why do we interface by Ehsan</a
+              >
+            </li>
           </ul>
         </div>
         <div>
           <h3>Resumé</h3>
           <p>
-            <a href="davidduyker.pdf">Download a PDF</a> — Whoa you’re old school! I
-            like it
+            <a href="davidduyker.pdf">Download a PDF</a> — Whoa you’re old
+            school! I like it
           </p>
         </div>
       </div>
       <div id="archive" class="section width-text">
         <h2>Archive</h2>
         <p><a href="2023/">2023 Personal Site</a></p>
-        <p><a href="https://www.instagram.com/repaircycle_seattle/">Repair Cycle</a> <em>(indefinite hiatus)</em></p>
+        <p>
+          <a href="https://www.instagram.com/repaircycle_seattle/"
+            >Repair Cycle</a
+          >
+          <em>(indefinite hiatus)</em>
+        </p>
         <p>2019 Personal Site (deprecated)</p>
       </div>
     </div>
