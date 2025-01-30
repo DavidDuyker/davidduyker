@@ -4,31 +4,26 @@
     <!-- Site Descriptions -->
     <meta name="viewport" content="width=device-width, user-scalable=yes" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="title" content="" />
-    <meta name="author" content="" />
+    <meta
+      name="description"
+      content="An experienced senior product designer with expertise in user-experience design, design research, design systems, and sustainability."
+    />
+    <meta name="keywords" content="Design Software Product Portfolio Seattle" />
+    <meta name="title" content="David Duyker | Product Designer" />
+    <meta name="author" content="David Duyker" />
     <title>David Duyker</title>
     <link rel="shortcut icon" href="/favicon@2x.png" />
     <!-- iOS -->
     <link rel="apple-touch-icon" href="/favicon-120.png" />
 
-    <!-- REPEATED -->
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Ubuntu:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,350,0,0"
-    />
-
-    <!-- Script -->
-    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
 
     <!-- Start of Woopra Code -->
     <script>
@@ -79,249 +74,167 @@
       woopra.track();
     </script>
     <!-- End of Woopra Code -->
-
-    <!-- md generate code -->
-    <script>
-      function generateMarkdownFromIndex(htmlPath, fileName) {
-        fetch(`${htmlPath}index.html`)
-          .then((response) => response.text())
-          .then((html) => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
-            const contentFlow = doc.querySelector(".content-flow");
-
-            // replace relative image paths with absolute URLs
-            const images = contentFlow.querySelectorAll("img");
-            images.forEach((img) => {
-              const src = img.getAttribute("src");
-              if (src && !src.startsWith("http")) {
-                const absoluteUrl = new URL(src, "https://davidduyker.com")
-                  .href;
-                img.setAttribute("src", absoluteUrl);
-              }
-            });
-
-            // Replace relative URLs in links with absolute URLs
-            const links = contentFlow.querySelectorAll("a");
-            links.forEach((link) => {
-              const href = link.getAttribute("href");
-              if (href && !href.startsWith("http")) {
-                const absoluteUrl = new URL(href, "https://davidduyker.com")
-                  .href;
-                link.setAttribute("href", absoluteUrl);
-              }
-            });
-
-            const converter = new showdown.Converter();
-            const markdown = converter.makeMarkdown(contentFlow.innerHTML);
-            const blob = new Blob([markdown], { type: "text/markdown" });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.download = `${fileName}.md`;
-            link.href = url;
-            link.click();
-          });
-      }
-    </script>
-
-    <!-- active tab code -->
-    <script>
-      window.addEventListener("load", function () {
-        var currentUrl = window.location.pathname;
-        var navItems = document.querySelectorAll(".nav-item");
-        navItems.forEach(function (navItem) {
-          var navButtonHref = navItem
-            .querySelector(".nav-button")
-            .getAttribute("href");
-          if (currentUrl === navButtonHref) {
-            navItem.classList.add("active");
-          }
-        });
-      });
-    </script>
   </head>
 
   <body>
-    <div class="page-background gradient"></div>
-    <div class="page-background texture"></div>
-    <div id="page-wrapper">
-      <div id="page">
-        <div class="column column-left">
-          <div class="nav-header">
-            <p class="nav-title">davidduyker.files</p>
-          </div>
-          <div id="nav">
-            <div class="divider"></div>
-            <div class="nav-item" id="home">
-              <a
-                class="button icon-button"
-                href="#"
-                onclick="generateMarkdownFromIndex('/', 'README')"
-              >
-                <span class="material-symbols-outlined">download</span>
-              </a>
-              <a class="button nav-button" href="/">README.md</a>
-            </div>
-            <div class="nav-item" id="work">
-              <div class="icon-button"></div>
-              <a class="button nav-button" href="/work/">work.html</a>
-            </div>
-            <div class="nav-item" id="postcard">
-              <div class="icon-button"></div>
-              <a class="button nav-button" href="/postcard/">postcard.png</a>
-            </div>
-            <div class="nav-item" id="links">
-              <a
-                class="button icon-button"
-                href="#"
-                onclick="generateMarkdownFromIndex('/links/', 'links')"
-              >
-                <span class="material-symbols-outlined">download</span>
-              </a>
-              <a class="button nav-button" href="/links/">links.md</a>
-            </div>
-            <div class="divider"></div>
-            <div class="nav-item">
-              <a
-                class="button nav-button"
-                href="https://read.cv/davidd"
-                target="_blank"
-              >
-                resume.cv
-                <span class="material-symbols-outlined">open_in_new</span>
-                <div class="preview">
-                  <img src="/assets/preview.jpg" />
-                  <p>read.cv/davidduyker</p>
-                </div>
-              </a>
-            </div>
-            <div class="nav-item">
-              <a
-                class="button nav-button"
-                href="https://davidduyker.bearblog.dev/"
-                >writing.blog
-                <span class="material-symbols-outlined">
-                  subdirectory_arrow_right
-                </span></a
-              >
-            </div>
-          </div>
-        </div>
-        <!-- END REPEATED -->
-        <div class="column column-right">
-          <div class="content-flow">
+    <div class="content-flow">
+      <div id="introduction" class="section width-text">
+        <div class="title-lockup">
+          <img class="profile-image" src="assets/profile.jpg" alt="" />
+          <div>
             <h1>David Duyker</h1>
-            <p>Product Designer | Creative | Primarily: Pacific Time</p>
-            <h2>About</h2>
-            <p>
-              An experienced senior product designer with expertise in
-              user-experience design,
-              <a href="https://davidduyker.bearblog.dev/design-research-pile/"
-                >design research</a
-              >,
-              <a href="https://davidduyker.com/work/design-system/"
-                >design systems</a
-              >, and sustainability. I am passionate about creative expression
-              through physical and digital experiences.
-            </p>
-            <h2>Professional Experience</h2>
-            <p>
-              <b>Currently</b> — Senior Product Designer @<a
-                href="https://nzero.com"
-                >nZero</a
-              >
-              where I'm helping organizations achieve their climate goals with
-              better data and analysis tools.
-            </p>
-            <p>
-              <b>Previous</b> roles at Kinaptic, Barn2Door, and Industrial
-              Alchemy, and freelance work.
-            </p>
-            <p>
-              <a class="open-in-new" href="https://read.cv/davidd"
-                >View resume at read.cv</a
-              >
-            </p>
-            <h2>Notable Projects</h2>
-            <img class="content-image" src="/assets/littleHero.jpg" />
-            <a class="button" href="/work/">work.html →</a>
-            <ul>
-              <li>
-                UI/UX Overhaul of Core App –
-                <a
-                  class="open-in-new"
-                  href="https://www.linkedin.com/posts/nzerocarbonmanagement_uidesign-carbonmanagement-netzero-activity-7092566277726056448-PYa1?utm_source=share&amp;utm_medium=member_desktop"
-                  target="_blank"
-                  >Announcement</a
-                >
-              </li>
-              <li>
-                Reporting Tools –
-                <a
-                  class="open-in-new"
-                  href="https://www.linkedin.com/posts/nzerocarbonmanagement_sustainabilityreporting-netzero-esg-activity-7036751688027774976-_poX?utm_source=share&amp;utm_medium=member_desktop"
-                  target="_blank"
-                  >Announcment</a
-                >
-              </li>
-              <li>
-                Public Data Portals –
-                <a
-                  class="open-in-new"
-                  href="https://nzero.com/knowledge-hub/how-the-biggest-little-city-in-the-world-is-leading-carbon-transparency/"
-                  target="_blank"
-                  >Announcement</a
-                >
-              </li>
-              <li>
-                RepairCycle –
-                <a
-                  class="open-in-new"
-                  href="https://www.instagram.com/repaircycle_seattle/"
-                  target="_blank"
-                  >Public Link</a
-                >
-              </li>
-            </ul>
-            <h2>Working With Me</h2>
-            <p>
-              Here's what some of my lovely colleagues have said about working
-              with me:
-            </p>
-            <blockquote>
-              <p>
-                "I really appreciate how open and generous David has been with
-                his time and knowledge... He's always willing to make time for a
-                meeting or a working session and I appreciate it big time."
-              </p>
-              <footer>—Coworker (Design)</footer>
-            </blockquote>
-            <blockquote>
-              <p>
-                "[David] is great at the "why" for the designs. This comes in
-                handy in sprint planning with all the devs asking a lot of whys
-                for the design we're looking at."
-              </p>
-              <footer>—Coworker (Developer)</footer>
-            </blockquote>
-            <blockquote>
-              <p>
-                "[David's] knowledge of design and understanding of how coding
-                and MUI come together are very powerful which adds to his
-                ability to communicate effectively to myself and other devs."
-              </p>
-              <footer>—Coworker (Developer)</footer>
-            </blockquote>
-            <blockquote>
-              <p>
-                "David always keeps the end user in mind, displaying a depth of
-                empathy that results in product features that are truly
-                human-centered."
-              </p>
-              <footer>—Coworker (Design)</footer>
-            </blockquote>
+            <p>Software Designer ＊ Product Craftsman</p>
           </div>
         </div>
+        <div class="intro-paragraph">
+          <p>
+            Typically called a senior product designer; I have expertise in
+            user-experience design, design research, design systems, and
+            sustainability.
+          </p>
+          <p>
+            Currently — Designing @USCIS supporting humanitarian immigration and
+            occasionally writing about design and creative work at
+            <a href="https://davidduyker.bearblog.dev/">Mixed Medium</a>
+          </p>
+        </div>
+      </div>
+      <div id="experience" class="section width-text">
+        <div class="header">
+          <h2>Experience</h2>
+          <p><a href="resume.pdf">Resume ></a></p>
+        </div>
+        <div class="job-entry">
+          <p>2024 – Present</p>
+          <div>
+            <p>Global Product Designer</p>
+            <p>
+              <a
+                href="https://www.uscis.gov/about-us/organization/directorates-and-program-offices/refugee-asylum-and-international-operations-directorate-raio"
+                >USCIS Refugee and Asylum Directorate (contract)</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="job-entry">
+          <p>2021 – 2023</p>
+          <div>
+            <p>Senior Product Designer (promoted Jan 2022)</p>
+            <p>
+              <a href="https://www.nzero.com">nZero (formerly Ledger8760)</a>
+            </p>
+          </div>
+        </div>
+        <div class="job-entry">
+          <p>2017 – 2021</p>
+          <div>
+            <p>Web Design & FE Development (freelance)</p>
+            <ul>
+              <li><a href="https://www.barn2door.com">Barn2Door</a></li>
+              <li>
+                <a href="https://www.industrialalchemy.net"
+                  >Industrial Alchemy</a
+                >
+              </li>
+              <li>Kinaptic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="projects" class="section">
+        <div class="project">
+          <img src="assets/DScover.jpg" alt="" />
+          <div class="width-text">
+            <div class="project-title">
+              <h3>NZero Design System 0–1</h3>
+              <div class="chip-bag">
+                <p class="chip">Design</p>
+                <p class="chip">2021–2023</p>
+              </div>
+            </div>
+            <p>
+              We used a "land-and-expand" strategy to implement the first nZero
+              design system. I lead our work focused on nailing the basics and
+              building off Material UI.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="project">
+          <img src="assets/FigmaColorPluggin.jpg" alt="" />
+          <div class="width-text">
+            <div class="project-title">
+              <h3>Figma Color Pluggin @ USCIS</h3>
+              <div class="chip-bag">
+                <p class="chip">Design</p>
+                <p class="chip">Development</p>
+                <p class="chip">2024</p>
+              </div>
+            </div>
+            <p>
+              Designed and Developed a tool to make accessible color choices
+              easy for designers working on government software in US
+              Citizenship and Immigration Services.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="project">
+          <img src="assets/Rcover.jpg" alt="" />
+          <div class="width-text">
+            <div class="project-title">
+              <h3>NZero Env Data Reporting Tool</h3>
+              <div class="chip-bag">
+                <p class="chip">Design</p>
+                <p class="chip">2023</p>
+              </div>
+            </div>
+            <p>
+              Founded on research sessions with sustainability experts and
+              scientists; We developed Data-Download tools to help practitioners
+              assemble data in seconds instead of months. We kept our solution
+              modular and extendable so it could keep up with the ever expanding
+              needs of our expert practitioners.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="links" class="section width-text">
+        <h2>Bonus Links</h2>
+        <div>
+          <h3>My Writing</h3>
+          <p>
+            If you are interested in reading some of my writing I recommend
+            starting here with these posts.
+          </p>
+          <ul>
+            <li><a href="">Messy Stacking Design Research</a></li>
+            <li><a href="">Digital Design Tips for Grassroots Activists</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Recommendations</h3>
+          <p>
+            These links have shaped me as a designer. I think you will like them
+            too.
+          </p>
+          <ul>
+            <li><a href="">Why do we interface by Ehsan</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resumé</h3>
+          <p>
+            <a href="resume.pdf">Download a PDF</a> — Whoa you’re old school! I
+            like it
+          </p>
+        </div>
+      </div>
+      <div id="archive" class="section width-text">
+        <h2>Archive</h2>
+        <p><a href="2023/">2023 Personal Site</a></p>
+        <p><a href="https://www.instagram.com/repaircycle_seattle/">Repair Cycle</a> <em>(indefinite hiatus)</em></p>
+        <p>2019 Personal Site (deprecated)</p>
       </div>
     </div>
   </body>
