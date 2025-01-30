@@ -1,0 +1,226 @@
+/* _______________ VARIABLES _________________ */
+
+:root {
+  --text: #000000;
+  --text-secondary: #575757;
+  --hover-background: #ffaa0031;
+  --background: #F2F2F2;
+  --background-secondary: #D6D6D6;
+  --divider: #9c9c9c;
+  --width-text: 34rem;
+}
+
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+/* ________________________________________________________________ */
+
+body {
+  font-family: "rubik", Helvetica, sans-serif;
+  color: var(--text-secondary);
+  background-color: var(--background);
+  transition-duration: 1500ms;
+  padding: 1.5rem;
+}
+
+.content-flow {
+  margin: 144px auto;
+  width: 100%;
+  max-width: 944px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 7rem;
+}
+
+.section {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.width-text {
+  max-width: var(--width-text);
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+hr { 
+  max-width: 5rem;
+  width: 100%;
+}
+
+/* _______  Typeography   _____________ */
+h1 {
+  font-family: "Rubik Mono One", Helvetica, sans-serif;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+h2 {
+  font-family: "Rubik Mono One", Helvetica, sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+a {
+  color: var(--text);
+  padding: 0.125rem 0.25rem;
+  margin: -0.125rem -0.25rem;
+  transition-duration: 300ms;
+}
+
+a:hover {
+  background-color: var(--hover-background);
+  border-radius: 2px;
+}
+
+ul {
+  padding-left: 2ch;
+}
+
+.chip {
+  padding: 0 8px;
+  border-radius: 0.5rem;
+  background-color: var(--background-secondary);
+  height: fit-content;
+}
+
+.chip-bag {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+/* _______  Introduction  ___________ */
+.title-lockup {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.profile-image {
+  width: 72px;
+  border: solid 1px var(--divider);
+  border-radius: 8px;
+}
+
+.title-lockup > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.intro-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* _______ Experience ________ */
+.job-entry {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.job-entry > p {
+  flex-grow: 1;
+}
+
+.job-entry > div {
+  flex-basis: 24rem;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* __________ Projects __________ */
+#projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.project > img {
+  border: solid 1px var(--divider);
+  border-radius: 12px;
+  filter: drop-shadow(0 4 4 #00000011)
+}
+
+.project > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
