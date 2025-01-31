@@ -161,7 +161,10 @@ ul {
 .chip-bag {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 0.5rem;
+  flex: 0 2 auto;
+  justify-content: flex-end;
 }
 
 /* _______  Introduction  ___________ */
