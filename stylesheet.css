@@ -225,11 +225,14 @@ ul {
 .job-entry {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 1rem;
 }
 
-.job-entry > p {
+.date-range {
   flex-grow: 1;
+  text-wrap: nowrap;
 }
 
 .job-entry > div {
