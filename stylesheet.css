@@ -235,6 +235,18 @@ ul {
   transform: rotate(6800deg);
 }
 
+.whoa {
+  position: absolute;
+  bottom: -350px;
+  left: 40%;
+  height: 200px;
+  transition-duration: 8s;
+}
+
+.spin:hover + .whoa {
+  bottom: 0;
+}
+
 .intro-paragraph {
   display: flex;
   flex-direction: column;
