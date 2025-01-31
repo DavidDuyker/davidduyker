@@ -405,6 +405,7 @@ a:hover + .nav-button {
 /* Content Column */
 .column-right {
   flex-basis: min(48ch, 100%);
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
