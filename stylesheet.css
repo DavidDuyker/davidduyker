@@ -167,7 +167,12 @@ ul {
 .title-lockup {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 2rem;
+}
+
+.title-lockup > * {
+  flex: 0 0 auto;
 }
 
 .profile-image img {
@@ -189,12 +194,14 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
 }
 
 .tag-line {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1ch;
 }
 
