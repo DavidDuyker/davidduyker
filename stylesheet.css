@@ -155,6 +155,7 @@ ul {
   border-radius: 0.5rem;
   background-color: var(--background-secondary);
   height: fit-content;
+  text-wrap: nowrap;
 }
 
 .chip-bag {
