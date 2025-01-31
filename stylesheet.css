@@ -181,7 +181,7 @@ ul {
 }
 
 .profile-image:hover img {
-  transform: rotate(-8deg);
+  transform: rotate(-8deg) scale(1.04);
   filter: drop-shadow(-2px 4px 4px #00000019);
 }
 
