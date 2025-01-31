@@ -12,12 +12,6 @@
 
 /* CSS Reset */
 
-@font-face {
-  font-family: 'Rubik';
-  font-display: swap;
-}
-
-
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
   box-sizing: border-box;
