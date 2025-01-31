@@ -205,7 +205,7 @@ ul {
 }
 
 .profile-image:hover p {
-  left: -24px;
+  left: -20px;
   transform: rotate(-12deg);
   top: 16px;
 }
