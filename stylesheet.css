@@ -73,7 +73,7 @@ body {
   color: var(--text-secondary);
   background-color: var(--background);
   transition-duration: 150ms;
-  padding: 1.5rem;
+  padding: 24px;
 }
 
 .content-flow {
@@ -179,19 +179,41 @@ ul {
   flex: 0 0 auto;
 }
 
+.profile-image {
+  position: relative;
+}
+
 .profile-image img {
   width: 72px;
   height: 72px;
   border: solid 1px var(--divider);
   border-radius: 8px;
   filter: drop-shadow(0px 4px 2px #00000019);
+  transform-origin: bottom;
+  transform: rotate(0deg);
   transition-duration: 150ms;
-  transform: rotate(deg);
 }
 
 .profile-image:hover img {
-  transform: rotate(-8deg) scale(1.04);
-  filter: drop-shadow(-1px 4px 4px #00000019);
+  transform: rotate(8deg) translateX(8px) translateY(1px);
+  filter: drop-shadow(1px 4px 4px #00000019);
+}
+
+.profile-image p {
+  font-family: Courier, monospace;
+  font-size: 1.1rem;
+  position: absolute;
+  top: 16px;
+  left: 0px;
+  z-index: -1;
+  transform: rotate(5deg);
+  transition-duration: 150ms;
+}
+
+.profile-image:hover p {
+  left: -24px;
+  transform: rotate(-12deg);
+  top: 16px;
 }
 
 .title-lockup > div {

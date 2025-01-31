@@ -28,7 +28,6 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
     
-
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0">
       <defs>
           <filter id="distort">
@@ -88,6 +87,21 @@
       woopra.track();
     </script>
     <!-- End of Woopra Code -->
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const greetings = ['Hi!', 'Hey', 'Sup', 'Ahoy', 'Hi!', 'Yo!', ' 👋 '];
+    let currentIndex = 0;
+    
+    const profileImage = document.querySelector('.profile-image');
+    const greetingText = profileImage.querySelector('p');
+    
+    profileImage.addEventListener('mouseenter', function() {
+        currentIndex = (currentIndex + 1) % greetings.length;
+        greetingText.textContent = greetings[currentIndex];
+    });
+});
+    </script>
   </head>
 
   <body>
@@ -105,6 +119,7 @@
         <div class="title-lockup">
           <div class="profile-image">
             <img src="assets/profile.jpg" alt="" />
+            <p>Hi!</p>
           </div>
           <div>
             <h1>David Duyker</h1>
