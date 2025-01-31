@@ -236,7 +236,7 @@ ul {
 }
 
 .whoa {
-  position: absolute;
+  position: fixed;
   bottom: -350px;
   left: 40%;
   height: 200px;
