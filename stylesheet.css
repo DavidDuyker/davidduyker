@@ -241,6 +241,7 @@ ul {
   left: 40%;
   height: 200px;
   transition-duration: 8s;
+  z-index: 1000;
 }
 
 .spin:hover + .whoa {
