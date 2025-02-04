@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set initial styles
     container.style.overflow = 'hidden';
-    projectImage.style.transition = 'transform 0.5s ease-out';
+    projectImage.style.transition = 'transform 0.1s ease-out';
     projectImage.style.width = '100%';
     projectImage.style.height = '100%';
     projectImage.style.objectFit = 'cover';
