@@ -1,0 +1,605 @@
+:root {
+    --figma-color-bg: #ffffff;
+    --figma-color-bg-brand: #0d99ff;
+    --figma-color-bg-brand-hover: #007be5;
+    --figma-color-bg-brand-pressed: #007be5;
+    --figma-color-bg-brand-secondary: #0768cf;
+    --figma-color-bg-brand-tertiary: #e5f4ff;
+    --figma-color-bg-component: #9747ff;
+    --figma-color-bg-component-hover: #8638e5;
+    --figma-color-bg-component-pressed: #8638e5;
+    --figma-color-bg-component-secondary: #7c2bda;
+    --figma-color-bg-component-tertiary: #f1e5ff;
+    --figma-color-bg-danger: #f24822;
+    --figma-color-bg-danger-hover: #dc3412;
+    --figma-color-bg-danger-pressed: #dc3412;
+    --figma-color-bg-danger-secondary: #bd2915;
+    --figma-color-bg-danger-tertiary: #ffe2e0;
+    --figma-color-bg-disabled: #d9d9d9;
+    --figma-color-bg-disabled-secondary: #b3b3b3;
+    --figma-color-bg-hover: #f5f5f5;
+    --figma-color-bg-inverse: #2c2c2c;
+    --figma-color-bg-onselected: #bde3ff;
+    --figma-color-bg-onselected-hover: #bde3ff;
+    --figma-color-bg-onselected-pressed: #bde3ff;
+    --figma-color-bg-pressed: #f5f5f5;
+    --figma-color-bg-secondary: #f5f5f5;
+    --figma-color-bg-selected: #e5f4ff;
+    --figma-color-bg-selected-hover: #bde3ff;
+    --figma-color-bg-selected-pressed: #bde3ff;
+    --figma-color-bg-selected-secondary: #f2f9ff;
+    --figma-color-bg-selected-strong: #0d99ff;
+    --figma-color-bg-selected-tertiary: #f2f9ff;
+    --figma-color-bg-success: #14ae5c;
+    --figma-color-bg-success-hover: #009951;
+    --figma-color-bg-success-pressed: #009951;
+    --figma-color-bg-success-secondary: #008043;
+    --figma-color-bg-success-tertiary: #cff7d3;
+    --figma-color-bg-tertiary: #e6e6e6;
+    --figma-color-bg-warning: #ffcd29;
+    --figma-color-bg-warning-hover: #ffc21a;
+    --figma-color-bg-warning-pressed: #ffc21a;
+    --figma-color-bg-warning-secondary: #fab815;
+    --figma-color-bg-warning-tertiary: #fff1c2;
+    --figma-color-border: #e6e6e6;
+    --figma-color-border-brand: #bde3ff;
+    --figma-color-border-brand-strong: #007be5;
+    --figma-color-border-component: #e4ccff;
+    --figma-color-border-component-hover: #9747ff;
+    --figma-color-border-component-strong: #8638e5;
+    --figma-color-border-danger: #ffc7c2;
+    --figma-color-border-danger-strong: #dc3412;
+    --figma-color-border-disabled: #e6e6e6;
+    --figma-color-border-disabled-strong: #0000004d;
+    --figma-color-border-onbrand: #007be5;
+    --figma-color-border-onbrand-strong: #ffffff;
+    --figma-color-border-oncomponent: #8638e5;
+    --figma-color-border-oncomponent-strong: #ffffff;
+    --figma-color-border-ondanger: #dc3412;
+    --figma-color-border-ondanger-strong: #ffffff;
+    --figma-color-border-onselected: #bde3ff;
+    --figma-color-border-onselected-strong: #000000e5;
+    --figma-color-border-onsuccess: #009951;
+    --figma-color-border-onsuccess-strong: #ffffff;
+    --figma-color-border-onwarning: #fab815;
+    --figma-color-border-onwarning-strong: #000000e5;
+    --figma-color-border-selected: #0d99ff;
+    --figma-color-border-selected-strong: #007be5;
+    --figma-color-border-strong: #2c2c2c;
+    --figma-color-border-success: #aff4c6;
+    --figma-color-border-success-strong: #009951;
+    --figma-color-border-warning: #ffe8a3;
+    --figma-color-border-warning-strong: #b86200;
+    --figma-color-icon: #000000e5;
+    --figma-color-icon-brand: #007be5;
+    --figma-color-icon-brand-pressed: #0768cf;
+    --figma-color-icon-brand-secondary: #80caff;
+    --figma-color-icon-brand-tertiary: #bde3ff;
+    --figma-color-icon-component: #8638e5;
+    --figma-color-icon-component-pressed: #7c2bda;
+    --figma-color-icon-component-secondary: #c5b2dc;
+    --figma-color-icon-component-tertiary: #c5b2dc;
+    --figma-color-icon-danger: #f24822;
+    --figma-color-icon-danger-hover: #bd2915;
+    --figma-color-icon-danger-pressed: #bd2915;
+    --figma-color-icon-danger-secondary: #f24822;
+    --figma-color-icon-danger-secondary-hover: #f24822;
+    --figma-color-icon-danger-tertiary: #f24822;
+    --figma-color-icon-disabled: #0000004d;
+    --figma-color-icon-hover: #000000e5;
+    --figma-color-icon-onbrand: #ffffff;
+    --figma-color-icon-onbrand-secondary: #ffffffcc;
+    --figma-color-icon-onbrand-tertiary: #ffffff66;
+    --figma-color-icon-oncomponent: #ffffff;
+    --figma-color-icon-oncomponent-secondary: #ffffffcc;
+    --figma-color-icon-oncomponent-tertiary: #ffffff66;
+    --figma-color-icon-ondanger: #ffffff;
+    --figma-color-icon-ondanger-secondary: #ffffffcc;
+    --figma-color-icon-ondanger-tertiary: #ffffff66;
+    --figma-color-icon-ondisabled: #ffffff;
+    --figma-color-icon-oninverse: #ffffffe5;
+    --figma-color-icon-onselected: #000000e5;
+    --figma-color-icon-onselected-secondary: #00000080;
+    --figma-color-icon-onselected-strong: #ffffff;
+    --figma-color-icon-onselected-tertiary: #0000004d;
+    --figma-color-icon-onsuccess: #ffffff;
+    --figma-color-icon-onsuccess-secondary: #ffffffcc;
+    --figma-color-icon-onsuccess-tertiary: #ffffff66;
+    --figma-color-icon-onwarning: #000000e5;
+    --figma-color-icon-onwarning-secondary: #ffffffcc;
+    --figma-color-icon-onwarning-tertiary: #ffffff66;
+    --figma-color-icon-pressed: #007be5;
+    --figma-color-icon-secondary: #00000080;
+    --figma-color-icon-secondary-hover: #000000e5;
+    --figma-color-icon-selected: #007be5;
+    --figma-color-icon-selected-secondary: #007be5;
+    --figma-color-icon-selected-tertiary: #007be5;
+    --figma-color-icon-success: #14ae5c;
+    --figma-color-icon-success-pressed: #008043;
+    --figma-color-icon-success-secondary: #14ae5c;
+    --figma-color-icon-success-tertiary: #14ae5c;
+    --figma-color-icon-tertiary: #0000004d;
+    --figma-color-icon-tertiary-hover: #000000e5;
+    --figma-color-icon-warning: #ffcd29;
+    --figma-color-icon-warning-pressed: #b86200;
+    --figma-color-icon-warning-secondary: #ffcd29;
+    --figma-color-icon-warning-tertiary: #ffcd29;
+    --figma-color-text: #000000e5;
+    --figma-color-text-brand: #007be5;
+    --figma-color-text-brand-secondary: #007be5;
+    --figma-color-text-brand-tertiary: #007be5;
+    --figma-color-text-component: #8638e5;
+    --figma-color-text-component-pressed: #7c2bda;
+    --figma-color-text-component-secondary: #c5b2dc;
+    --figma-color-text-component-tertiary: #c5b2dc;
+    --figma-color-text-danger: #dc3412;
+    --figma-color-text-danger-secondary: #dc3412;
+    --figma-color-text-danger-tertiary: #dc3412;
+    --figma-color-text-disabled: #0000004d;
+    --figma-color-text-hover: #000000e5;
+    --figma-color-text-onbrand: #ffffff;
+    --figma-color-text-onbrand-secondary: #ffffffcc;
+    --figma-color-text-onbrand-tertiary: #ffffff66;
+    --figma-color-text-oncomponent: #ffffff;
+    --figma-color-text-oncomponent-secondary: #ffffffcc;
+    --figma-color-text-oncomponent-tertiary: #ffffff66;
+    --figma-color-text-ondanger: #ffffff;
+    --figma-color-text-ondanger-secondary: #ffffffcc;
+    --figma-color-text-ondanger-tertiary: #ffffff66;
+    --figma-color-text-ondisabled: #ffffff;
+    --figma-color-text-oninverse: #ffffffe5;
+    --figma-color-text-onselected: #000000e5;
+    --figma-color-text-onselected-secondary: #00000080;
+    --figma-color-text-onselected-strong: #ffffff;
+    --figma-color-text-onselected-tertiary: #0000004d;
+    --figma-color-text-onsuccess: #ffffff;
+    --figma-color-text-onsuccess-secondary: #ffffffcc;
+    --figma-color-text-onsuccess-tertiary: #ffffff66;
+    --figma-color-text-onwarning: #000000e5;
+    --figma-color-text-onwarning-secondary: #00000080;
+    --figma-color-text-onwarning-tertiary: #0000004d;
+    --figma-color-text-secondary: #00000080;
+    --figma-color-text-secondary-hover: #000000e5;
+    --figma-color-text-selected: #007be5;
+    --figma-color-text-selected-secondary: #007be5;
+    --figma-color-text-selected-tertiary: #007be5;
+    --figma-color-text-success: #009951;
+    --figma-color-text-success-secondary: #009951;
+    --figma-color-text-success-tertiary: #009951;
+    --figma-color-text-tertiary: #0000004d;
+    --figma-color-text-tertiary-hover: #000000e5;
+    --figma-color-text-warning: #b86200;
+    --figma-color-text-warning-secondary: #b86200;
+    --figma-color-text-warning-tertiary: #b86200;
+  }
+  
+
+*,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0
+    }
+
+    body {
+      line-height: 1.2;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: calc(50vw - 300px);
+      height: 100vh;
+      background-color: var(--figma-color-bg-hover);
+      background-image: url(header.png);
+      background-color: rgba(255,255,255,0.3);
+    background-blend-mode: lighten;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: 944px;
+      padding-top: 40px;
+    }
+
+    .canvas {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        flex-basis: 200px;
+        font-family: monospace;
+    }
+
+    .canvas *:hover {
+        /* border: 2px solid var(--figma-color-bg-brand-hover); */
+        cursor: default;
+        text-decoration: underline;
+        text-decoration-color: var(--figma-color-bg-brand);
+        text-decoration-thickness: 2px;
+        text-underline-offset: -1px;
+        text-decoration-skip-ink: none;
+    }
+
+    @media screen and (max-width: 500px) {
+        .canvas {
+            display: none;
+        }
+    }
+
+    #plugin {
+      width: 240px;
+      height: calc(306px + 40px);
+      /* border: 1px solid rgb(166, 166, 166); */
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: 0 8px 24px #00000025;
+    }
+
+    .plugin-header {
+        height: 40px;
+        border-bottom: 1px solid var(--figma-color-bg-disabled);
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+      display: block;
+      max-width: 100%
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+      font: inherit
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      overflow-wrap: break-word
+    }
+
+    #root,
+    #__next {
+      isolation: isolate
+    }
+
+    :root {
+      --foreground: #000000;
+      --background: #ffffff
+    }
+
+    body {
+      font-family: Inter, serif
+    }
+
+    #plugin h1 {
+      font-weight: 550;
+      font-size: 11px;
+      color: var(--figma-color-text)
+    }
+
+    h2 {
+      font-weight: 550;
+      font-size: 11px;
+      color: var(--figma-color-text-secondary)
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--figma-color-text-secondary)
+    }
+
+    p {
+      font-size: 11px;
+      color: var(--figma-color-text)
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    .disabled {
+      color: var(--figma-color-text-disabled)
+    }
+
+    button {
+      font-weight: 600;
+      border: none;
+      background-color: var(--figma-color-bg);
+      color: var(--figma-color-icon);
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    button:hover {
+      background-color: var(--figma-color-bg-hover);
+      color: var(--figma-color-icon-hover)
+    }
+
+    button.disabled {
+      color: var(--figma-color-icon-disabled)
+    }
+
+    button.disabled:hover {
+      color: var(--figma-color-icon-disabled);
+      background: none
+    }
+
+    .iconBox {
+      width: 24px;
+      height: 24px;
+      padding: 2px
+    }
+
+    input[type=color] {
+      appearance: none;
+      border: none;
+      border-radius: 4px;
+      width: 14px;
+      height: 14px;
+      padding: 0
+    }
+
+    input[type=color]::-webkit-color-swatch-wrapper {
+      padding: 0
+    }
+
+    input[type=color]::-webkit-color-swatch {
+      border: none
+    }
+
+    .section {
+      padding: 8px 0
+    }
+
+    .header {
+      height: 40px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 8px 8px 8px 16px
+    }
+
+    .header h1 {
+      flex-grow: 1
+    }
+
+    .dashboard {
+      padding: 0 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px
+    }
+
+    .dashboardCard {
+      padding: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 4px;
+      background-color: var(--figma-color-bg-secondary);
+      border-radius: 4px;
+      width: 100%
+    }
+
+    .cardPrimaryContent {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 4px
+    }
+
+    .cardPrimaryContent p {
+      font-size: 14px;
+      color: var(--figma-color-text-tertiary)
+    }
+
+    .cardSecondaryContent {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      text-align: right
+    }
+
+    .cardSecondaryContent>p {
+      line-height: 1.2;
+      max-width: 16ch
+    }
+
+    .largeText,
+    p.largeText {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 22px;
+      color: var(--figma-color-text)
+    }
+
+    .exampleText .yes,
+    td .yes,
+    .meetsCriteria .no {
+      display: none
+    }
+
+    .meetsCriteria .yes {
+      display: inline-block
+    }
+
+    .contrastCard {
+      flex-grow: 1;
+      flex-direction: column;
+      background-color: var(--background);
+      box-shadow: inset 0 0 0 1px #00000014;
+      padding: 8px
+    }
+
+    .contrastCard p {
+      color: var(--foreground);
+      line-height: 1.1;
+      display: inline-block;
+      font-size: 14px
+    }
+
+    .exampleText {
+      display: flex;
+      width: 100%;
+      align-self: stretch;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    table {
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 12px;
+      color: var(--figma-color-text);
+      text-align: end;
+      padding: 0;
+      height: 39px;
+      display: block
+    }
+
+    table * {
+      padding: 0;
+      margin: 0
+    }
+
+    table th {
+      font-weight: 400;
+      color: var(--figma-color-text-secondary);
+      padding-left: 16px
+    }
+
+    td p.no {
+      color: var(--figma-color-text-danger)
+    }
+
+    td p.yes {
+      color: var(--figma-color-text-success)
+    }
+
+    #perceptualContrastTable tr th {
+      padding-left: 2px
+    }
+
+    #perceptualContrastTable tr :nth-child(3) {
+      padding-left: 12px
+    }
+
+    #pickers {
+      margin: 0
+    }
+
+    .picker {
+      width: 100%
+    }
+
+    #pickers .header {
+      height: 32px;
+      padding: 0 16px
+    }
+
+    .pickSelector {
+      padding: 4px 8px 4px 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px
+    }
+
+    .pickSelector svg {
+      background: none;
+      color: transparent
+    }
+
+    .color {
+      background-color: var(--figma-color-bg);
+      padding: 4px 5px;
+      flex-grow: 1;
+      border: 1px solid var(--figma-color-border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px
+    }
+
+    .spot {
+      background-color: var(--foreground);
+      border: 1px solid hsla(0, 0%, 0%, .16);
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    #background .spot {
+      background-color: var(--background)
+    }
+
+    .colorName {
+      color: var(--figma-color-text);
+      flex-grow: 1
+    }
+
+    .colorHex input {
+      border: none;
+      background: none;
+      color: var(--figma-color-text-secondary);
+      text-align: end
+    }
+
+    .colorHex {
+      color: var(--figma-color-text-secondary);
+      font-size: 11px;
+      display: flex;
+      align-items: center
+    }
+
+    .active .pickSelector {
+      background-color: var(--figma-color-bg-selected)
+    }
+
+    .active .pickSelector svg {
+      color: var(--figma-color-icon-selected)
+    }
+
+    .active .color {
+      border-color: var(--figma-color-border-selected)
+    }
+
+    .pickSelector:hover {
+      background-color: var(--figma-color-bg-hover)
+    }
+
+    .pickSelector:hover svg {
+      color: var(--figma-color-icon-secondary)
+    }
+
+    .active .pickSelector:hover {
+      background-color: var(--figma-color-bg-selected)
+    }
+
+    .active .pickSelector:hover svg {
+      color: var(--figma-color-icon-selected)
+    }

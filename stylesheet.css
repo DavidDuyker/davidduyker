@@ -179,6 +179,11 @@ ul {
   justify-content: flex-end;
 }
 
+#plugin iframe {
+  border: 1px solid var(--divider); 
+  border-radius: 12px;
+}
+
 /* _______  Introduction  ___________ */
 .title-lockup {
   display: flex;
@@ -306,6 +311,7 @@ ul {
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  width: 100%;
 }
 
 .project > img {
