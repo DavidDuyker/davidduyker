@@ -32,6 +32,49 @@ let wcagContrast = null;
 let apcaContrast = null;
 let selectionMode = "none";
 
+const swatchColors = {
+    'red': '#E31C3D',
+    'blue': '#0071BC',
+    'green': '#2E8540',
+    'yellow': '#FDB81E'
+};
+
+function initializeClickHandlers() {
+    // Helper function to update color based on selection mode
+    function updateSelectedColor(newColor) {
+        if (selectionMode === 'foreground') {
+            const foregroundPicker = document.getElementById('foregroundHTMLPicker');
+            if (foregroundPicker) {
+                foregroundPicker.value = newColor;
+                updateColor(newColor, 'foreground');
+            }
+        } else if (selectionMode === 'background') {
+            const backgroundPicker = document.getElementById('backgroundHTMLPicker');
+            if (backgroundPicker) {
+                backgroundPicker.value = newColor;
+                updateColor(newColor, 'background');
+            }
+        }
+    }
+
+    // Initialize color swatches
+    document.querySelectorAll('.frame-color').forEach(swatch => {
+        // Set the background color for each swatch
+        swatch.style.backgroundColor = swatchColors[swatch.id];
+        
+        swatch.addEventListener('click', () => {
+            updateSelectedColor(swatchColors[swatch.id]);
+        });
+    });
+
+    // Initialize text click handlers
+    document.querySelectorAll('.canvas h1, .canvas p').forEach(element => {
+        element.addEventListener('click', () => {
+            updateSelectedColor('#000000');
+        });
+    });
+}
+
 // APCA Contrast calculation functions
 function calculateAPCAContrast(textY, bgY, decimals = -1) {
     const bounds = [0, 1.1];
@@ -266,6 +309,8 @@ function handleMessage(event) {
     }
 }
 
+
+
 // Initialize event listeners
 document.addEventListener("DOMContentLoaded", () => {
     console.log(
@@ -274,6 +319,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "contrast", wcagContrast,
         "selection mode", selectionMode
     );
+
+    initializeClickHandlers();
 
     updateColor(foregroundColor, "foreground");
     updateColor(backgroundColor, "background");
@@ -333,3 +380,46 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set up plugin message handler
     window.onmessage = handleMessage;
 });
+
+dragElement(document.getElementById("plugin"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "-header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}

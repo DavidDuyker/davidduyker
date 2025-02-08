@@ -188,7 +188,7 @@
       line-height: 1.2;
       -webkit-font-smoothing: antialiased;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
       gap: calc(50vw - 300px);
@@ -200,7 +200,7 @@
       background-position: 0 0;
       background-repeat: no-repeat;
       background-size: max(944px, 100%);
-      padding-top: 40px;
+      padding: 40px 10vw 0 10vw;
     }
 
     .canvas {
@@ -208,6 +208,7 @@
         flex-direction: column;
         gap: 24px;
         flex-basis: 200px;
+        flex-grow: 0;
         font-family: monospace;
     }
 
@@ -221,6 +222,37 @@
         text-decoration-skip-ink: none;
     }
 
+    .color-swatches {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+    }
+
+    .frame-color {
+        width: 48px;
+        height: 48px;
+    }
+
+    .frame-color:hover {
+        border: 2px solid var(--figma-color-bg-brand);
+    }
+
+    #blue {
+        background-color: blue;
+    }
+
+    #red {
+        background-color: red;
+    }
+
+    #green {
+        background-color: green;
+    }
+
+    #yellow {
+        background-color: yellow;
+    }
+
     @media screen and (max-width: 500px) {
         .canvas {
             display: none;
@@ -228,12 +260,14 @@
     }
 
     #plugin {
-      width: 240px;
-      height: calc(306px + 40px);
-      /* border: 1px solid rgb(166, 166, 166); */
-      border-radius: 12px;
-      background-color: white;
-      box-shadow: 0 8px 24px #00000025;
+        position: absolute;
+        right: 20vw;
+        width: 240px;
+        height: calc(306px + 40px);
+        /* border: 1px solid rgb(166, 166, 166); */
+        border-radius: 12px;
+        background-color: white;
+        box-shadow: 0 8px 24px #00000025;
     }
 
     .plugin-header {
@@ -243,6 +277,7 @@
         align-items: center;
         padding: 8px 16px;
         font-weight: 600;
+        cursor: move;
     }
 
     img,
