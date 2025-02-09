@@ -200,7 +200,7 @@
       background-position: 0 0;
       background-repeat: no-repeat;
       background-size: max(944px, 100%);
-      padding: 40px 10vw 0 10vw;
+      padding: 40px 20vw 0 20vw;
     }
 
     .canvas {
@@ -225,6 +225,7 @@
     .color-swatches {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         gap: 24px;
     }
 
@@ -233,24 +234,16 @@
         height: 48px;
     }
 
+    .frame-color::after {
+        content:  " ";
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        background-color: #ffffff;
+    }
+
     .frame-color:hover {
-        border: 2px solid var(--figma-color-bg-brand);
-    }
-
-    #blue {
-        background-color: blue;
-    }
-
-    #red {
-        background-color: red;
-    }
-
-    #green {
-        background-color: green;
-    }
-
-    #yellow {
-        background-color: yellow;
+        outline: 2px solid var(--figma-color-bg-brand);
     }
 
     @media screen and (max-width: 500px) {

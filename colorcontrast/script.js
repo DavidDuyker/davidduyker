@@ -33,10 +33,15 @@ let apcaContrast = null;
 let selectionMode = "none";
 
 const swatchColors = {
-    'red': '#E31C3D',
-    'blue': '#0071BC',
-    'green': '#2E8540',
-    'yellow': '#FDB81E'
+    'color-1': '#00FFFF',
+    'color-2': '#FF00FF',
+    'color-3': '#FFFF00',
+    'color-4': '#ff0000',
+    'color-5': '#00ff00',
+    'color-6': '#0000ff',
+    'color-7': '#FFFFFF',
+    'color-7': '#FFFFFF',
+    'color-7': '#FFFFFF'
 };
 
 function initializeClickHandlers() {
