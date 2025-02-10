@@ -32,19 +32,19 @@ let wcagContrast = null;
 let apcaContrast = null;
 let selectionMode = "none";
 
-const swatchColors = {
-    'color-1': '#00FFFF',
-    'color-2': '#FF00FF',
-    'color-3': '#FFFF00',
-    'color-4': '#ff0000',
-    'color-5': '#00ff00',
-    'color-6': '#0000ff',
-    'color-7': '#FFFFFF',
-    'color-7': '#FFFFFF',
-    'color-7': '#FFFFFF'
-};
-
 function initializeClickHandlers() {
+    // Helper function to convert RGB to Hex
+    function rgbToHex(rgb) {
+        // Extract rgb values
+        const [r, g, b] = rgb.match(/\d+/g).map(Number);
+        // Convert to hex
+        const toHex = (n) => {
+            const hex = n.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        };
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
     // Helper function to update color based on selection mode
     function updateSelectedColor(newColor) {
         if (selectionMode === 'foreground') {
@@ -64,11 +64,12 @@ function initializeClickHandlers() {
 
     // Initialize color swatches
     document.querySelectorAll('.frame-color').forEach(swatch => {
-        // Set the background color for each swatch
-        swatch.style.backgroundColor = swatchColors[swatch.id];
-        
         swatch.addEventListener('click', () => {
-            updateSelectedColor(swatchColors[swatch.id]);
+            // Get the computed color from the ::after pseudo-element
+            const computedStyle = getComputedStyle(swatch, '::after');
+            const backgroundColor = computedStyle.backgroundColor;
+            const hexColor = rgbToHex(backgroundColor);
+            updateSelectedColor(hexColor);
         });
     });
 

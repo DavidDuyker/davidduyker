@@ -171,6 +171,15 @@
     --figma-color-text-warning: #b86200;
     --figma-color-text-warning-secondary: #b86200;
     --figma-color-text-warning-tertiary: #b86200;
+    --color-1: #00FFFF;
+    --color-2: #FF00FF;
+    --color-3: #FFFF00;
+    --color-4: #ff0000;
+    --color-5: #00ff00;
+    --color-6: #0000ff;
+    --color-7: #FFFFFF;
+    --color-8: #8c8c8c;
+    --color-9: #585858;
   }
   
 
@@ -188,7 +197,7 @@
       line-height: 1.2;
       -webkit-font-smoothing: antialiased;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
       gap: calc(50vw - 300px);
@@ -200,14 +209,15 @@
       background-position: 0 0;
       background-repeat: no-repeat;
       background-size: max(944px, 100%);
-      padding: 40px 20vw 0 20vw;
+      padding: 40px 5vw 0 5vw;
     }
 
     .canvas {
         display: flex;
         flex-direction: column;
         gap: 24px;
-        flex-basis: 200px;
+        width: 550px;
+        padding: 0 310px 0 0;
         flex-grow: 0;
         font-family: monospace;
     }
@@ -228,25 +238,36 @@
         flex-wrap: wrap;
         gap: 24px;
     }
-
+    
     .frame-color {
         width: 48px;
         height: 48px;
     }
-
+    
     .frame-color::after {
-        content:  " ";
+        content: " ";
         width: 100%;
         height: 100%;
         border-radius: 8px;
-        background-color: #ffffff;
+        display: inline-block;
     }
-
+    
+    /* Set colors using the variables */
+    #color-1::after { background-color: var(--color-1); }
+    #color-2::after { background-color: var(--color-2); }
+    #color-3::after { background-color: var(--color-3); }
+    #color-4::after { background-color: var(--color-4); }
+    #color-5::after { background-color: var(--color-5); }
+    #color-6::after { background-color: var(--color-6); }
+    #color-7::after { background-color: var(--color-7); }
+    #color-8::after { background-color: var(--color-8); }
+    #color-9::after { background-color: var(--color-9); }
+    
     .frame-color:hover {
         outline: 2px solid var(--figma-color-bg-brand);
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 650px) {
         .canvas {
             display: none;
         }

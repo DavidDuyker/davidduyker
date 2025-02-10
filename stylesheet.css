@@ -2,7 +2,7 @@
 
 :root {
   --text: #000000;
-  --text-secondary: #575757;
+  --text-secondary: #2a2a2a;
   --hover-background: hsla(193, 100%, 50%, 0.13);
   --hover-background-light: hsla(193, 100%, 50%, 0.10);
   --hover-corners: #000000;
@@ -138,6 +138,7 @@ h2 {
 
 h3 {
   font-size: 1rem;
+  color: var(--text);
 }
 
 a {
