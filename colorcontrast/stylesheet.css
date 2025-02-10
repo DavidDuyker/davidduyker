@@ -183,6 +183,10 @@
   }
   
 
+  html {
+    background-color: #F2F2F2;
+  }
+
 *,
     *:before,
     *:after {
