@@ -3,19 +3,42 @@
 :root {
   --text: #000000;
   --text-secondary: #2a2a2a;
-  --hover-background: hsla(193, 100%, 50%, 0.13);
-  --hover-background-light: hsla(193, 100%, 50%, 0.10);
-  --hover-corners: #000000;
-  --background: #F2F2F2;
-  --background-secondary: #D6D6D6;
-  --divider: #9c9c9c;
-  --width-text: 34rem;
+  --text-underline: #d7d7d7;
+  --hover-background: hsl(202deg 100% 48.37% / 17%);
+  --hover-background-light: hsl(202deg 100% 48.37% / 8%);
+  --hover-corners: #00000088;
+  --background: #f2f2f2;
+  --background-secondary: #d6d6d6;
+  --divider: #00000016;
+  --outline: #00000054;
+
+  --width-text: 38rem;
+  --width-content: 60rem;
+  --text-size: clamp(1rem, 0.85rem + 0.7vw, 1.1rem);
+  --text-size-modify-large: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #ffffff;
+    --text-secondary: #dbdbdb;
+    --text-underline: #383838;
+    --hover-background: hsla(202, 50%, 27%, 0.915);
+    --hover-background-light: hsla(202, 50%, 27%, 0.5);
+    --hover-corners: #aaaaaa;
+    --background: #090909;
+    --background-secondary: #333333;
+    --divider: #686868;
+    --outline: #0c0c0c82;
+  }
 }
 
 /* CSS Reset */
 
 /* 1. Use a more-intuitive box-sizing model */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -32,18 +55,31 @@ body {
 }
 
 /* 5. Improve media defaults */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
 /* 6. Inherit fonts for form controls */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
 /* 7. Avoid text overflows */
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
@@ -51,14 +87,20 @@ p, h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
 /*
   9. Create a root stacking context
 */
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
@@ -76,16 +118,16 @@ body {
   position: fixed;
   z-index: -100;
   inset: 0;
-  mix-blend-mode: darken;
-  opacity: 16%;
-  background: url('data:image/svg+xml,%3Csvg viewBox=%270 0 369 369%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%271.5%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E');
+  mix-blend-mode: luminosity;
+  opacity: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='fixed top-0 left-0 w-full h-full pointer-events-none'%3E%3Cfilter id='noise-filter-bg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'%3E%3C/feTurbulence%3E%3CfeColorMatrix type='saturate' values='0'%3E%3C/feColorMatrix%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.7'%3E%3C/feFuncR%3E%3CfeFuncG type='linear' slope='0.7'%3E%3C/feFuncG%3E%3CfeFuncB type='linear' slope='0.7'%3E%3C/feFuncB%3E%3CfeFuncA type='linear' slope='0.25'%3E%3C/feFuncA%3E%3C/feComponentTransfer%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.3' intercept='0.35'%3E%3C/feFuncR%3E%3CfeFuncG type='linear' slope='0.3' intercept='0.35'%3E%3C/feFuncG%3E%3CfeFuncB type='linear' slope='0.3' intercept='0.35'%3E%3C/feFuncB%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise-filter-bg)'%3E%3C/rect%3E%3C/svg%3E");
   pointer-events: none;
 }
 
 .content-flow {
   margin: 144px auto;
   width: 100%;
-  max-width: 944px;
+  max-width: var(--width-content);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -111,7 +153,7 @@ body {
   justify-content: space-between;
 }
 
-hr { 
+hr {
   max-width: 5rem;
   border: none;
   height: 2px;
@@ -120,25 +162,27 @@ hr {
 }
 
 /* _______  Typeography   _____________ */
-h1, h2, hr {
-  filter: url(#distort);
-}
 
 h1 {
   font-family: "Rubik Mono One", Helvetica, sans-serif;
-  font-size: 1.5rem;
+  font-size: calc(var(--text-size) * var(--text-size-modify-large));
   color: var(--text);
 }
 
 h2 {
   font-family: "Rubik Mono One", Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: var(--text-size);
   color: var(--text);
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: var(--text-size);
   color: var(--text);
+}
+
+p,
+ul {
+  font-size: var(--text-size);
 }
 
 a {
@@ -146,17 +190,47 @@ a {
   padding: 0.125rem 0.25rem;
   margin: -0.125rem -0.25rem;
   transition-duration: 150ms;
-  text-decoration-color: #00000037;
-  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0ms;
+  text-decoration-color: var(--text-underline);
+  text-decoration-thickness: 2px;
   text-underline-offset: 2px;
+  text-decoration-skip-ink: auto;
 }
 
-a:hover {
+a:focus {
+  outline-offset: 3px;
+  outline: 2px solid var(--hover-corners);
+}
+
+a:hover, a:focus {
+  border-radius: 4px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--hover-corners);
   background-color: var(--hover-background-light);
-  box-shadow: inset 0 0 4px 2px var(--hover-background);
-  border-radius: 2px;
-  text-decoration-color: #00000000;
-  text-underline-offset: 3px;
+}
+
+.open-new::after {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256'%3E%3Cpath d='M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  .open-new::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 256 256'%3E%3Cpath d='M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z'%3E%3C/path%3E%3C/svg%3E");
+  }
+}
+
+.inline-link {
+  padding: 0rem 0.1rem;
+  margin: 0rem -0.1rem;
+}
+
+.inline-link:hover {
+  text-decoration: none;
+  background-color: var(--hover-background);
+}
+
+.inline-link span {
+  display: none;
 }
 
 ul {
@@ -164,24 +238,27 @@ ul {
 }
 
 .chip {
-  padding: 0 8px;
-  border-radius: 0.5rem;
+  padding: 5px 8px 4px 8px;
+  border-radius: 0.4rem;
   background-color: var(--background-secondary);
   height: fit-content;
   text-wrap: nowrap;
+  text-transform: uppercase;
+  font-size: calc(var(--text-size) * 0.8);
+  line-height: 1;
 }
 
 .chip-bag {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.6rem;
   flex: 0 2 auto;
   justify-content: flex-end;
 }
 
 #plugin iframe {
-  border: 1px solid var(--divider); 
+  border: 1px solid var(--divider);
   border-radius: 12px;
 }
 
@@ -190,7 +267,7 @@ ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1.8rem;
 }
 
 .title-lockup > * {
@@ -202,24 +279,28 @@ ul {
 }
 
 .profile-image img {
-  width: 72px;
-  height: 72px;
-  border: solid 1px var(--divider);
+  width: calc(var(--text-size) * 4.5);
+  /* height: 72px; */
+  border: solid 1px var(--outline);
   border-radius: 8px;
   filter: drop-shadow(0px 4px 2px #00000019);
   transform-origin: bottom;
   transform: rotate(0deg);
-  transition-duration: 150ms;
+  transition-duration: 300ms;
 }
 
-.profile-image:hover img {
+.animate-profile-img-speed img, .animate-profile-img-speed p {
+  transition-duration: 500ms !important;
+}
+
+.profile-image:hover img, .animate-profile-img img {
   transform: rotate(8deg) translateX(8px) translateY(1px);
   filter: drop-shadow(1px 4px 4px #00000019);
 }
 
 .profile-image p {
   font-family: Courier, monospace;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   position: absolute;
   top: 16px;
   left: 0px;
@@ -228,8 +309,8 @@ ul {
   transition-duration: 150ms;
 }
 
-.profile-image:hover p {
-  left: -20px;
+.profile-image:hover p, .animate-profile-img p {
+  left: -24px;
   transform: rotate(-12deg);
   top: 16px;
 }
@@ -238,7 +319,10 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+}
+
+.title-text {
+  flex-grow: 1;
 }
 
 .tag-line {
@@ -250,8 +334,10 @@ ul {
 }
 
 .tag-line .spin {
+  transition-property: transform;
   transition-duration: 10s;
-  width: 1rem;
+  position: relative;
+  width: 1.2rem;
   cursor: default;
 }
 
@@ -275,7 +361,7 @@ ul {
 .intro-paragraph {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.8rem;
 }
 
 /* _______ Experience ________ */
@@ -293,7 +379,7 @@ ul {
 }
 
 .job-entry > div {
-  flex-basis: 24rem;
+  flex-basis: 28rem;
   flex-grow: 0;
   display: flex;
   flex-direction: column;
@@ -308,6 +394,7 @@ ul {
 }
 
 .project {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -316,7 +403,7 @@ ul {
 }
 
 .project > img {
-  border: solid 1px var(--divider);
+  border: solid 1px var(--outline);
   border-radius: 12px;
   filter: drop-shadow(0px 4px 2px #00000011);
 }
@@ -335,12 +422,16 @@ ul {
 
 #zoomFrame {
   position: relative;
-  border: solid 1px var(--divider);
+  border: solid 1px var(--outline);
   border-radius: 12px;
   filter: drop-shadow(0px 4px 2px #00000011);
   overflow: hidden;
   background-color: #fff;
-  background: radial-gradient(bottom, rgba(16, 115, 235, 0.0673) 0%, rgba(16, 115, 235, 0) 100%);
+  background: radial-gradient(
+    bottom,
+    rgba(16, 115, 235, 0.0673) 0%,
+    rgba(16, 115, 235, 0) 100%
+  );
   background-position: 0px 0px;
 }
 
@@ -366,10 +457,25 @@ ul {
   z-index: -100;
   mix-blend-mode: luminosity;
   opacity: 50%;
-  background: url('data:image/svg+xml,%3Csvg viewBox=%270 0 369 369%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%271.5%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E');
+  background: url("data:image/svg+xml,%3Csvg viewBox=%270 0 369 369%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%271.5%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E");
   pointer-events: none;
 }
 
+/* color Contrast plugin try me */
+
+.project .try-it {
+  border: none;
+  position: absolute;
+  left: 0;
+  top: 25%;
+  margin-left: -118px;
+}
+
+@media (width < calc(60rem + 244px)) {
+  .try-it {
+    display: none;
+  }
+}
 
 /* _______ Links _________ */
 
@@ -391,10 +497,10 @@ a {
   height: calc(100% + 4px);
   pointer-events: none;
   opacity: 0;
-  transition-duration: 150ms;
+  transition-duration: 350ms;
 }
 
-a:hover .CornerLinesWrapper {
+a:hover .CornerLinesWrapper, a:focus .CornerLinesWrapper {
   top: 0;
   left: 0;
   width: 100%;

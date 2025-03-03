@@ -32,15 +32,6 @@
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
 
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0">
-    <defs>
-      <filter id="distort">
-        <feTurbulence baseFrequency="1.5 1.5" numOctaves="20" seed="1"></feTurbulence>
-        <feDisplacementMap in="SourceGraphic" scale="1"></feDisplacementMap>
-      </filter>
-    </defs>
-  </svg>
-
   <!-- Start of Woopra Code -->
   <script>
     (function () {
@@ -103,7 +94,7 @@
           <img src="assets/profile.jpg" alt="" />
           <p>Hi!</p>
         </div>
-        <div>
+        <div class="title-text">
           <h1>David Duyker</h1>
           <div class="tag-line">
             <p>Software Designer</p>
@@ -115,31 +106,31 @@
       </div>
       <div class="intro-paragraph">
         <p>
-          Typically called a senior product designer; with expertise in
+          I'm a senior product designer; with expertise in
           user-experience design, design research, design systems, and
           sustainability.
         </p>
         <p>
-          Currently — Designing on an innovation team @
-          <a
+          Currently — Designing on an innovation team at
+          <a target="_blank" class="inline-link open-new"
             href="https://www.uscis.gov/about-us/organization/directorates-and-program-offices/refugee-asylum-and-international-operations-directorate-raio">USCIS</a>
           supporting humanitarian immigration and occasionally writing about
           design and creative work at
-          <a href="https://davidduyker.bearblog.dev/">Mixed Medium</a>
+          <a class="inline-link open-new" href="https://davidduyker.bearblog.dev/">Mixed Medium</a>
         </p>
       </div>
     </div>
     <div id="experience" class="section width-text">
       <div class="header">
         <h2>Experience</h2>
-        <p><a href="davidduyker.pdf">Resume ></a></p>
+        <p><a href="davidduyker.pdf">Résumé</a></p>
       </div>
       <div class="job-entry">
         <p class="date-range">2023 – Present</p>
         <div>
           <p>Global Product Designer</p>
           <p>
-            <a
+            <a  class="open-new"
               href="https://www.uscis.gov/about-us/organization/directorates-and-program-offices/refugee-asylum-and-international-operations-directorate-raio">USCIS
               Refugee and Asylum Directorate (contract)</a>
           </p>
@@ -150,7 +141,7 @@
         <div>
           <p>Senior Product Designer (promoted Jan 2022)</p>
           <p>
-            <a href="https://www.nzero.com">nZero (formerly Ledger8760)</a>
+            <a class="open-new" href="https://www.nzero.com">nZero (formerly Ledger8760)</a>
           </p>
         </div>
       </div>
@@ -159,9 +150,9 @@
         <div>
           <p>Web Design & FE Development (freelance)</p>
 
-          <p><a href="https://www.barn2door.com">Barn2Door</a></p>
+          <p><a class="open-new" href="https://www.barn2door.com">Barn2Door</a></p>
           <p>
-            <a href="https://www.industrialalchemy.net">Industrial Alchemy</a>
+            <a class="open-new" href="https://www.industrialalchemy.net">Industrial Alchemy</a>
           </p>
           <p>Kinaptic</p>
         </div>
@@ -191,6 +182,13 @@
       <div class="project" id="plugin">
         <iframe src="colorcontrast/index.html" width="100%" height="500" frameborder="0"
           title="Color Contrast Tool"></iframe>
+        <picture class="try-it">
+          <!-- User prefers dark mode: -->
+          <source srcset="assets/trymedark.png"  media="(prefers-color-scheme: dark)"/>
+        
+          <!-- User has no color preference: -->
+          <img src="assets/tryme.png" width="122px"/>
+        </picture>
         <div class="width-text">
           <div class="project-title">
             <h3>Figma Color Pluggin @ USCIS</h3>
@@ -270,10 +268,9 @@
       <h2>Archive</h2>
       <p><a href="2023/">2023 Personal Site</a></p>
       <p>
-        <a href="https://www.instagram.com/repaircycle_seattle/">Repair Cycle</a>
-        <em>(indefinite hiatus)</em>
+        <a href="https://www.instagram.com/repaircycle_seattle/">Repair Cycle</a> <em>(indefinite hiatus)</em>
       </p>
-      <p>2019 Personal Site (deprecated)</p>
+      <p>2019 Personal Site <em>(deprecated)</em></p>
     </div>
   </div>
 </body>
