@@ -185,6 +185,10 @@ ul {
   font-size: var(--text-size);
 }
 
+ul a {
+  text-wrap: pretty;
+}
+
 a {
   color: var(--text);
   padding: 0.125rem 0.25rem;
@@ -195,6 +199,7 @@ a {
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
   text-decoration-skip-ink: auto;
+  text-wrap-mode: nowrap;
 }
 
 a:focus {
@@ -211,6 +216,9 @@ a:hover, a:focus {
 
 .open-new::after {
   content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256'%3E%3Cpath d='M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z'%3E%3C/path%3E%3C/svg%3E");
+  position: absolute;
+  right: -1.2ch;
+  transition-duration: 150ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -219,9 +227,17 @@ a:hover, a:focus {
   }
 }
 
+a:hover::after {
+  right: -1.5ch;
+}
+
 .inline-link {
   padding: 0rem 0.1rem;
   margin: 0rem -0.1rem;
+}
+
+.inline-link::after {
+  position: static;
 }
 
 .inline-link:hover {
@@ -498,6 +514,12 @@ a {
   pointer-events: none;
   opacity: 0;
   transition-duration: 350ms;
+}
+
+@media (width < 25rem) {
+  .CornerLinesWrapper {
+    display: none;
+  }
 }
 
 a:hover .CornerLinesWrapper, a:focus .CornerLinesWrapper {

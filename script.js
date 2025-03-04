@@ -108,6 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         element.classList.add('animate-profile-img');
         element.classList.add('animate-profile-img-speed');
-        setTimeout(function() {element.classList.remove('animate-profile-img');}, 3000);
-    }, 3000);
+        setTimeout(function() {
+            element.classList.remove('animate-profile-img');
+        }, 2500);
+        setTimeout(function() {
+            element.classList.remove('animate-profile-img-speed');
+        }, 3000);
+    }, 5000);
 });
