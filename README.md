@@ -4,15 +4,15 @@ Product Designer \| Creative \| Primarily: Pacific Time
 
 ## About
 
-An experienced senior product designer with expertise in design systems, user experience design, and sustainability. I am passionate about creative expression through physical and digital experiences.
+I'm a senior product designer; with expertise in user-experience design, design research, design systems, and sustainability.
 
 ## Professional Experience
 
-**Currently** — Senior Product Designer @[nZero](<https://nzero.com>) where I'm helping organizations achieve their climate goals with better data and analysis tools.
+**Currently** — Designing on an innovation team at USCIS and occasionally writing about design and creative work at Mixed Medium
 
-**Previous** roles at Kinaptic, Barn2Door, and Industrial Alchemy, and freelance work.
+**Previous** roles at nZero, Kinaptic, Barn2Door, and Industrial Alchemy, and freelance work.
 
-[View resume at read.cv](<https://read.cv/davidd>)
+[View portfolio at davidduyker.com](<https://davidduyker.com>)
 
 ## Notable Projects
 
