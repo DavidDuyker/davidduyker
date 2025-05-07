@@ -13,14 +13,36 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
         .video-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-wrap: nowrap;
             gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 20px;
+            overflow-x: auto;
+            width: 100%;
+            height: 100vh;
+            max-width: 100vw;
+            margin: 0;
+            align-items: flex-start;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f0f0f0;
+        }
+        .video-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .video-container::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .video-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .video-container::-webkit-scrollbar-thumb:hover {
+            background: #666;
         }
         .card {
             background: white;
@@ -28,11 +50,14 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             width: 560px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 0 0 auto;
+            transition: box-shadow 0.3s ease;
             margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
         }
         .card:hover {
-            transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
         .video-wrapper {
@@ -171,11 +196,14 @@
                 </iframe>
             </div>
             <div class="video-title">Main Stage</div>
+            <div class="audience-section" id="audience-1">Join Audience<span class="audience-icon">👤</span></div>
             <div class="agenda-section collapsed">
                 <div class="agenda-title">Agenda</div>
                 <div class="agenda-content">
                     <div class="agenda-item">
                         <div class="agenda-time">12:35PM – 1:55PM PDT</div>
+                    </div>
+                    <div class="agenda-item">
                         <div class="agenda-session">Designing in disaster</div>
                         <div class="agenda-speaker">Megan Metzger</div>
                         <div class="agenda-company">Forerunner</div>
@@ -191,11 +219,11 @@
                     </div>
                     <div class="agenda-item">
                         <div class="agenda-time">2:15PM – 3:15PM PDT</div>
+                    </div>
+                    <div class="agenda-item">
                         <div class="agenda-session">From canvas to code: building design systems, together</div>
                         <div class="agenda-speaker">Jake Albaugh</div>
                         <div class="agenda-company">Figma</div>
-                    </div>
-                    <div class="agenda-item">
                         <div class="agenda-speaker">Chad Bergman</div>
                         <div class="agenda-company">Figma, Glean</div>
                     </div>
@@ -205,8 +233,7 @@
                         <div class="agenda-company">IDEO</div>
                     </div>
                     <div class="agenda-item">
-                        <div class="agenda-time">4:00PM – 5:00PM PDT</div>
-                        <div class="agenda-session">Closing keynotes</div>
+                        <div class="agenda-time">4:00PM – 5:00PM PDT — Closing keynotes</div>
                     </div>
                     <div class="agenda-item">
                         <div class="agenda-session">Crafting quality that endures</div>
@@ -222,14 +249,11 @@
                         <div class="agenda-session">Building the next computing platform</div>
                         <div class="agenda-speaker">Dylan Field</div>
                         <div class="agenda-company">Figma</div>
-                    </div>
-                    <div class="agenda-item">
                         <div class="agenda-speaker">Andrew "Boz" Bosworth</div>
                         <div class="agenda-company">Meta</div>
                     </div>
                 </div>
             </div>
-            <div class="audience-section" id="audience-1">Audience<span class="audience-icon">👤</span></div>
         </div>
         
         <div class="card">
@@ -247,7 +271,82 @@
                 </iframe>
             </div>
             <div class="video-title">Mezzanine Stage</div>
-            <div class="audience-section" id="audience-2">Audience<span class="audience-icon">👤</span></div>
+            <div class="audience-section" id="audience-2">Join Audience<span class="audience-icon">👤</span></div>
+            <div class="agenda-section collapsed">
+                <div class="agenda-title">Agenda</div>
+                <div class="agenda-content">
+                    <div class="agenda-item">
+                        <div class="agenda-time">10:40AM – 12:00PM PDT</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">From storytelling as a PM to storytelling as a film director</div>
+                        <div class="agenda-speaker">Ebi Atawodi</div>
+                        <div class="agenda-company">YouTube</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Beyond agents: AI as a creative partner</div>
+                        <div class="agenda-speaker">Joel Lewenstein</div>
+                        <div class="agenda-company">Anthropic</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">The maximalist theory of minimalism</div>
+                        <div class="agenda-speaker">Keegan McNamara</div>
+                        <div class="agenda-company">Mythic Computer Co</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Poetry Camera: How to fall back in love with technology</div>
+                        <div class="agenda-speaker">Kelin Carolyn Zhang</div>
+                        <div class="agenda-company">Poetry Camera</div>
+                        <div class="agenda-speaker">Ryan Mather</div>
+                        <div class="agenda-company">Poetry Camera</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-time">12:25PM – 1:25PM PDT</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">And...cut! The design process behind animation tools</div>
+                        <div class="agenda-speaker">Ruchita Lodha</div>
+                        <div class="agenda-company">Pixar Animation Studios</div>
+                        <div class="agenda-speaker">Rehan Butt</div>
+                        <div class="agenda-company">Walt Disney Animation Studios</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">No flags, just wins: reimagining the NFL app</div>
+                        <div class="agenda-speaker">Lauren Manning</div>
+                        <div class="agenda-company">NFL</div>
+                        <div class="agenda-speaker">Arjun Kalyanpur</div>
+                        <div class="agenda-company">Code and Theory</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Designing positive futures</div>
+                        <div class="agenda-speaker">John LePore</div>
+                        <div class="agenda-company">BlackBox Infinite</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-time">2:25PM – 3:45PM PDT</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Building digital products as a company of one</div>
+                        <div class="agenda-speaker">Christine Vallaure de la Paz</div>
+                        <div class="agenda-company">moonlearning</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Just... go for it!</div>
+                        <div class="agenda-speaker">Parteek Saran</div>
+                        <div class="agenda-company">Stealth</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">The space-filling curve of design</div>
+                        <div class="agenda-speaker">Helena Zhang</div>
+                        <div class="agenda-company">Independent</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Building in public with Figma: designers should be creators</div>
+                        <div class="agenda-speaker">Nolan Perkins</div>
+                        <div class="agenda-company">Rad Collab</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="card">
@@ -265,7 +364,30 @@
                 </iframe>
             </div>
             <div class="video-title">2nd Floor Stage</div>
-            <div class="audience-section" id="audience-3">Audience<span class="audience-icon">👤</span></div>
+            <div class="audience-section" id="audience-3">Join Audience<span class="audience-icon">👤</span></div>
+            <div class="agenda-section collapsed">
+                <div class="agenda-title">Agenda</div>
+                <div class="agenda-content">
+                    <div class="agenda-item">
+                        <div class="agenda-time">2:15PM – 3:15PM PDT</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Influencing via prototyping</div>
+                        <div class="agenda-speaker">Cheechee Lin</div>
+                        <div class="agenda-company">Instagram</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">When products must die</div>
+                        <div class="agenda-speaker">Subham Agarwal</div>
+                        <div class="agenda-company">Ramp</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Pitch perfect: how to present ideas to cut through the noise</div>
+                        <div class="agenda-speaker">Wojtek Dziedzic</div>
+                        <div class="agenda-company">Nord Security</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="card">
@@ -283,7 +405,7 @@
                 </iframe>
             </div>
             <div class="video-title">Maker Stage</div>
-            <div class="audience-section" id="audience-4">Audience<span class="audience-icon">👤</span></div>
+            <div class="audience-section" id="audience-4">Join Audience<span class="audience-icon">👤</span></div>
         </div>
     </div>
 
@@ -359,17 +481,23 @@
                 if (activeStage === stageNumber) {
                     // Deactivate current stage
                     activeStage = null;
-                    document.getElementById('audience-' + stageNumber).classList.remove('audience-active');
+                    const audienceSection = document.getElementById('audience-' + stageNumber);
+                    audienceSection.classList.remove('audience-active');
+                    audienceSection.innerHTML = 'Join Audience<span class="audience-icon">👤</span>';
                     muteAll();
                 } else {
                     // Activate new stage
                     activeStage = stageNumber;
-                    // Remove active class from all stages
+                    // Remove active class from all stages and reset text
                     for (let i = 1; i <= 4; i++) {
-                        document.getElementById('audience-' + i).classList.remove('audience-active');
+                        const audienceSection = document.getElementById('audience-' + i);
+                        audienceSection.classList.remove('audience-active');
+                        audienceSection.innerHTML = 'Join Audience<span class="audience-icon">👤</span>';
                     }
-                    // Add active class to selected stage
-                    document.getElementById('audience-' + stageNumber).classList.add('audience-active');
+                    // Add active class to selected stage and update text
+                    const selectedAudience = document.getElementById('audience-' + stageNumber);
+                    selectedAudience.classList.add('audience-active');
+                    selectedAudience.innerHTML = 'Listening<span class="audience-icon">👤</span>';
                     // Unmute selected stage and mute others
                     const player = eval('player' + stageNumber);
                     if (player && typeof player.unMute === 'function') {
