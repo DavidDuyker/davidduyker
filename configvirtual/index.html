@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Live Streams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 560px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .video-wrapper {
+            width: 100%;
+            height: 315px;
+            overflow: hidden;
+        }
+        .video-title {
+            padding: 15px;
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+            border-bottom: 1px solid #eee;
+        }
+        .agenda-section {
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .agenda-section:hover {
+            background-color: #e0e0e0;
+        }
+        .agenda-title {
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .agenda-title::after {
+            content: '▼';
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+        .agenda-section.collapsed .agenda-title::after {
+            transform: rotate(-90deg);
+        }
+        .agenda-content {
+            margin-top: 10px;
+            display: none;
+        }
+        .agenda-section:not(.collapsed) .agenda-content {
+            display: block;
+        }
+        .agenda-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .agenda-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .agenda-time {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .agenda-session {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .agenda-speaker {
+            color: #666;
+            font-size: 14px;
+        }
+        .agenda-company {
+            color: #888;
+            font-size: 14px;
+            font-style: italic;
+        }
+        .audience-section {
+            padding: 15px 30px;
+            margin: 10px 20px 20px 20px;
+            background-color: #f8f8f8;
+            text-align: center;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23555'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>") 12 12, auto;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #555;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            user-select: none;
+            height: 80px;
+            transform: perspective(100px) rotateX(4deg);
+            transform-origin: bottom;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .audience-section:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .audience-icon {
+            margin-left: 10px;
+            visibility: hidden;
+            font-size: 18px;
+        }
+        .audience-active {
+            background-color: #e0e0e0;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .audience-active .audience-icon {
+            visibility: visible;
+        }
+        @media (max-width: 600px) {
+            .card {
+                width: 100%;
+            }
+            .video-wrapper {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <div class="card">
+            <div class="video-wrapper" id="video-wrapper-1">
+                <iframe 
+                    id="player1"
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/-6nS237xviI?si=yrVOSXDdAlvUhCOH&amp;controls=1&amp;autoplay=1&amp;mute=1&amp;enablejsapi=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-title">Main Stage</div>
+            <div class="agenda-section collapsed">
+                <div class="agenda-title">Agenda</div>
+                <div class="agenda-content">
+                    <div class="agenda-item">
+                        <div class="agenda-time">12:35PM – 1:55PM PDT</div>
+                        <div class="agenda-session">Designing in disaster</div>
+                        <div class="agenda-speaker">Megan Metzger</div>
+                        <div class="agenda-company">Forerunner</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Crossing the chasm between quality and performance</div>
+                        <div class="agenda-speaker">Ricardo Vazquez</div>
+                        <div class="agenda-company">Dropbox</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Writing is designing</div>
+                        <div class="agenda-speaker">Andy Welfle</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-time">2:15PM – 3:15PM PDT</div>
+                        <div class="agenda-session">From canvas to code: building design systems, together</div>
+                        <div class="agenda-speaker">Jake Albaugh</div>
+                        <div class="agenda-company">Figma</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-speaker">Chad Bergman</div>
+                        <div class="agenda-company">Figma, Glean</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Designing for play and friction in a fast-paced world</div>
+                        <div class="agenda-speaker">Michelle Lee</div>
+                        <div class="agenda-company">IDEO</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-time">4:00PM – 5:00PM PDT</div>
+                        <div class="agenda-session">Closing keynotes</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Crafting quality that endures</div>
+                        <div class="agenda-speaker">Karri Saarinen</div>
+                        <div class="agenda-company">Linear</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Designing dystopia: the creative vision behind Severance</div>
+                        <div class="agenda-speaker">Jeremy Hindle</div>
+                        <div class="agenda-company">Severance</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-session">Building the next computing platform</div>
+                        <div class="agenda-speaker">Dylan Field</div>
+                        <div class="agenda-company">Figma</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-speaker">Andrew "Boz" Bosworth</div>
+                        <div class="agenda-company">Meta</div>
+                    </div>
+                </div>
+            </div>
+            <div class="audience-section" id="audience-1">Audience<span class="audience-icon">👤</span></div>
+        </div>
+        
+        <div class="card">
+            <div class="video-wrapper" id="video-wrapper-2">
+                <iframe 
+                    id="player2"
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/RJsJ9Uva6i0?si=yrVOSXDdAlvUhCOH&amp;controls=1&amp;autoplay=1&amp;mute=1&amp;enablejsapi=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-title">Mezzanine Stage</div>
+            <div class="audience-section" id="audience-2">Audience<span class="audience-icon">👤</span></div>
+        </div>
+
+        <div class="card">
+            <div class="video-wrapper" id="video-wrapper-3">
+                <iframe 
+                    id="player3"
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/j-yPNyf0Rzw?si=o9gJcO0DyiNdZIBT&amp;controls=1&amp;autoplay=1&amp;mute=1&amp;enablejsapi=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-title">2nd Floor Stage</div>
+            <div class="audience-section" id="audience-3">Audience<span class="audience-icon">👤</span></div>
+        </div>
+
+        <div class="card">
+            <div class="video-wrapper" id="video-wrapper-4">
+                <iframe 
+                    id="player4"
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/Q_nsNFiO_9Q?si=P7dtbnBoVRkmfhxF&amp;controls=1&amp;autoplay=1&amp;mute=1&amp;enablejsapi=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-title">Maker Stage</div>
+            <div class="audience-section" id="audience-4">Audience<span class="audience-icon">👤</span></div>
+        </div>
+    </div>
+
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        // Load YouTube API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // YouTube Player objects
+        var player1, player2, player3, player4;
+        var activeStage = null; // Track which stage is active
+
+        // Called when YouTube API is ready
+        function onYouTubeIframeAPIReady() {
+            // Initialize all players
+            player1 = new YT.Player('player1', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+
+            player2 = new YT.Player('player2', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+
+            player3 = new YT.Player('player3', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+
+            player4 = new YT.Player('player4', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        // Called when players are ready
+        function onPlayerReady(event) {
+            // All videos start muted
+            event.target.mute();
+            
+            // Setup hover events after players are ready
+            setupHoverEvents();
+        }
+
+        function setupHoverEvents() {
+            // Function to mute all players except the specified one
+            function muteAllExcept(player) {
+                if (player1 && player1 !== player) player1.mute();
+                if (player2 && player2 !== player) player2.mute();
+                if (player3 && player3 !== player) player3.mute();
+                if (player4 && player4 !== player) player4.mute();
+            }
+
+            // Function to mute all players
+            function muteAll() {
+                if (player1) player1.mute();
+                if (player2) player2.mute();
+                if (player3) player3.mute();
+                if (player4) player4.mute();
+            }
+
+            // Function to handle stage activation
+            function activateStage(stageNumber) {
+                if (activeStage === stageNumber) {
+                    // Deactivate current stage
+                    activeStage = null;
+                    document.getElementById('audience-' + stageNumber).classList.remove('audience-active');
+                    muteAll();
+                } else {
+                    // Activate new stage
+                    activeStage = stageNumber;
+                    // Remove active class from all stages
+                    for (let i = 1; i <= 4; i++) {
+                        document.getElementById('audience-' + i).classList.remove('audience-active');
+                    }
+                    // Add active class to selected stage
+                    document.getElementById('audience-' + stageNumber).classList.add('audience-active');
+                    // Unmute selected stage and mute others
+                    const player = eval('player' + stageNumber);
+                    if (player && typeof player.unMute === 'function') {
+                        player.unMute();
+                    }
+                    muteAllExcept(player);
+                }
+            }
+
+            // Add hover events for all cards
+            for (let i = 1; i <= 4; i++) {
+                const card = document.querySelector('.card:nth-child(' + i + ')');
+                card.addEventListener('mouseenter', function() {
+                    if (activeStage === null) {
+                        const player = eval('player' + i);
+                        if (player && typeof player.unMute === 'function') {
+                            player.unMute();
+                        }
+                        muteAllExcept(player);
+                    }
+                });
+            }
+
+            // Add mouse leave event for all cards
+            document.querySelectorAll('.card').forEach(function(card) {
+                card.addEventListener('mouseleave', function() {
+                    if (activeStage === null) {
+                        muteAll();
+                    }
+                });
+            });
+
+            // Add click events for all audience sections
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('audience-' + i).addEventListener('click', function() {
+                    activateStage(i);
+                });
+            }
+        }
+
+        // Setup hover events when document is ready
+        $(document).ready(function() {
+            setupHoverEvents();
+            
+            // Add click handler for agenda toggle
+            $('.agenda-section').click(function() {
+                $(this).toggleClass('collapsed');
+            });
+        });
+    </script>
+</body>
+</html>
