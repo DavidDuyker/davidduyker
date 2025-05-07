@@ -5,20 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Live Streams</title>
     <style>
+        root, * {
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
+            height: 100vh;
+            width: 100vw;
         }
         .video-container {
             display: flex;
             flex-wrap: nowrap;
-            gap: 30px;
+            gap: 20px;
             padding: 20px;
             overflow-x: auto;
             width: 100%;
@@ -30,32 +35,22 @@
             scrollbar-width: thin;
             scrollbar-color: #888 #f0f0f0;
         }
-        .video-container::-webkit-scrollbar {
-            height: 8px;
-        }
-        .video-container::-webkit-scrollbar-track {
-            background: #f0f0f0;
-            border-radius: 4px;
-        }
-        .video-container::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        .video-container::-webkit-scrollbar-thumb:hover {
-            background: #666;
-        }
         .card {
+            box-sizing: border-box;
             background: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             width: 560px;
+            max-height: 100%;
             flex: 0 0 auto;
             transition: box-shadow 0.3s ease;
-            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            height: fit-content;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f0f0f0;
+            position: relative;
         }
         .card:hover {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -64,6 +59,11 @@
             width: 100%;
             height: 315px;
             overflow: hidden;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: white;
         }
         .video-title {
             padding: 15px;
@@ -71,16 +71,11 @@
             color: #333;
             font-size: 18px;
             border-bottom: 1px solid #eee;
-        }
-        .agenda-section {
-            padding: 15px;
-            background-color: #f8f8f8;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .agenda-section:hover {
-            background-color: #e0e0e0;
+            flex-shrink: 0;
+            position: sticky;
+            top: 315px;
+            z-index: 1;
+            background: white;
         }
         .agenda-title {
             font-weight: bold;
@@ -89,20 +84,40 @@
             justify-content: space-between;
             align-items: center;
         }
-        .agenda-title::after {
-            content: '▼';
-            font-size: 12px;
-            transition: transform 0.3s ease;
-        }
-        .agenda-section.collapsed .agenda-title::after {
-            transform: rotate(-90deg);
-        }
         .agenda-content {
             margin-top: 10px;
             display: none;
         }
-        .agenda-section:not(.collapsed) .agenda-content {
-            display: block;
+        details {
+            padding: 0;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        summary:hover {
+            background-color: #f3f3f3;
+        }
+        summary {
+            padding: 15px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            animation-duration: 150ms;
+        }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        summary::after {
+            content: 'show';
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary::after {
+            content: 'hide';
         }
         .agenda-item {
             margin-bottom: 15px;
@@ -152,6 +167,7 @@
             transform: perspective(100px) rotateX(4deg);
             transform-origin: bottom;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
         }
         .audience-section:hover {
             background-color: #e0e0e0;
@@ -197,9 +213,9 @@
             </div>
             <div class="video-title">Main Stage</div>
             <div class="audience-section" id="audience-1">Join Audience<span class="audience-icon">👤</span></div>
-            <div class="agenda-section collapsed">
-                <div class="agenda-title">Agenda</div>
-                <div class="agenda-content">
+            <details>
+                <summary>Agenda</summary>
+                <div style="padding: 15px;">
                     <div class="agenda-item">
                         <div class="agenda-time">12:35PM – 1:55PM PDT</div>
                     </div>
@@ -253,7 +269,7 @@
                         <div class="agenda-company">Meta</div>
                     </div>
                 </div>
-            </div>
+            </details>
         </div>
         
         <div class="card">
@@ -272,9 +288,9 @@
             </div>
             <div class="video-title">Mezzanine Stage</div>
             <div class="audience-section" id="audience-2">Join Audience<span class="audience-icon">👤</span></div>
-            <div class="agenda-section collapsed">
-                <div class="agenda-title">Agenda</div>
-                <div class="agenda-content">
+            <details>
+                <summary>Agenda</summary>
+                <div style="padding: 15px;">
                     <div class="agenda-item">
                         <div class="agenda-time">10:40AM – 12:00PM PDT</div>
                     </div>
@@ -346,7 +362,7 @@
                         <div class="agenda-company">Rad Collab</div>
                     </div>
                 </div>
-            </div>
+            </details>
         </div>
 
         <div class="card">
@@ -365,9 +381,9 @@
             </div>
             <div class="video-title">2nd Floor Stage</div>
             <div class="audience-section" id="audience-3">Join Audience<span class="audience-icon">👤</span></div>
-            <div class="agenda-section collapsed">
-                <div class="agenda-title">Agenda</div>
-                <div class="agenda-content">
+            <details>
+                <summary>Agenda</summary>
+                <div style="padding: 15px;">
                     <div class="agenda-item">
                         <div class="agenda-time">2:15PM – 3:15PM PDT</div>
                     </div>
@@ -387,7 +403,7 @@
                         <div class="agenda-company">Nord Security</div>
                     </div>
                 </div>
-            </div>
+            </details>
         </div>
 
         <div class="card">
@@ -540,11 +556,6 @@
         // Setup hover events when document is ready
         $(document).ready(function() {
             setupHoverEvents();
-            
-            // Add click handler for agenda toggle
-            $('.agenda-section').click(function() {
-                $(this).toggleClass('collapsed');
-            });
         });
     </script>
 </body>
