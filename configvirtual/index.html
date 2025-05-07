@@ -38,7 +38,6 @@
         .card {
             box-sizing: border-box;
             background: white;
-            border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             width: 560px;
@@ -108,16 +107,16 @@
             list-style: none;
             animation-duration: 150ms;
         }
-        summary::-webkit-details-marker {
-            display: none;
-        }
         summary::after {
-            content: 'show';
+            content: 'SHOW';
             font-size: 12px;
-            transition: transform 0.3s ease;
+            padding-top: 2px;
         }
         details[open] summary::after {
-            content: 'hide';
+            content: 'HIDE';
+        }
+        details[open] summary {
+            border-bottom: 1px solid #eee;
         }
         .agenda-item {
             margin-bottom: 15px;
@@ -212,7 +211,7 @@
                 </iframe>
             </div>
             <div class="video-title">Main Stage</div>
-            <div class="audience-section" id="audience-1">Join Audience<span class="audience-icon">👤</span></div>
+            <div class="audience-section" id="audience-1">Join Audience</div>
             <details>
                 <summary>Agenda</summary>
                 <div style="padding: 15px;">
@@ -287,7 +286,7 @@
                 </iframe>
             </div>
             <div class="video-title">Mezzanine Stage</div>
-            <div class="audience-section" id="audience-2">Join Audience<span class="audience-icon">👤</span></div>
+            <div class="audience-section" id="audience-2">Join Audience</div>
             <details>
                 <summary>Agenda</summary>
                 <div style="padding: 15px;">
@@ -380,7 +379,7 @@
                 </iframe>
             </div>
             <div class="video-title">2nd Floor Stage</div>
-            <div class="audience-section" id="audience-3">Join Audience<span class="audience-icon">👤</span></div>
+            <div class="audience-section" id="audience-3">Join Audience</div>
             <details>
                 <summary>Agenda</summary>
                 <div style="padding: 15px;">
@@ -421,7 +420,7 @@
                 </iframe>
             </div>
             <div class="video-title">Maker Stage</div>
-            <div class="audience-section" id="audience-4">Join Audience<span class="audience-icon">👤</span></div>
+            <div class="audience-section" id="audience-4">Join Audience</div>
         </div>
     </div>
 
@@ -507,12 +506,12 @@
                     for (let i = 1; i <= 4; i++) {
                         const audienceSection = document.getElementById('audience-' + i);
                         audienceSection.classList.remove('audience-active');
-                        audienceSection.innerHTML = 'Join Audience<span class="audience-icon">👤</span>';
+                        audienceSection.innerHTML = 'Join Audience';
                     }
                     // Add active class to selected stage and update text
                     const selectedAudience = document.getElementById('audience-' + stageNumber);
                     selectedAudience.classList.add('audience-active');
-                    selectedAudience.innerHTML = 'Listening<span class="audience-icon">👤</span>';
+                    selectedAudience.innerHTML = 'Listening...';
                     // Unmute selected stage and mute others
                     const player = eval('player' + stageNumber);
                     if (player && typeof player.unMute === 'function') {
