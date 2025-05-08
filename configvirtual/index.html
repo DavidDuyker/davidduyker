@@ -33,7 +33,7 @@
             transform-origin: 0 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 200px;
             padding: 20px;
             min-width: 100vw;
             min-height: 100vh;
@@ -45,7 +45,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             width: 560px;
             max-width: 90%;
-            max-height: 100%;
             flex: 0 0 auto;
             transition: box-shadow 0.3s ease;
             display: flex;
@@ -54,6 +53,8 @@
             scrollbar-width: thin;
             scrollbar-color: #888 #f0f0f0;
             position: relative;
+            user-select: none;
+            transform-origin: center center;
         }
         .card:hover {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -62,10 +63,10 @@
             width: 100%;
             overflow: hidden;
             flex-shrink: 0;
-            position: sticky;
-            top: 0;
+            position: relative;
             z-index: 1;
             background: white;
+            margin-top: 50px; /* Add space for the title */
         }
         iframe {
             width: 100%;
@@ -80,6 +81,18 @@
             border-bottom: 1px solid #eee;
             flex-shrink: 0;
             background: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            cursor: move;
+        }
+        .video-title:hover {
+            background-color: #f8f8f8;
+        }
+        .video-title:active {
+            cursor: grabbing;
         }
         .agenda-container {
             padding: 0 15px;
@@ -169,17 +182,7 @@
     <div class="video-container">
         <div class="card">
             <div class="video-wrapper" id="video-wrapper-1">
-                <iframe 
-                    id="player1"
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/embed/-6nS237xviI?si=yrVOSXDdAlvUhCOH&amp;controls=1&amp;autoplay=1&amp;mute=1&amp;enablejsapi=1" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen>
-                </iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/5ODf8VZTO7A?si=eePwP-t_qa18eijV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <div class="video-title">Main Stage</div>
             <div class="audience-section" id="audience-1">Join Audience</div>
@@ -587,7 +590,105 @@
             }
         });
 
-        // Add canvas navigation functionality
+        // Add card dragging functionality
+        let draggedCard = null;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+        let cardPositions = new Map();
+        let initialCardPositions = new Map();
+
+        function initializeCardPositions() {
+            document.querySelectorAll('.card').forEach((card) => {
+                const rect = card.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                const position = {
+                    x: (rect.left - containerRect.left - translateX) / scale,
+                    y: (rect.top - containerRect.top - translateY) / scale,
+                    width: rect.width,
+                    height: rect.height
+                };
+                initialCardPositions.set(card, position);
+                cardPositions.set(card, position);
+            });
+        }
+
+        function handleCardDragStart(e) {
+            // Only allow dragging from the title
+            if (!e.target.classList.contains('video-title')) return;
+            if (e.target.closest('.audience-section')) return;
+            
+            draggedCard = e.target.closest('.card');
+            const rect = draggedCard.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
+            // Calculate current position relative to container
+            const currentX = (rect.left - containerRect.left - translateX) / scale;
+            const currentY = (rect.top - containerRect.top - translateY) / scale;
+            
+            // Make the card absolute positioned
+            draggedCard.style.position = 'absolute';
+            draggedCard.style.left = `${currentX}px`;
+            draggedCard.style.top = `${currentY}px`;
+            
+            // Calculate offset from mouse to card corner
+            dragOffsetX = e.clientX - rect.left;
+            dragOffsetY = e.clientY - rect.top;
+            
+            draggedCard.style.zIndex = '1000';
+            draggedCard.style.transition = 'none';
+        }
+
+        function handleCardDrag(e) {
+            if (!draggedCard) return;
+            
+            // Calculate new position in screen coordinates
+            const newX = e.clientX - dragOffsetX;
+            const newY = e.clientY - dragOffsetY;
+            
+            // Convert screen coordinates to container coordinates
+            const containerRect = container.getBoundingClientRect();
+            const relativeX = (newX - containerRect.left - translateX) / scale;
+            const relativeY = (newY - containerRect.top - translateY) / scale;
+            
+            // Keep card within bounds
+            const cardWidth = draggedCard.offsetWidth;
+            const cardHeight = draggedCard.offsetHeight;
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            
+            const boundedX = Math.max(0, Math.min(relativeX, containerWidth - cardWidth));
+            const boundedY = Math.max(0, Math.min(relativeY, containerHeight - cardHeight));
+            
+            draggedCard.style.left = `${boundedX}px`;
+            draggedCard.style.top = `${boundedY}px`;
+        }
+
+        function handleCardDragEnd() {
+            if (!draggedCard) return;
+            
+            const rect = draggedCard.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
+            cardPositions.set(draggedCard, {
+                x: (rect.left - containerRect.left - translateX) / scale,
+                y: (rect.top - containerRect.top - translateY) / scale,
+                width: rect.width,
+                height: rect.height
+            });
+            
+            draggedCard.style.zIndex = '';
+            draggedCard = null;
+        }
+
+        // Initialize card dragging
+        document.querySelectorAll('.video-title').forEach(title => {
+            title.addEventListener('mousedown', handleCardDragStart);
+        });
+        document.addEventListener('mousemove', handleCardDrag);
+        document.addEventListener('mouseup', handleCardDragEnd);
+        document.addEventListener('mouseleave', handleCardDragEnd);
+
+        // Modify existing canvas navigation to work with draggable cards
         let isDragging = false;
         let startX, startY;
         let translateX = 0;
@@ -600,18 +701,16 @@
 
         // Handle mouse wheel for zooming
         document.addEventListener('wheel', (e) => {
+            if (draggedCard) return;
             e.preventDefault();
             
-            // Calculate zoom factor
             const delta = e.deltaY > 0 ? -ZOOM_SPEED : ZOOM_SPEED;
             const newScale = Math.min(Math.max(scale + delta, MIN_SCALE), MAX_SCALE);
             
-            // Calculate mouse position relative to container
             const rect = container.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const mouseY = e.clientY - rect.top;
             
-            // Calculate new position to zoom towards mouse
             const scaleChange = newScale - scale;
             translateX -= (mouseX * scaleChange);
             translateY -= (mouseY * scaleChange);
@@ -620,8 +719,9 @@
             updateTransform();
         });
 
-        // Handle mouse events for panning
+        // Handle canvas panning
         document.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.card')) return;
             isDragging = true;
             startX = e.clientX - translateX;
             startY = e.clientY - translateY;
@@ -650,7 +750,8 @@
             container.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
         }
 
-        // Initialize transform
+        // Initialize
+        initializeCardPositions();
         updateTransform();
     </script>
 </body>
