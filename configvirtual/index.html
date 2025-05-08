@@ -349,7 +349,17 @@
 
         <div class="card">
             <div class="video-wrapper" id="video-wrapper-4">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/Q_nsNFiO_9Q?si=21TI8jvcghj1T6dI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe 
+                    id="player4"
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/Q_nsNFiO_9Q?si=21TI8jvcghj1T6dI&amp;controls=1&amp;autoplay=1&amp;mute=1&amp;enablejsapi=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
             </div>
             <div class="video-title">Maker Stage</div>
             <div class="audience-section" id="audience-4">Join Audience</div>
@@ -390,126 +400,145 @@
         // YouTube Player objects
         var player1, player2, player3, player4;
         var activeStage = null; // Track which stage is active
+        var playersReady = 0; // Track how many players are ready
 
         // Called when YouTube API is ready
         function onYouTubeIframeAPIReady() {
-            // Initialize all players
-            player1 = new YT.Player('player1', {
+            // Initialize all players with proper configuration
+            const playerConfig = {
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                },
+                playerVars: {
+                    'autoplay': 1,
+                    'mute': 1,
+                    'controls': 1,
+                    'enablejsapi': 1,
+                    'origin': window.location.origin,
+                    'playsinline': 1
                 }
-            });
+            };
 
-            player2 = new YT.Player('player2', {
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-
-            player3 = new YT.Player('player3', {
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-
-            player4 = new YT.Player('player4', {
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
+            player1 = new YT.Player('player1', playerConfig);
+            player2 = new YT.Player('player2', playerConfig);
+            player3 = new YT.Player('player3', playerConfig);
+            player4 = new YT.Player('player4', playerConfig);
         }
 
         // Called when players are ready
         function onPlayerReady(event) {
-            // All videos start muted
+            // Ensure video is playing but muted
             event.target.mute();
+            event.target.playVideo();
+            playersReady++;
             
-            // Setup hover events after players are ready
-            setupHoverEvents();
+            if (playersReady === 4) {
+                setupHoverEvents();
+            }
+        }
+
+        // Handle player state changes
+        function onPlayerStateChange(event) {
+            // If video ends, restart it
+            if (event.data === YT.PlayerState.ENDED) {
+                event.target.seekTo(0);
+                event.target.playVideo();
+            }
+            // If video is paused, resume it
+            else if (event.data === YT.PlayerState.PAUSED) {
+                event.target.playVideo();
+            }
         }
 
         function setupHoverEvents() {
-            // Function to mute all players except the specified one
-            function muteAllExcept(player) {
-                if (player1 && player1 !== player) player1.mute();
-                if (player2 && player2 !== player) player2.mute();
-                if (player3 && player3 !== player) player3.mute();
-                if (player4 && player4 !== player) player4.mute();
+            const players = [null, player1, player2, player3, player4];
+            
+            function muteAllExcept(playerIndex) {
+                players.forEach((player, index) => {
+                    if (index !== 0 && index !== playerIndex && player && player.mute) {
+                        player.mute();
+                    }
+                });
             }
 
-            // Function to mute all players
             function muteAll() {
-                if (player1) player1.mute();
-                if (player2) player2.mute();
-                if (player3) player3.mute();
-                if (player4) player4.mute();
+                players.forEach((player, index) => {
+                    if (index !== 0 && player && player.mute) {
+                        player.mute();
+                    }
+                });
             }
 
-            // Function to handle stage activation
+            function unmutePlayer(playerIndex) {
+                const player = players[playerIndex];
+                if (player && player.unMute) {
+                    player.unMute();
+                    player.setVolume(100);
+                    // Ensure video is playing
+                    player.playVideo();
+                }
+            }
+
             function activateStage(stageNumber) {
                 if (activeStage === stageNumber) {
                     // Deactivate current stage
                     activeStage = null;
                     const audienceSection = document.getElementById('audience-' + stageNumber);
                     audienceSection.classList.remove('audience-active');
-                    audienceSection.innerHTML = 'Join Audience<span class="audience-icon">👤</span>';
+                    audienceSection.innerHTML = 'Join Audience';
                     muteAll();
                 } else {
                     // Activate new stage
                     activeStage = stageNumber;
-                    // Remove active class from all stages and reset text
-                    for (let i = 1; i <= 4; i++) {
-                        const audienceSection = document.getElementById('audience-' + i);
-                        audienceSection.classList.remove('audience-active');
-                        audienceSection.innerHTML = 'Join Audience';
-                    }
-                    // Add active class to selected stage and update text
+                    
+                    // Update UI
+                    document.querySelectorAll('.audience-section').forEach(section => {
+                        section.classList.remove('audience-active');
+                        section.innerHTML = 'Join Audience';
+                    });
+                    
                     const selectedAudience = document.getElementById('audience-' + stageNumber);
                     selectedAudience.classList.add('audience-active');
                     selectedAudience.innerHTML = 'Listening...';
-                    // Unmute selected stage and mute others
-                    const player = eval('player' + stageNumber);
-                    if (player && typeof player.unMute === 'function') {
-                        player.unMute();
-                    }
-                    muteAllExcept(player);
+                    
+                    // Handle audio
+                    muteAll();
+                    unmutePlayer(stageNumber);
                 }
             }
 
-            // Add hover events for all cards
-            for (let i = 1; i <= 4; i++) {
-                const card = document.querySelector('.card:nth-child(' + i + ')');
-                card.addEventListener('mouseenter', function() {
+            // Add hover events
+            document.querySelectorAll('.card').forEach((card, index) => {
+                const stageNumber = index + 1;
+                
+                card.addEventListener('mouseenter', () => {
                     if (activeStage === null) {
-                        const player = eval('player' + i);
-                        if (player && typeof player.unMute === 'function') {
-                            player.unMute();
-                        }
-                        muteAllExcept(player);
+                        unmutePlayer(stageNumber);
+                        muteAllExcept(stageNumber);
                     }
                 });
-            }
 
-            // Add mouse leave event for all cards
-            document.querySelectorAll('.card').forEach(function(card) {
-                card.addEventListener('mouseleave', function() {
+                card.addEventListener('mouseleave', () => {
                     if (activeStage === null) {
                         muteAll();
                     }
                 });
             });
 
-            // Add click events for all audience sections
-            for (let i = 1; i <= 4; i++) {
-                document.getElementById('audience-' + i).addEventListener('click', function() {
-                    activateStage(i);
+            // Add click events for audience sections
+            document.querySelectorAll('.audience-section').forEach((section, index) => {
+                section.addEventListener('click', () => {
+                    activateStage(index + 1);
                 });
-            }
+            });
         }
 
         // Setup hover events when document is ready
         $(document).ready(function() {
-            setupHoverEvents();
+            if (playersReady === 4) {
+                setupHoverEvents();
+            }
         });
     </script>
 </body>
