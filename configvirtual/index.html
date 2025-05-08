@@ -9,7 +9,11 @@
         root, * {
             box-sizing: border-box;
         }
+        html {
+            height: 100%;
+        }
         body {
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
@@ -18,7 +22,7 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            height: 100vh;
+            height: 100%;
             width: 100vw;
         }
         .video-container {
@@ -126,6 +130,9 @@
             margin: 0 4px;
             color: #ccc;
         }
+        button {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23555'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>") 12 12, auto;
+        }
         .audience-section {
             padding: 15px 30px;
             border-radius: 3px;
@@ -135,6 +142,7 @@
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23555'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>") 12 12, auto;
             transition: all 0.3s ease;
             font-weight: bold;
+            font-size: 18px;
             color: #555;
             display: flex;
             justify-content: center;
@@ -145,14 +153,11 @@
             transform: perspective(100px) rotateX(4deg);
             transform-origin: bottom;
             flex-shrink: 0;
+            border: none;
+            outline: none;
         }
         .audience-section:hover {
             background-color: #00000015;
-        }
-        .audience-icon {
-            margin-left: 10px;
-            visibility: hidden;
-            font-size: 18px;
         }
         .audience-active {
             background-color: #ebf9ff !important;
@@ -180,7 +185,15 @@
                 </iframe>
             </div>
             <div class="video-title">Main Stage</div>
-            <div class="audience-section" id="audience-1">Join Audience</div>
+            <button 
+                class="audience-section" 
+                id="audience-1" 
+                data-umami-event="Join Main Stage"
+                role="switch"
+                aria-checked="false"
+                aria-label="Join audience for Main Stage">
+                Join Audience
+            </button>
             <div class="agenda-container">
                 <div class="agenda-item">
                     <div class="agenda-time">May 8 9:00AM – 10:20AM PDT</div>
@@ -237,7 +250,15 @@
                 </iframe>
             </div>
             <div class="video-title">Mezzanine Stage</div>
-            <div class="audience-section" id="audience-2">Join Audience</div>
+            <button 
+                class="audience-section" 
+                id="audience-2" 
+                data-umami-event="Join Mezzanine Stage"
+                role="switch"
+                aria-checked="false"
+                aria-label="Join audience for Mezzanine Stage">
+                Join Audience
+            </button>
             <div class="agenda-container">
                 <div class="agenda-item">
                     <div class="agenda-time">May 8 10:40AM – 11:40AM PDT</div>
@@ -304,7 +325,15 @@
                 </iframe>
             </div>
             <div class="video-title">Level 2 Stage</div>
-            <div class="audience-section" id="audience-3">Join Audience</div>
+            <button 
+                class="audience-section" 
+                id="audience-3" 
+                data-umami-event="Join Level 2 Stage"
+                role="switch"
+                aria-checked="false"
+                aria-label="Join audience for Level 2 Stage">
+                Join Audience
+            </button>
             <div class="agenda-container">
                 <div class="agenda-item">
                     <div class="agenda-time">May 8 10:50AM – 11:50AM PDT</div>
@@ -363,7 +392,15 @@
                 </iframe>
             </div>
             <div class="video-title">Maker Stage</div>
-            <div class="audience-section" id="audience-4">Join Audience</div>
+            <button 
+                class="audience-section" 
+                id="audience-4" 
+                data-umami-event="Join Maker Stage"
+                role="switch"
+                aria-checked="false"
+                aria-label="Join audience for Maker Stage">
+                Join Audience
+            </button>
             <div class="agenda-container">
                 <div class="agenda-item">
                     <div class="agenda-time">May 8 12:00PM – 12:20PM PDT</div>
@@ -531,6 +568,7 @@
                     const audienceSection = document.getElementById('audience-' + stageNumber);
                     audienceSection.classList.remove('audience-active');
                     audienceSection.innerHTML = 'Join Audience';
+                    audienceSection.setAttribute('aria-checked', 'false');
                     muteAll();
                 } else {
                     // Activate new stage
@@ -540,11 +578,13 @@
                     document.querySelectorAll('.audience-section').forEach(section => {
                         section.classList.remove('audience-active');
                         section.innerHTML = 'Join Audience';
+                        section.setAttribute('aria-checked', 'false');
                     });
                     
                     const selectedAudience = document.getElementById('audience-' + stageNumber);
                     selectedAudience.classList.add('audience-active');
                     selectedAudience.innerHTML = 'Listening...';
+                    selectedAudience.setAttribute('aria-checked', 'true');
                     
                     // Handle audio
                     muteAll();
@@ -570,10 +610,17 @@
                 });
             });
 
-            // Add click events for audience sections
+            // Add click and keyboard events for audience sections
             document.querySelectorAll('.audience-section').forEach((section, index) => {
                 section.addEventListener('click', () => {
                     activateStage(index + 1);
+                });
+
+                section.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        activateStage(index + 1);
+                    }
                 });
             });
         }
