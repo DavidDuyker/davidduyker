@@ -27,7 +27,7 @@
             padding: 20px;
             overflow-x: auto;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             max-width: 100vw;
             margin: 0;
             align-items: flex-start;
@@ -41,6 +41,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             width: 560px;
+            max-width: 90%;
             max-height: 100%;
             flex: 0 0 auto;
             transition: box-shadow 0.3s ease;
@@ -56,13 +57,17 @@
         }
         .video-wrapper {
             width: 100%;
-            height: 315px;
             overflow: hidden;
             flex-shrink: 0;
             position: sticky;
             top: 0;
             z-index: 1;
             background: white;
+        }
+        iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            height: auto;
         }
         .video-title {
             padding: 15px;
@@ -71,81 +76,46 @@
             font-size: 18px;
             border-bottom: 1px solid #eee;
             flex-shrink: 0;
-            position: sticky;
-            top: 315px;
-            z-index: 1;
             background: white;
         }
-        .agenda-title {
-            font-weight: bold;
-            color: #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .agenda-content {
-            margin-top: 10px;
-            display: none;
-        }
-        details {
-            padding: 0;
+        .agenda-container {
+            padding: 0 15px;
             background-color: #f8f8f8;
             border-bottom: 1px solid #eee;
-            transition: all 0.3s ease;
-        }
-        summary:hover {
-            background-color: #f3f3f3;
-        }
-        summary {
-            padding: 15px;
-            font-weight: bold;
-            color: #333;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            list-style: none;
-            animation-duration: 150ms;
-        }
-        summary::after {
-            content: 'SHOW';
-            font-size: 12px;
-            padding-top: 2px;
-        }
-        details[open] summary::after {
-            content: 'HIDE';
-        }
-        details[open] summary {
-            border-bottom: 1px solid #eee;
+            overflow-y: auto;
+            max-height: calc(100vh - 450px);
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f0f0f0;
         }
         .agenda-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
+            margin: 0;
+            padding: 20px 0;
             border-bottom: 1px solid #eee;
-        }
-        .agenda-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
         }
         .agenda-time {
             color: #666;
             font-size: 14px;
-            margin-bottom: 5px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
         .agenda-session {
-            font-weight: bold;
+            font-weight: 600;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-size: 15px;
+            line-height: 1.4;
         }
         .agenda-speaker {
-            color: #666;
+            color: #555;
             font-size: 14px;
+            margin-bottom: 2px;
+            line-height: 1.4;
         }
         .agenda-company {
             color: #888;
-            font-size: 14px;
+            font-size: 13px;
             font-style: italic;
+            line-height: 1.4;
         }
         .audience-section {
             padding: 15px 30px;
@@ -156,7 +126,6 @@
             transition: all 0.3s ease;
             font-weight: bold;
             color: #555;
-            border-radius: 6px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -184,14 +153,6 @@
         .audience-active .audience-icon {
             visibility: visible;
         }
-        @media (max-width: 600px) {
-            .card {
-                width: 100%;
-            }
-            .video-wrapper {
-                height: 240px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -212,63 +173,60 @@
             </div>
             <div class="video-title">Main Stage</div>
             <div class="audience-section" id="audience-1">Join Audience</div>
-            <details>
-                <summary>Agenda</summary>
-                <div style="padding: 15px;">
-                    <div class="agenda-item">
-                        <div class="agenda-time">12:35PM – 1:55PM PDT</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Designing in disaster</div>
-                        <div class="agenda-speaker">Megan Metzger</div>
-                        <div class="agenda-company">Forerunner</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Crossing the chasm between quality and performance</div>
-                        <div class="agenda-speaker">Ricardo Vazquez</div>
-                        <div class="agenda-company">Dropbox</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Writing is designing</div>
-                        <div class="agenda-speaker">Andy Welfle</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-time">2:15PM – 3:15PM PDT</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">From canvas to code: building design systems, together</div>
-                        <div class="agenda-speaker">Jake Albaugh</div>
-                        <div class="agenda-company">Figma</div>
-                        <div class="agenda-speaker">Chad Bergman</div>
-                        <div class="agenda-company">Figma, Glean</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Designing for play and friction in a fast-paced world</div>
-                        <div class="agenda-speaker">Michelle Lee</div>
-                        <div class="agenda-company">IDEO</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-time">4:00PM – 5:00PM PDT — Closing keynotes</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Crafting quality that endures</div>
-                        <div class="agenda-speaker">Karri Saarinen</div>
-                        <div class="agenda-company">Linear</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Designing dystopia: the creative vision behind Severance</div>
-                        <div class="agenda-speaker">Jeremy Hindle</div>
-                        <div class="agenda-company">Severance</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Building the next computing platform</div>
-                        <div class="agenda-speaker">Dylan Field</div>
-                        <div class="agenda-company">Figma</div>
-                        <div class="agenda-speaker">Andrew "Boz" Bosworth</div>
-                        <div class="agenda-company">Meta</div>
-                    </div>
+            <div class="agenda-container">
+                <div class="agenda-item">
+                    <div class="agenda-time">12:35PM – 1:55PM PDT</div>
                 </div>
-            </details>
+                <div class="agenda-item">
+                    <div class="agenda-session">Designing in disaster</div>
+                    <div class="agenda-speaker">Megan Metzger</div>
+                    <div class="agenda-company">Forerunner</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Crossing the chasm between quality and performance</div>
+                    <div class="agenda-speaker">Ricardo Vazquez</div>
+                    <div class="agenda-company">Dropbox</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Writing is designing</div>
+                    <div class="agenda-speaker">Andy Welfle</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">2:15PM – 3:15PM PDT</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">From canvas to code: building design systems, together</div>
+                    <div class="agenda-speaker">Jake Albaugh</div>
+                    <div class="agenda-company">Figma</div>
+                    <div class="agenda-speaker">Chad Bergman</div>
+                    <div class="agenda-company">Figma, Glean</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Designing for play and friction in a fast-paced world</div>
+                    <div class="agenda-speaker">Michelle Lee</div>
+                    <div class="agenda-company">IDEO</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">4:00PM – 5:00PM PDT — Closing keynotes</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Crafting quality that endures</div>
+                    <div class="agenda-speaker">Karri Saarinen</div>
+                    <div class="agenda-company">Linear</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Designing dystopia: the creative vision behind Severance</div>
+                    <div class="agenda-speaker">Jeremy Hindle</div>
+                    <div class="agenda-company">Severance</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Building the next computing platform</div>
+                    <div class="agenda-speaker">Dylan Field</div>
+                    <div class="agenda-company">Figma</div>
+                    <div class="agenda-speaker">Andrew "Boz" Bosworth</div>
+                    <div class="agenda-company">Meta</div>
+                </div>
+            </div>
         </div>
         
         <div class="card">
@@ -287,81 +245,78 @@
             </div>
             <div class="video-title">Mezzanine Stage</div>
             <div class="audience-section" id="audience-2">Join Audience</div>
-            <details>
-                <summary>Agenda</summary>
-                <div style="padding: 15px;">
-                    <div class="agenda-item">
-                        <div class="agenda-time">10:40AM – 12:00PM PDT</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">From storytelling as a PM to storytelling as a film director</div>
-                        <div class="agenda-speaker">Ebi Atawodi</div>
-                        <div class="agenda-company">YouTube</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Beyond agents: AI as a creative partner</div>
-                        <div class="agenda-speaker">Joel Lewenstein</div>
-                        <div class="agenda-company">Anthropic</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">The maximalist theory of minimalism</div>
-                        <div class="agenda-speaker">Keegan McNamara</div>
-                        <div class="agenda-company">Mythic Computer Co</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Poetry Camera: How to fall back in love with technology</div>
-                        <div class="agenda-speaker">Kelin Carolyn Zhang</div>
-                        <div class="agenda-company">Poetry Camera</div>
-                        <div class="agenda-speaker">Ryan Mather</div>
-                        <div class="agenda-company">Poetry Camera</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-time">12:25PM – 1:25PM PDT</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">And...cut! The design process behind animation tools</div>
-                        <div class="agenda-speaker">Ruchita Lodha</div>
-                        <div class="agenda-company">Pixar Animation Studios</div>
-                        <div class="agenda-speaker">Rehan Butt</div>
-                        <div class="agenda-company">Walt Disney Animation Studios</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">No flags, just wins: reimagining the NFL app</div>
-                        <div class="agenda-speaker">Lauren Manning</div>
-                        <div class="agenda-company">NFL</div>
-                        <div class="agenda-speaker">Arjun Kalyanpur</div>
-                        <div class="agenda-company">Code and Theory</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Designing positive futures</div>
-                        <div class="agenda-speaker">John LePore</div>
-                        <div class="agenda-company">BlackBox Infinite</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-time">2:25PM – 3:45PM PDT</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Building digital products as a company of one</div>
-                        <div class="agenda-speaker">Christine Vallaure de la Paz</div>
-                        <div class="agenda-company">moonlearning</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Just... go for it!</div>
-                        <div class="agenda-speaker">Parteek Saran</div>
-                        <div class="agenda-company">Stealth</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">The space-filling curve of design</div>
-                        <div class="agenda-speaker">Helena Zhang</div>
-                        <div class="agenda-company">Independent</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Building in public with Figma: designers should be creators</div>
-                        <div class="agenda-speaker">Nolan Perkins</div>
-                        <div class="agenda-company">Rad Collab</div>
-                    </div>
+            <div class="agenda-container">
+                <div class="agenda-item">
+                    <div class="agenda-time">10:40AM – 12:00PM PDT</div>
                 </div>
-            </details>
+                <div class="agenda-item">
+                    <div class="agenda-session">From storytelling as a PM to storytelling as a film director</div>
+                    <div class="agenda-speaker">Ebi Atawodi</div>
+                    <div class="agenda-company">YouTube</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Beyond agents: AI as a creative partner</div>
+                    <div class="agenda-speaker">Joel Lewenstein</div>
+                    <div class="agenda-company">Anthropic</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">The maximalist theory of minimalism</div>
+                    <div class="agenda-speaker">Keegan McNamara</div>
+                    <div class="agenda-company">Mythic Computer Co</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Poetry Camera: How to fall back in love with technology</div>
+                    <div class="agenda-speaker">Kelin Carolyn Zhang</div>
+                    <div class="agenda-company">Poetry Camera</div>
+                    <div class="agenda-speaker">Ryan Mather</div>
+                    <div class="agenda-company">Poetry Camera</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">12:25PM – 1:25PM PDT</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">And...cut! The design process behind animation tools</div>
+                    <div class="agenda-speaker">Ruchita Lodha</div>
+                    <div class="agenda-company">Pixar Animation Studios</div>
+                    <div class="agenda-speaker">Rehan Butt</div>
+                    <div class="agenda-company">Walt Disney Animation Studios</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">No flags, just wins: reimagining the NFL app</div>
+                    <div class="agenda-speaker">Lauren Manning</div>
+                    <div class="agenda-company">NFL</div>
+                    <div class="agenda-speaker">Arjun Kalyanpur</div>
+                    <div class="agenda-company">Code and Theory</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Designing positive futures</div>
+                    <div class="agenda-speaker">John LePore</div>
+                    <div class="agenda-company">BlackBox Infinite</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-time">2:25PM – 3:45PM PDT</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Building digital products as a company of one</div>
+                    <div class="agenda-speaker">Christine Vallaure de la Paz</div>
+                    <div class="agenda-company">moonlearning</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Just... go for it!</div>
+                    <div class="agenda-speaker">Parteek Saran</div>
+                    <div class="agenda-company">Stealth</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">The space-filling curve of design</div>
+                    <div class="agenda-speaker">Helena Zhang</div>
+                    <div class="agenda-company">Independent</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Building in public with Figma: designers should be creators</div>
+                    <div class="agenda-speaker">Nolan Perkins</div>
+                    <div class="agenda-company">Rad Collab</div>
+                </div>
+            </div>
         </div>
 
         <div class="card">
@@ -380,29 +335,26 @@
             </div>
             <div class="video-title">2nd Floor Stage</div>
             <div class="audience-section" id="audience-3">Join Audience</div>
-            <details>
-                <summary>Agenda</summary>
-                <div style="padding: 15px;">
-                    <div class="agenda-item">
-                        <div class="agenda-time">2:15PM – 3:15PM PDT</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Influencing via prototyping</div>
-                        <div class="agenda-speaker">Cheechee Lin</div>
-                        <div class="agenda-company">Instagram</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">When products must die</div>
-                        <div class="agenda-speaker">Subham Agarwal</div>
-                        <div class="agenda-company">Ramp</div>
-                    </div>
-                    <div class="agenda-item">
-                        <div class="agenda-session">Pitch perfect: how to present ideas to cut through the noise</div>
-                        <div class="agenda-speaker">Wojtek Dziedzic</div>
-                        <div class="agenda-company">Nord Security</div>
-                    </div>
+            <div class="agenda-container">
+                <div class="agenda-item">
+                    <div class="agenda-time">2:15PM – 3:15PM PDT</div>
                 </div>
-            </details>
+                <div class="agenda-item">
+                    <div class="agenda-session">Influencing via prototyping</div>
+                    <div class="agenda-speaker">Cheechee Lin</div>
+                    <div class="agenda-company">Instagram</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">When products must die</div>
+                    <div class="agenda-speaker">Subham Agarwal</div>
+                    <div class="agenda-company">Ramp</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-session">Pitch perfect: how to present ideas to cut through the noise</div>
+                    <div class="agenda-speaker">Wojtek Dziedzic</div>
+                    <div class="agenda-company">Nord Security</div>
+                </div>
+            </div>
         </div>
 
         <div class="card">
