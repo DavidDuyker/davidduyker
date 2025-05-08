@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Live Streams</title>
+    <title>Config Virtual</title>
     <style>
         root, * {
             box-sizing: border-box;
@@ -302,7 +302,7 @@
                     allowfullscreen>
                 </iframe>
             </div>
-            <div class="video-title">2nd Floor Stage</div>
+            <div class="video-title">Level 2 Stage</div>
             <div class="audience-section" id="audience-3">Join Audience</div>
             <div class="agenda-container">
                 <div class="agenda-item">
@@ -408,7 +408,8 @@
             const playerConfig = {
                 events: {
                     'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
                 },
                 playerVars: {
                     'autoplay': 1,
@@ -416,7 +417,8 @@
                     'controls': 1,
                     'enablejsapi': 1,
                     'origin': window.location.origin,
-                    'playsinline': 1
+                    'playsinline': 1,
+                    'rel': 0
                 }
             };
 
@@ -428,9 +430,13 @@
 
         // Called when players are ready
         function onPlayerReady(event) {
-            // Ensure video is playing but muted
-            event.target.mute();
-            event.target.playVideo();
+            // Always start muted and playing
+            try {
+                event.target.mute();
+                event.target.playVideo();
+            } catch (error) {
+                console.log('Initial playback failed:', error);
+            }
             playersReady++;
             
             if (playersReady === 4) {
@@ -438,16 +444,36 @@
             }
         }
 
+        // Handle player errors
+        function onPlayerError(event) {
+            console.log('Player error:', event.data);
+            // Try to recover by restarting the video
+            try {
+                event.target.seekTo(0);
+                event.target.playVideo();
+            } catch (error) {
+                console.log('Error recovery failed:', error);
+            }
+        }
+
         // Handle player state changes
         function onPlayerStateChange(event) {
             // If video ends, restart it
             if (event.data === YT.PlayerState.ENDED) {
-                event.target.seekTo(0);
-                event.target.playVideo();
+                try {
+                    event.target.seekTo(0);
+                    event.target.playVideo();
+                } catch (error) {
+                    console.log('Restart failed:', error);
+                }
             }
-            // If video is paused, resume it
+            // If video is paused, try to resume it
             else if (event.data === YT.PlayerState.PAUSED) {
-                event.target.playVideo();
+                try {
+                    event.target.playVideo();
+                } catch (error) {
+                    console.log('Resume failed:', error);
+                }
             }
         }
 
@@ -457,7 +483,11 @@
             function muteAllExcept(playerIndex) {
                 players.forEach((player, index) => {
                     if (index !== 0 && index !== playerIndex && player && player.mute) {
-                        player.mute();
+                        try {
+                            player.mute();
+                        } catch (error) {
+                            console.log('Mute failed:', error);
+                        }
                     }
                 });
             }
@@ -465,7 +495,11 @@
             function muteAll() {
                 players.forEach((player, index) => {
                     if (index !== 0 && player && player.mute) {
-                        player.mute();
+                        try {
+                            player.mute();
+                        } catch (error) {
+                            console.log('Mute failed:', error);
+                        }
                     }
                 });
             }
@@ -473,10 +507,19 @@
             function unmutePlayer(playerIndex) {
                 const player = players[playerIndex];
                 if (player && player.unMute) {
-                    player.unMute();
-                    player.setVolume(100);
-                    // Ensure video is playing
-                    player.playVideo();
+                    try {
+                        player.unMute();
+                        player.setVolume(100);
+                        player.playVideo();
+                    } catch (error) {
+                        console.log('Unmute failed:', error);
+                        // If unmute fails, try to play the video anyway
+                        try {
+                            player.playVideo();
+                        } catch (playError) {
+                            console.log('Play failed:', playError);
+                        }
+                    }
                 }
             }
 
