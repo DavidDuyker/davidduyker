@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls-container">
+            <div class="filter-container">
+                <div class="year-range">
+                    <select id="startYear" class="year-select"></select>
+                    <span>to</span>
+                    <select id="endYear" class="year-select"></select>
+                </div>
+                <button id="applyFilter" class="filter-button">Apply Filter</button>
+                <button id="resetFilter" class="filter-button secondary">Reset</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4">
+            <div class="stat-card col-span-2">
+                <div class="stat-label">Total Tracks</div>
+                <div class="stat-value" id="totalTracks">-</div>
+            </div>
+            <div class="stat-card col-span-2">
+                <div class="stat-label">Unique Artists</div>
+                <div class="stat-value" id="uniqueArtists">-</div>
+            </div>
+            <div class="stat-card col-span-2">
+                <div class="stat-label">Total Play Time</div>
+                <div class="stat-value" id="totalPlayTime">-</div>
+            </div>
+            <div class="stat-card col-span-2">
+                <div class="stat-label">Years of Data</div>
+                <div class="stat-value" id="yearsOfData">-</div>
+            </div>
+            <div class="stat-card col-span-2">
+                <div class="stat-label">Most Played Artist</div>
+                <div class="stat-value" id="mostPlayedArtist">-</div>
+                <div class="stat-subtext" id="mostPlayedArtistName">-</div>
+            </div>
+            <div class="stat-card col-span-2">
+                <div class="stat-label">Most Played Track</div>
+                <div class="stat-value" id="mostPlayedTrack">-</div>
+                <div class="stat-subtext" id="mostPlayedTrackName">-</div>
+            </div>
+
+            <div class="chart-container col-span-6">
+                <h2>Top 12 Artists</h2>
+                <canvas id="topArtistsChart"></canvas>
+            </div>
+            <div class="chart-container col-span-6">
+                <h2>Top 12 Tracks</h2>
+                <canvas id="topTracksChart"></canvas>
+            </div>
+            <div class="chart-container col-span-12">
+                <h2>Monthly Activity</h2>
+                <canvas id="monthlyActivityChart"></canvas>
+            </div>
+            <div class="chart-container col-span-6">
+                <h2>Listening Time Distribution</h2>
+                <canvas id="timeOfDayChart"></canvas>
+            </div>
+            <div class="chart-container yearly-artists col-span-6">
+                <h2>Yearly Top Artist</h2>
+                <div id="yearlyArtistsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div>Loading your Spotify data...</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

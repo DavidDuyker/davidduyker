@@ -1,0 +1,482 @@
+:root {
+    --background: #f5f5f7;
+    --surface: rgba(255, 255, 255, 0.8);
+    --surface-hover: rgba(255, 255, 255, 0.9);
+    --accent: #007AFF;
+    --text-primary: rgba(0, 0, 0, 0.9);
+    --text-secondary: rgba(0, 0, 0, 0.6);
+    --border: rgba(0, 0, 0, 0.1);
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding: 24px;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    padding: 0 12px;
+    background: linear-gradient(90deg, #000 0%, rgba(0,0,0,0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    padding: 0;
+    text-align: left;
+}
+
+.file-selector {
+    margin-bottom: 30px;
+    padding: 25px;
+    background: var(--surface);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px var(--shadow);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 0 12px;
+}
+
+.stat-card {
+    background: var(--surface);
+    padding: 16px;
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    margin-bottom: 4px;
+}
+
+.stat-subtext {
+    color: var(--text-secondary);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.visualization-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+    padding: 0 12px;
+}
+
+.chart-container {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 16px var(--shadow);
+    height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    padding: 0;
+    text-align: left;
+    flex-shrink: 0;
+}
+
+.chart-container canvas {
+    flex: 1;
+    width: 100% !important;
+    height: calc(100% - 32px) !important; /* Account for title height and margin */
+}
+
+select, button {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 10px 20px;
+    margin: 5px;
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+select:hover, button:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+}
+
+select:focus, button:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(245, 245, 247, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--accent);
+    animation: spin 1s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1200px) {
+    .chart-container {
+        grid-column: span 6;
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .chart-container {
+        grid-column: span 12;
+        height: 300px;
+    }
+}
+
+.yearly-artists {
+    grid-column: span 6;
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.yearly-artists h2 {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+}
+
+#yearlyArtistsList {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin: -8px -8px -8px 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* Custom scrollbar styling */
+#yearlyArtistsList::-webkit-scrollbar {
+    width: 8px;
+}
+
+#yearlyArtistsList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#yearlyArtistsList::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+#yearlyArtistsList::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+.year-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: var(--background);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.year-item:last-child {
+    margin-bottom: 0;
+}
+
+.year {
+    color: var(--text-secondary);
+    font-weight: 500;
+    min-width: 48px;
+}
+
+.artist-name {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.play-count {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Grid System */
+.grid {
+    display: grid;
+    gap: var(--grid-gap, 16px);
+    width: 100%;
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+.grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+
+.col-span-1 { grid-column: span 1; }
+.col-span-2 { grid-column: span 2; }
+.col-span-3 { grid-column: span 3; }
+.col-span-4 { grid-column: span 4; }
+.col-span-6 { grid-column: span 6; }
+.col-span-12 { grid-column: span 12; }
+
+/* Responsive Grid */
+@media (max-width: 1200px) {
+    .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .lg\:col-span-4 { grid-column: span 4; }
+    .lg\:col-span-6 { grid-column: span 6; }
+    .lg\:col-span-12 { grid-column: span 12; }
+}
+
+@media (max-width: 768px) {
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .md\:col-span-6 { grid-column: span 6; }
+    .md\:col-span-12 { grid-column: span 12; }
+}
+
+@media (max-width: 480px) {
+    .sm\:grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+    .sm\:col-span-12 { grid-column: span 12; }
+}
+
+/* Remove the stats-grid class and update grid styles */
+.grid {
+    display: grid;
+    gap: var(--grid-gap, 16px);
+    width: 100%;
+}
+
+.grid-cols-12 {
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.gap-4 {
+    gap: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stat-card {
+        grid-column: span 6;
+    }
+    
+    .chart-container {
+        grid-column: span 12;
+        height: 300px;
+    }
+}
+
+/* Filter Container */
+.controls-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.year-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.year-select {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 8px 32px 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+}
+
+.year-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+.year-range span {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.filter-button {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+    background: rgba(0, 122, 255, 0.9);
+}
+
+.filter-button.secondary {
+    background: transparent;
+    color: var(--accent);
+}
+
+.filter-button.secondary:hover {
+    background: rgba(0, 122, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .controls-container {
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.8);
+    }
+    
+    .container {
+        padding: 16px;
+        padding-top: 90px;
+    }
+    
+    .filter-container {
+        flex-wrap: wrap;
+    }
+    
+    .year-range {
+        flex: 1;
+        min-width: 200px;
+    }
+} 
