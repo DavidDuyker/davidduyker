@@ -316,8 +316,8 @@ function createBarChart(canvasId, title, data) {
             datasets: [{
                 label: 'Number of Plays',
                 data: data.map(item => item[1]),
-                backgroundColor: 'rgba(0, 122, 255, 0.6)',
-                borderColor: 'rgba(0, 122, 255, 0.3)',
+                backgroundColor: 'rgba(29, 185, 84, 0.6)',
+                borderColor: 'rgba(29, 185, 84, 0.3)',
                 borderWidth: 1,
                 borderRadius: 6,
                 barThickness: 20,
@@ -375,8 +375,8 @@ function createLineChart(canvasId, title, data) {
             datasets: [{
                 label: 'Number of Plays',
                 data: sortedData.map(item => item[1]),
-                borderColor: 'rgba(0, 122, 255, 0.8)',
-                backgroundColor: 'rgba(0, 122, 255, 0.1)',
+                borderColor: 'rgba(29, 185, 84, 0.8)',
+                backgroundColor: 'rgba(29, 185, 84, 0.1)',
                 borderWidth: 2,
                 fill: true,
                 tension: 0.4
@@ -438,8 +438,8 @@ function createTimeOfDayChart(canvasId, title, data) {
             datasets: [{
                 label: 'Number of Plays',
                 data: data,
-                borderColor: 'rgba(0, 122, 255, 0.8)',
-                backgroundColor: 'rgba(0, 122, 255, 0.1)',
+                borderColor: 'rgba(29, 185, 84, 0.8)',
+                backgroundColor: 'rgba(29, 185, 84, 0.1)',
                 borderWidth: 2,
                 fill: true,
                 tension: 0.4
