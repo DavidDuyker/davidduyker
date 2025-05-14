@@ -1,3 +1,5 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
 :root {
     --background: #f5f5f7;
     --surface: rgba(255, 255, 255, 0.9);
@@ -167,10 +169,10 @@ select:focus, button:focus {
 
 select {
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
-    background-size: 20px;
+    background-size: 16px;
     padding-right: 40px;
 }
 
@@ -407,8 +409,9 @@ select {
 }
 
 .filter-toggle {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     padding: 6px 12px;
     background: var(--surface);
@@ -423,6 +426,8 @@ select {
     -webkit-backdrop-filter: blur(20px);
     height: 32px;
     margin-left: 16px;
+    min-width: 80px;
+    position: relative;
 }
 
 .filter-toggle:hover {
@@ -434,18 +439,22 @@ select {
     transform: scale(0.98);
 }
 
-.filter-icon {
-    font-size: 16px;
-    opacity: 0.8;
+.filter-text {
+    display: inline-block;
+    line-height: 1;
 }
 
 .filter-indicator {
-    width: 6px;
-    height: 6px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--accent);
     opacity: 0;
     transition: opacity 0.2s ease;
+    border: 1px solid var(--surface);
 }
 
 .filter-indicator.active {
@@ -456,7 +465,7 @@ select {
     position: absolute;
     top: 100%;
     right: 20px;
-    background: var(--surface);
+    background: white;
     border-radius: 12px;
     border: 1px solid var(--border);
     box-shadow: var(--shadow-lg);
@@ -466,8 +475,6 @@ select {
     visibility: hidden;
     transform: translateY(-8px);
     transition: all 0.2s ease;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     z-index: 1000;
 }
 
