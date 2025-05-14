@@ -11,50 +11,60 @@
 <body>
     <div class="container">
         <div class="controls-container">
-            <div class="filter-container">
-                <div class="year-range">
-                    <select id="startYear" class="year-select"></select>
-                    <span>to</span>
-                    <select id="endYear" class="year-select"></select>
+            <div class="filter-header">
+                <h1>Spotify Data Visualization</h1>
+                <button id="filterToggle" class="filter-toggle">
+                    <span class="filter-icon">􀋦</span>
+                    <span class="filter-text">Filter</span>
+                    <span class="filter-indicator"></span>
+                </button>
+            </div>
+            <div class="filter-panel" id="filterPanel">
+                <div class="filter-container">
+                    <div class="year-range">
+                        <select id="startYear" class="year-select"></select>
+                        <span>to</span>
+                        <select id="endYear" class="year-select"></select>
+                    </div>
+                    <div class="filter-actions">
+                        <button id="applyFilter" class="filter-button">Apply</button>
+                        <button id="resetFilter" class="filter-button secondary">Reset</button>
+                    </div>
                 </div>
-                <button id="applyFilter" class="filter-button">Apply Filter</button>
-                <button id="resetFilter" class="filter-button secondary">Reset</button>
             </div>
         </div>
 
         <div class="grid grid-cols-12 gap-4">
-            <div class="stat-card col-span-2">
+            <div class="stat-card col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-6">
                 <div class="stat-label">Total Tracks</div>
                 <div class="stat-value" id="totalTracks">-</div>
             </div>
-            <div class="stat-card col-span-2">
+            <div class="stat-card col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-6">
+                <div class="stat-label">Unique Tracks</div>
+                <div class="stat-value" id="uniqueTracks">-</div>
+            </div>
+            <div class="stat-card col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-6">
                 <div class="stat-label">Unique Artists</div>
                 <div class="stat-value" id="uniqueArtists">-</div>
             </div>
-            <div class="stat-card col-span-2">
+            <div class="stat-card col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-6">
                 <div class="stat-label">Total Play Time</div>
                 <div class="stat-value" id="totalPlayTime">-</div>
             </div>
-            <div class="stat-card col-span-2">
+            <div class="stat-card col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-6">
                 <div class="stat-label">Years of Data</div>
                 <div class="stat-value" id="yearsOfData">-</div>
             </div>
-            <div class="stat-card col-span-2">
-                <div class="stat-label">Most Played Artist</div>
-                <div class="stat-value" id="mostPlayedArtist">-</div>
-                <div class="stat-subtext" id="mostPlayedArtistName">-</div>
-            </div>
-            <div class="stat-card col-span-2">
-                <div class="stat-label">Most Played Track</div>
-                <div class="stat-value" id="mostPlayedTrack">-</div>
-                <div class="stat-subtext" id="mostPlayedTrackName">-</div>
+            <div class="stat-card col-span-2 lg:col-span-2 md:col-span-3 sm:col-span-6">
+                <div class="stat-label">Most Active Day</div>
+                <div class="stat-value" id="mostActiveDay">-</div>
             </div>
 
-            <div class="chart-container col-span-6">
+            <div class="chart-container col-span-6 lg:col-span-6 md:col-span-12 sm:col-span-12">
                 <h2>Top 12 Artists</h2>
                 <canvas id="topArtistsChart"></canvas>
             </div>
-            <div class="chart-container col-span-6">
+            <div class="chart-container col-span-6 lg:col-span-6 md:col-span-12 sm:col-span-12">
                 <h2>Top 12 Tracks</h2>
                 <canvas id="topTracksChart"></canvas>
             </div>
@@ -62,11 +72,11 @@
                 <h2>Monthly Activity</h2>
                 <canvas id="monthlyActivityChart"></canvas>
             </div>
-            <div class="chart-container col-span-6">
+            <div class="chart-container col-span-6 lg:col-span-6 md:col-span-12 sm:col-span-12">
                 <h2>Listening Time Distribution</h2>
                 <canvas id="timeOfDayChart"></canvas>
             </div>
-            <div class="chart-container yearly-artists col-span-6">
+            <div class="chart-container yearly-artists col-span-6 lg:col-span-6 md:col-span-12 sm:col-span-12">
                 <h2>Yearly Top Artist</h2>
                 <div id="yearlyArtistsList"></div>
             </div>

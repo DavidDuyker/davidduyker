@@ -13,7 +13,7 @@ const files = [
 // Add event listener to load data when page is ready
 document.addEventListener('DOMContentLoaded', () => {
     loadAllData();
-    setupDateFilters();
+    setupFilterToggle();
 });
 
 function setupDateFilters() {
@@ -25,7 +25,11 @@ function setupDateFilters() {
     // Get unique years from data
     const years = [...new Set(allSpotifyData.map(item => new Date(item.ts).getFullYear()))].sort((a, b) => a - b);
     
-    // Populate year selectors
+    // Clear existing options
+    startYearSelect.innerHTML = '';
+    endYearSelect.innerHTML = '';
+    
+    // Populate year selects
     years.forEach(year => {
         const startOption = document.createElement('option');
         startOption.value = year;
@@ -46,9 +50,27 @@ function setupDateFilters() {
     resetButton.addEventListener('click', resetDateFilter);
 }
 
+function setupFilterToggle() {
+    const filterToggle = document.getElementById('filterToggle');
+    const filterPanel = document.getElementById('filterPanel');
+    const filterIndicator = document.querySelector('.filter-indicator');
+    
+    filterToggle.addEventListener('click', () => {
+        filterPanel.classList.toggle('open');
+    });
+    
+    // Close filter panel when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!filterToggle.contains(event.target) && !filterPanel.contains(event.target)) {
+            filterPanel.classList.remove('open');
+        }
+    });
+}
+
 function applyDateFilter() {
     const startYear = parseInt(document.getElementById('startYear').value);
     const endYear = parseInt(document.getElementById('endYear').value);
+    const filterIndicator = document.querySelector('.filter-indicator');
     
     // Reset filtered data
     filteredData = allSpotifyData.filter(item => {
@@ -56,12 +78,18 @@ function applyDateFilter() {
         return itemYear >= startYear && itemYear <= endYear;
     });
 
+    // Update filter indicator
+    filterIndicator.classList.add('active');
+
     // Clear existing charts before updating
     clearCharts();
     
     // Update visualizations with filtered data
     updateVisualizations();
     updateStats();
+    
+    // Close filter panel
+    document.getElementById('filterPanel').classList.remove('open');
 }
 
 function clearCharts() {
@@ -78,6 +106,7 @@ function clearCharts() {
 function resetDateFilter() {
     const startYearSelect = document.getElementById('startYear');
     const endYearSelect = document.getElementById('endYear');
+    const filterIndicator = document.querySelector('.filter-indicator');
     
     const years = [...new Set(allSpotifyData.map(item => new Date(item.ts).getFullYear()))].sort((a, b) => a - b);
     
@@ -87,12 +116,18 @@ function resetDateFilter() {
     // Reset filtered data to all data
     filteredData = [...allSpotifyData];
     
+    // Remove filter indicator
+    filterIndicator.classList.remove('active');
+    
     // Clear existing charts before updating
     clearCharts();
     
     // Update visualizations with all data
     updateVisualizations();
     updateStats();
+    
+    // Close filter panel
+    document.getElementById('filterPanel').classList.remove('open');
 }
 
 function showLoading() {
@@ -171,36 +206,34 @@ function updateStats() {
     const totalPlayTime = filteredData.reduce((sum, item) => sum + (item.ms_played || 0), 0);
     const years = new Set(filteredData.map(item => new Date(item.ts).getFullYear())).size;
 
-    // Calculate most played artist
-    const artistCounts = {};
-    filteredData
-        .filter(item => item.master_metadata_album_artist_name)
-        .forEach(item => {
-            const artist = item.master_metadata_album_artist_name;
-            artistCounts[artist] = (artistCounts[artist] || 0) + 1;
-        });
-    const [mostPlayedArtist, mostPlayedArtistCount] = Object.entries(artistCounts)
+    // Calculate most active day
+    const dayCounts = {};
+    filteredData.forEach(item => {
+        const date = new Date(item.ts);
+        const dayKey = date.toISOString().split('T')[0];
+        dayCounts[dayKey] = (dayCounts[dayKey] || 0) + 1;
+    });
+    const [mostActiveDay, mostActiveDayCount] = Object.entries(dayCounts)
         .sort((a, b) => b[1] - a[1])[0] || ['-', 0];
 
-    // Calculate most played track
-    const trackCounts = {};
-    filteredData
+    // Calculate unique tracks
+    const uniqueTracks = new Set(filteredData
         .filter(item => item.master_metadata_track_name)
-        .forEach(item => {
-            const track = item.master_metadata_track_name;
-            trackCounts[track] = (trackCounts[track] || 0) + 1;
-        });
-    const [mostPlayedTrack, mostPlayedTrackCount] = Object.entries(trackCounts)
-        .sort((a, b) => b[1] - a[1])[0] || ['-', 0];
+        .map(item => item.master_metadata_track_name)).size;
 
     document.getElementById('totalTracks').textContent = totalTracks.toLocaleString();
     document.getElementById('uniqueArtists').textContent = uniqueArtists.toLocaleString();
     document.getElementById('totalPlayTime').textContent = formatDuration(totalPlayTime);
     document.getElementById('yearsOfData').textContent = years;
-    document.getElementById('mostPlayedArtist').textContent = mostPlayedArtistCount.toLocaleString();
-    document.getElementById('mostPlayedArtistName').textContent = mostPlayedArtist;
-    document.getElementById('mostPlayedTrack').textContent = mostPlayedTrackCount.toLocaleString();
-    document.getElementById('mostPlayedTrackName').textContent = mostPlayedTrack;
+    
+    // Format the most active day
+    const formattedDate = mostActiveDay !== '-' ? new Date(mostActiveDay).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    }) : '-';
+    document.getElementById('mostActiveDay').textContent = formattedDate;
+    document.getElementById('uniqueTracks').textContent = uniqueTracks.toLocaleString();
 }
 
 function formatDuration(ms) {

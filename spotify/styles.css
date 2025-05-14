@@ -1,12 +1,20 @@
 :root {
     --background: #f5f5f7;
-    --surface: rgba(255, 255, 255, 0.8);
+    --surface: rgba(255, 255, 255, 0.9);
     --surface-hover: rgba(255, 255, 255, 0.9);
     --accent: #007AFF;
     --text-primary: rgba(0, 0, 0, 0.9);
     --text-secondary: rgba(0, 0, 0, 0.6);
     --border: rgba(0, 0, 0, 0.1);
-    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-sm: 0 1px 3px var(--shadow);
+    --shadow-md: 0 2px 8px var(--shadow);
+    --shadow-lg: 0 4px 16px var(--shadow);
+    
+    /* Breakpoints */
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1200px;
 }
 
 * {
@@ -27,20 +35,21 @@ body {
 
 .container {
     width: 100%;
-    max-width: 100%;
+    max-width: 1400px;
     padding: 24px;
     margin: 0 auto;
-    padding-top: 100px;
+    padding-top: 88px;
 }
 
 h1 {
     font-size: 24px;
     font-weight: 600;
-    margin: 0 0 16px 0;
-    padding: 0 12px;
+    margin: 0;
+    padding: 0;
     background: linear-gradient(90deg, #000 0%, rgba(0,0,0,0.8) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    letter-spacing: -0.01em;
 }
 
 h2 {
@@ -50,17 +59,6 @@ h2 {
     margin: 0 0 16px 0;
     padding: 0;
     text-align: left;
-}
-
-.file-selector {
-    margin-bottom: 30px;
-    padding: 25px;
-    background: var(--surface);
-    border-radius: 16px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 32px var(--shadow);
 }
 
 .stats-grid {
@@ -81,6 +79,7 @@ h2 {
     text-align: left;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow-sm);
 }
 
 .stat-label {
@@ -122,7 +121,7 @@ h2 {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border);
-    box-shadow: 0 4px 16px var(--shadow);
+    box-shadow: var(--shadow-md);
     height: 400px;
     width: 100%;
     display: flex;
@@ -149,15 +148,10 @@ select, button {
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
     padding: 10px 20px;
     margin: 5px;
-    background: var(--surface);
     color: var(--text-primary);
     border: 1px solid var(--border);
     border-radius: 8px;
-    cursor: pointer;
     font-size: 14px;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 select:hover, button:hover {
@@ -214,22 +208,8 @@ select {
     to { transform: rotate(360deg); }
 }
 
-@media (max-width: 1200px) {
-    .chart-container {
-        grid-column: span 6;
-        height: 350px;
-    }
-}
-
-@media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .chart-container {
-        grid-column: span 12;
-        height: 300px;
-    }
+.filter-actions .filter-button {
+    flex: 1;
 }
 
 .yearly-artists {
@@ -237,7 +217,7 @@ select {
     background: var(--surface);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 6px var(--shadow);
+    box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -330,52 +310,6 @@ select {
 .col-span-6 { grid-column: span 6; }
 .col-span-12 { grid-column: span 12; }
 
-/* Responsive Grid */
-@media (max-width: 1200px) {
-    .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-    .lg\:col-span-4 { grid-column: span 4; }
-    .lg\:col-span-6 { grid-column: span 6; }
-    .lg\:col-span-12 { grid-column: span 12; }
-}
-
-@media (max-width: 768px) {
-    .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-    .md\:col-span-6 { grid-column: span 6; }
-    .md\:col-span-12 { grid-column: span 12; }
-}
-
-@media (max-width: 480px) {
-    .sm\:grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-    .sm\:col-span-12 { grid-column: span 12; }
-}
-
-/* Remove the stats-grid class and update grid styles */
-.grid {
-    display: grid;
-    gap: var(--grid-gap, 16px);
-    width: 100%;
-}
-
-.grid-cols-12 {
-    grid-template-columns: repeat(12, 1fr);
-}
-
-.gap-4 {
-    gap: 16px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .stat-card {
-        grid-column: span 6;
-    }
-    
-    .chart-container {
-        grid-column: span 12;
-        height: 300px;
-    }
-}
-
 /* Filter Container */
 .controls-container {
     position: fixed;
@@ -384,30 +318,33 @@ select {
     right: 0;
     z-index: 100;
     background: rgba(255, 255, 255, 0.7);
-    padding: 20px;
+    padding: 12px 24px;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
 }
 
 .filter-container {
     display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0;
-    max-width: 1200px;
-    margin: 0 auto;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 280px;
 }
 
-.year-range {
+.year-filter {
     display: flex;
     align-items: center;
     gap: 8px;
+    min-width: 200px;
 }
 
 .year-select {
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    flex: 1;
     padding: 8px 32px 8px 12px;
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -422,10 +359,10 @@ select {
     background-size: 16px;
 }
 
-.year-select:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+.year-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .year-range span {
@@ -434,7 +371,6 @@ select {
 }
 
 .filter-button {
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
     padding: 8px 16px;
     border: 1px solid var(--accent);
     border-radius: 8px;
@@ -452,31 +388,212 @@ select {
 
 .filter-button.secondary {
     background: transparent;
-    color: var(--accent);
+    color: var(--text-primary);
+    border-color: var(--border);
 }
 
 .filter-button.secondary:hover {
-    background: rgba(0, 122, 255, 0.1);
+    background: var(--surface-hover);
+    border-color: var(--accent);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .controls-container {
-        padding: 16px;
-        background: rgba(255, 255, 255, 0.8);
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    height: 32px;
+    margin-left: 16px;
+}
+
+.filter-toggle:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+}
+
+.filter-toggle:active {
+    transform: scale(0.98);
+}
+
+.filter-icon {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.filter-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.filter-indicator.active {
+    opacity: 1;
+}
+
+.filter-panel {
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    padding: 16px;
+    margin-top: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+}
+
+.filter-panel.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.filter-actions .filter-button {
+    flex: 1;
+}
+
+/* Breakpoint Styles */
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
     
-    .container {
-        padding: 16px;
-        padding-top: 90px;
+    .chart-container {
+        grid-column: span 12;
     }
+    
+    .lg\:grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+    .lg\:col-span-2 { grid-column: span 4; }
+    .lg\:col-span-3 { grid-column: span 3; }
+    .lg\:col-span-4 { grid-column: span 4; }
+    .lg\:col-span-6 { grid-column: span 6; }
+    .lg\:col-span-12 { grid-column: span 12; }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sm\:grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+    .sm\:col-span-6 { grid-column: span 6; }
+    .sm\:col-span-12 { grid-column: span 12; }
     
     .filter-container {
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: stretch;
     }
     
-    .year-range {
-        flex: 1;
-        min-width: 200px;
+    .year-filter {
+        width: 100%;
+    }
+    
+    .filter-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px;
+        padding-top: 72px;
+    }
+
+    h1 {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 14px;
+        margin: 0 0 12px 0;
+    }
+
+    .stats-grid {
+        gap: 8px;
+        margin-bottom: 12px;
+        padding: 0 8px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 18px;
+    }
+
+    .visualization-container {
+        gap: 12px;
+        margin-top: 12px;
+        padding: 0 8px;
+    }
+
+    .chart-container {
+        padding: 16px;
+    }
+
+    .controls-container {
+        padding: 8px 16px;
+        height: 56px;
+    }
+
+    .filter-toggle {
+        padding: 4px 8px;
+        font-size: 12px;
+        height: 28px;
+    }
+
+    .yearly-artists {
+        padding: 16px;
+    }
+
+    .year-item {
+        padding: 6px 8px;
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+
+    .grid {
+        gap: 12px;
     }
 } 
