@@ -94,7 +94,7 @@ function applyDateFilter() {
 
 function clearCharts() {
     // Destroy existing charts
-    const chartIds = ['topArtistsChart', 'topTracksChart', 'monthlyActivityChart', 'timeOfDayChart'];
+    const chartIds = ['topArtistsChart', 'topTracksChart', 'topAlbumsChart', 'monthlyActivityChart', 'timeOfDayChart'];
     chartIds.forEach(id => {
         const chart = Chart.getChart(document.getElementById(id));
         if (chart) {
@@ -178,8 +178,12 @@ async function loadAllData() {
                 .then(data => {
                     // Handle both array and object formats
                     const records = Array.isArray(data) ? data : data.data || [];
-                    // Filter out records with less than 1 minute of play time
-                    return records.filter(item => (item.ms_played || 0) >= 30000);
+                    // Filter out records with less than 30 seconds of play time and exclude podcasts
+                    return records.filter(item => 
+                        (item.ms_played || 0) >= 30000 && 
+                        item.master_metadata_track_name && 
+                        !item.episode_name
+                    );
                 })
                 .catch(error => {
                     throw new Error(`Error loading ${file}: ${error.message}`);
@@ -277,20 +281,72 @@ function updateVisualizations() {
         .sort((a, b) => b[1] - a[1])
         .slice(0, 12);
 
-    // Process monthly activity
+    // Process data for top albums (music only)
+    const albumCounts = {};
+    filteredData
+        .filter(item => item.master_metadata_album_album_name)
+        .forEach(item => {
+            const album = item.master_metadata_album_album_name;
+            albumCounts[album] = (albumCounts[album] || 0) + 1;
+        });
+
+    const topAlbums = Object.entries(albumCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 12);
+
+    // Process monthly listening time
     const monthlyActivity = {};
     filteredData.forEach(item => {
         const date = new Date(item.ts);
         const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-        monthlyActivity[monthYear] = (monthlyActivity[monthYear] || 0) + 1;
+        monthlyActivity[monthYear] = (monthlyActivity[monthYear] || 0) + (item.ms_played || 0);
     });
 
-    // Process time of day activity
-    const timeOfDayActivity = Array(24).fill(0);
-    filteredData.forEach(item => {
-        const hour = new Date(item.ts).getHours();
-        timeOfDayActivity[hour] += 1;
+    // Convert milliseconds to hours for better readability
+    Object.keys(monthlyActivity).forEach(key => {
+        monthlyActivity[key] = Math.round(monthlyActivity[key] / (1000 * 60 * 60) * 10) / 10; // Round to 1 decimal place
     });
+
+    // Process time of day activity by day of week
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const timeOfDayActivity = daysOfWeek.map(() => Array(24).fill(0));
+    const dayCounts = Array(7).fill(0); // Count of days for each day of week
+    
+    // First pass: count total days for each day of week
+    const uniqueDays = new Set();
+    filteredData.forEach(item => {
+        const date = new Date(item.ts);
+        const dayKey = date.toISOString().split('T')[0];
+        if (!uniqueDays.has(dayKey)) {
+            uniqueDays.add(dayKey);
+            dayCounts[date.getDay()]++;
+        }
+    });
+    
+    // Second pass: accumulate listening time
+    filteredData.forEach(item => {
+        const date = new Date(item.ts);
+        const dayOfWeek = date.getDay();
+        const hour = date.getHours();
+        // Convert ms_played to minutes and add to the total
+        timeOfDayActivity[dayOfWeek][hour] += (item.ms_played || 0) / (1000 * 60);
+    });
+
+    // Calculate average daily listening time for each hour
+    for (let day = 0; day < 7; day++) {
+        for (let hour = 0; hour < 24; hour++) {
+            if (dayCounts[day] > 0) {
+                timeOfDayActivity[day][hour] = Math.round((timeOfDayActivity[day][hour] / dayCounts[day]) * 10) / 10;
+            }
+        }
+    }
+
+    // Calculate overall average across all days
+    const averageActivity = Array(24).fill(0);
+    for (let hour = 0; hour < 24; hour++) {
+        const sum = timeOfDayActivity.reduce((acc, day) => acc + day[hour], 0);
+        averageActivity[hour] = Math.round((sum / 7) * 10) / 10;
+    }
 
     // Process yearly top artists
     const yearlyArtists = {};
@@ -307,15 +363,42 @@ function updateVisualizations() {
         });
 
     // Create charts
-    createBarChart('topArtistsChart', 'Top 30 Artists', topArtists);
-    createBarChart('topTracksChart', 'Top 30 Tracks', topTracks);
-    createLineChart('monthlyActivityChart', 'Monthly Activity', monthlyActivity);
-    createTimeOfDayChart('timeOfDayChart', 'Listening Time Distribution', timeOfDayActivity);
+    createBarChart('topArtistsChart', 'Top 12 Artists', topArtists);
+    createBarChart('topTracksChart', 'Top 12 Tracks', topTracks);
+    createBarChart('topAlbumsChart', 'Top 12 Albums', topAlbums);
+    createLineChart('monthlyActivityChart', 'Monthly Listening Time (Hours)', monthlyActivity);
+    createTimeOfDayChart('timeOfDayChart', 'Average Daily Listening Time (Minutes)', timeOfDayActivity, averageActivity);
     createYearlyArtistsList(yearlyArtists);
 }
 
 function createBarChart(canvasId, title, data) {
-    new Chart(document.getElementById(canvasId), {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    
+    // Register the plugin
+    const playCountPlugin = {
+        id: 'playCount',
+        afterDraw(chart) {
+            const ctx = chart.ctx;
+            ctx.save();
+            ctx.font = '12px "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+            ctx.textAlign = 'left';
+            
+            chart.data.datasets.forEach((dataset, i) => {
+                const meta = chart.getDatasetMeta(i);
+                meta.data.forEach((bar, index) => {
+                    const value = dataset.data[index];
+                    const x = bar.x + 5;
+                    const y = bar.y;
+                    ctx.fillText(value.toString(), x, y + 4);
+                });
+            });
+            
+            ctx.restore();
+        }
+    };
+
+    new Chart(ctx, {
         type: 'bar',
         data: {
             labels: data.map(item => item[0]),
@@ -327,32 +410,33 @@ function createBarChart(canvasId, title, data) {
                 borderWidth: 1,
                 borderRadius: 6,
                 barThickness: 20,
-                maxBarThickness: 30
+                maxBarThickness: 20
             }]
         },
         options: {
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                axis: 'y',
+                intersect: false
+            },
             plugins: {
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    enabled: false
                 }
+            },
+            hover: {
+                mode: 'index',
+                intersect: false
             },
             scales: {
                 x: {
-                    beginAtZero: true,
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.05)',
-                        drawBorder: false
-                    },
-                    ticks: {
-                        color: 'rgba(0, 0, 0, 0.6)',
-                        font: {
-                            family: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
-                            size: 12
-                        }
-                    }
+                    display: false,
                 },
                 y: {
                     grid: {
@@ -363,11 +447,16 @@ function createBarChart(canvasId, title, data) {
                         font: {
                             family: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
                             size: 12
+                        },
+                        callback: function(value) {
+                            const label = this.getLabelForValue(value);
+                            return label.length > 20 ? label.substring(0, 20) + '...' : label;
                         }
                     }
                 }
             }
-        }
+        },
+        plugins: [playCountPlugin]
     });
 }
 
@@ -379,13 +468,15 @@ function createLineChart(canvasId, title, data) {
         data: {
             labels: sortedData.map(item => item[0]),
             datasets: [{
-                label: 'Number of Plays',
+                label: title,
                 data: sortedData.map(item => item[1]),
                 borderColor: 'rgba(29, 185, 84, 0.8)',
                 backgroundColor: 'rgba(29, 185, 84, 0.1)',
                 borderWidth: 2,
                 fill: true,
-                tension: 0.4
+                tension: 0.4,
+                pointRadius: 2,
+                pointHoverRadius: 6
             }]
         },
         options: {
@@ -394,7 +485,28 @@ function createLineChart(canvasId, title, data) {
             plugins: {
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                    borderWidth: 1,
+                    padding: 10,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return `${title}: ${context.raw} hours`;
+                        }
+                    }
                 }
+            },
+            hover: {
+                mode: 'index',
+                intersect: false
             },
             scales: {
                 y: {
@@ -430,34 +542,94 @@ function createLineChart(canvasId, title, data) {
     });
 }
 
-function createTimeOfDayChart(canvasId, title, data) {
+function createTimeOfDayChart(canvasId, title, data, averageData) {
     const hours = Array.from({length: 24}, (_, i) => {
         const hour = i % 12 || 12;
         const period = i < 12 ? 'AM' : 'PM';
         return `${hour} ${period}`;
     });
 
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+    // Use light variations of Spotify green for individual days
+    const colors = [
+        'hsla(141, 73%, 85%, 0.8)',
+        'hsla(141, 73%, 80%, 0.8)',
+        'hsla(141, 73%, 75%, 0.8)',
+        'hsla(141, 73%, 70%, 0.8)',
+        'hsla(141, 73%, 65%, 0.8)',
+        'hsla(141, 73%, 60%, 0.8)',
+        'hsla(141, 73%, 55%, 0.8)'
+    ];
+
     new Chart(document.getElementById(canvasId), {
         type: 'line',
         data: {
             labels: hours,
-            datasets: [{
-                label: 'Number of Plays',
-                data: data,
-                borderColor: 'rgba(29, 185, 84, 0.8)',
-                backgroundColor: 'rgba(29, 185, 84, 0.1)',
-                borderWidth: 2,
-                fill: true,
-                tension: 0.4
-            }]
+            datasets: [
+                // Add individual day lines first
+                ...daysOfWeek.map((day, index) => ({
+                    label: day,
+                    data: data[index],
+                    borderColor: colors[index],
+                    backgroundColor: colors[index].replace('0.8', '0.1'),
+                    borderWidth: 1,
+                    fill: false,
+                    tension: 0.2,
+                    order: 1,
+                    pointRadius: 2,
+                    pointHoverRadius: 3
+                })),
+                // Add average line last so it appears on top
+                {
+                    label: 'Average',
+                    data: averageData,
+                    borderColor: 'hsla(141, 73%, 35%, 0.9)',
+                    backgroundColor: 'hsla(141, 73%, 35%, 0.1)',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4,
+                    order: 0,
+                    pointRadius: 3,
+                    pointHoverRadius: 6
+                }
+            ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: 'rgba(0, 0, 0, 0.6)',
+                        font: {
+                            family: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                    borderWidth: 1,
+                    padding: 10,
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.raw} minutes`;
+                        }
+                    }
                 }
+            },
+            hover: {
+                mode: 'index',
+                intersect: false
             },
             scales: {
                 y: {
