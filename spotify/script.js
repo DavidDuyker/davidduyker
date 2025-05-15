@@ -1,13 +1,13 @@
 let allSpotifyData = [];
 let filteredData = [];
 const files = [
-    '2023.json',
-    '2023_5.json',
-    '2020_4.json',
-    '2019_3.json',
-    '2018_2.json',
-    '2017_1.json',
-    '2015_0.json'
+    'Streaming_History_Audio_2021-2025_6.json',
+    'Streaming_History_Audio_2019-2021_5.json',
+    'Streaming_History_Audio_2019_4.json',
+    'Streaming_History_Audio_2018-2019_3.json',
+    'Streaming_History_Audio_2017-2018_2.json',
+    'Streaming_History_Audio_2015-2017_1.json',
+    'Streaming_History_Audio_2012-2015_0.json'
 ];
 
 // Add event listener to load data when page is ready
@@ -174,6 +174,10 @@ async function loadAllData() {
                         throw new Error(`Failed to load ${file}`);
                     }
                     return response.json();
+                })
+                .then(data => {
+                    // Handle both array and object formats
+                    return Array.isArray(data) ? data : data.data || [];
                 })
                 .catch(error => {
                     throw new Error(`Error loading ${file}: ${error.message}`);
