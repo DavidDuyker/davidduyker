@@ -177,7 +177,9 @@ async function loadAllData() {
                 })
                 .then(data => {
                     // Handle both array and object formats
-                    return Array.isArray(data) ? data : data.data || [];
+                    const records = Array.isArray(data) ? data : data.data || [];
+                    // Filter out records with less than 1 minute of play time
+                    return records.filter(item => (item.ms_played || 0) >= 30000);
                 })
                 .catch(error => {
                     throw new Error(`Error loading ${file}: ${error.message}`);
