@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Card Effect</title>
+    <style>
+        :root {
+            --text: #000000;
+            --text-secondary: #2a2a2a;
+            --text-underline: #d7d7d7;
+            --hover-background: hsl(202deg 100% 48.37% / 17%);
+            --hover-background-light: hsl(202deg 100% 48.37% / 8%);
+            --hover-corners: #00000088;
+            --background: #f2f2f2;
+            --background-secondary: #d6d6d6;
+            --divider: #00000016;
+            --outline: #00000054;
+            --width-text: 38rem;
+            --width-content: 60rem;
+            --text-size: clamp(1rem, 0.85rem + 0.7vw, 1.1rem);
+            --text-size-modify-large: 1.5;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background);
+            font-family: "rubik", Helvetica, sans-serif;
+            color: var(--text-secondary);
+            padding: 24px;
+            gap: 100px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: var(--width-content);
+            padding: 40px;
+            transform:translateZ(-1000px);
+        }
+
+        .card {
+            width: 500px;
+            height: 350px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            cursor: pointer;
+            flex-shrink: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 0.2)
+            );
+            box-shadow: 
+                0 0 20px rgba(0, 0, 0, 0.1),
+                0 0 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            border-radius: 18px;
+            overflow: hidden;
+            background: white;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card img.front {
+            z-index: 2;
+        }
+
+        .card img.back {
+            z-index: 1;
+        }
+
+        .content {
+            max-width: var(--width-text);
+        }
+
+        .content h1 {
+            font-family: "Rubik Mono One", Helvetica, sans-serif;
+            font-size: calc(var(--text-size) * var(--text-size-modify-large));
+            color: var(--text);
+            margin: 0 0 20px 0;
+        }
+
+        .content p {
+            font-size: var(--text-size);
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .button {
+            color: var(--text);
+            padding: 0.125rem 0.25rem;
+            margin: -0.125rem -0.25rem;
+            transition-duration: 150ms;
+            transition: text-decoration-color 0ms;
+            text-decoration-color: var(--text-underline);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
+            text-decoration-skip-ink: auto;
+            text-wrap-mode: nowrap;
+            position: relative;
+        }
+
+        .button:hover, .button:focus {
+            border-radius: 4px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: var(--hover-corners);
+            background-color: var(--hover-background-light);
+        }
+
+        .button:focus {
+            outline-offset: 3px;
+            outline: 2px solid var(--hover-corners);
+        }
+
+        .CornerLinesWrapper {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            pointer-events: none;
+            opacity: 0;
+            transition-duration: 350ms;
+        }
+
+        .button:hover .CornerLinesWrapper, .button:focus .CornerLinesWrapper {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+        }
+
+        .CornerLinesWrapper span {
+            position: absolute;
+            border: solid 1px var(--hover-corners);
+            width: 8px;
+            height: 8px;
+        }
+
+        span.CornerLinesTopLeft {
+            top: -1px;
+            left: -1px;
+            border-bottom: none;
+            border-right: none;
+            border-top-left-radius: 4px;
+        }
+
+        span.CornerLinesTopRight {
+            top: -1px;
+            right: -1px;
+            border-bottom: none;
+            border-left: none;
+            border-top-right-radius: 4px;
+        }
+
+        span.CornerLinesBottomLeft {
+            bottom: -1px;
+            left: -1px;
+            border-top: none;
+            border-right: none;
+            border-bottom-left-radius: 4px;
+        }
+
+        span.CornerLinesBottomRight {
+            bottom: -1px;
+            right: -1px;
+            border-top: none;
+            border-left: none;
+            border-bottom-right-radius: 4px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.8)
+            );
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            filter: blur(0.5px);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.4) 0%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 255, 255, 0.4) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <img src="/assets/DSgrid.png" alt="DS Grid" class="back">
+                <img src="/assets/DSitems.png" alt="DS Items" class="front">
+            </div>
+        </div>
+        <div class="content">
+            <h1>Design System</h1>
+            <p>A comprehensive design system that streamlines the creation of consistent, high-quality user interfaces. This system includes a robust component library, clear documentation, and practical guidelines for implementation.</p>
+            <a href="#" class="button">
+                View Case Study
+                <div class="CornerLinesWrapper">
+                    <span class="CornerLinesTopLeft"></span>
+                    <span class="CornerLinesTopRight"></span>
+                    <span class="CornerLinesBottomLeft"></span>
+                    <span class="CornerLinesBottomRight"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <h1>Design System</h1>
+            <p>A comprehensive design system that streamlines the creation of consistent, high-quality user interfaces. This system includes a robust component library, clear documentation, and practical guidelines for implementation.</p>
+            <a href="#" class="button">
+                View Case Study
+                <div class="CornerLinesWrapper">
+                    <span class="CornerLinesTopLeft"></span>
+                    <span class="CornerLinesTopRight"></span>
+                    <span class="CornerLinesBottomLeft"></span>
+                    <span class="CornerLinesBottomRight"></span>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <img src="/assets/DSgrid.png" alt="DS Grid" class="back">
+                <img src="/assets/DSitems.png" alt="DS Items" class="front">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        const maxRotation = 10;
+        const baseRotation = 5;
+        const maxTranslate = 5; // Maximum translation in pixels
+
+        cards.forEach((card, index) => {
+            const container = card.closest('.container');
+            let isDragging = false;
+            let startX, startY;
+            let currentRotationX = baseRotation;
+            let currentRotationY = index === 1 ? -baseRotation : baseRotation;
+            let lastMouseX, lastMouseY;
+            
+            // Mouse move handler for hover effect
+            container.addEventListener('mousemove', (e) => {
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                
+                if (isDragging) return; // Skip hover effect while dragging
+                
+                const rect = container.getBoundingClientRect();
+                
+                // Calculate mouse position relative to container center
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+                
+                // Calculate rotation with more dramatic effect
+                const rotateY = baseRotation + (mouseX / (rect.width / 2)) * maxRotation;
+                const rotateX = baseRotation - (mouseY / (rect.height / 2)) * maxRotation;
+                
+                // Calculate translation (move away from cursor)
+                const translateX = -(mouseX / (rect.width / 2)) * maxTranslate;
+                const translateY = -(mouseY / (rect.height / 2)) * maxTranslate;
+                
+                // Apply rotation and translation
+                if (index === 1) {
+                    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${-rotateY}deg) translate(${translateX}px, ${translateY}px)`;
+                } else {
+                    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${translateX}px, ${translateY}px)`;
+                }
+            });
+
+            // Mouse down handler for drag start
+            card.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                card.style.cursor = 'grabbing';
+                card.style.transition = 'none';
+            });
+
+            // Mouse move handler for dragging
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+                
+                // Update rotation based on drag distance
+                currentRotationY += deltaX * 0.5;
+                currentRotationX -= deltaY * 0.5;
+                
+                // Clamp rotations to prevent extreme angles
+                currentRotationX = Math.max(-30, Math.min(30, currentRotationX));
+                currentRotationY = Math.max(-30, Math.min(30, currentRotationY));
+                
+                // Apply rotation
+                if (index === 1) {
+                    card.style.transform = `perspective(800px) rotateX(${currentRotationX}deg) rotateY(${-currentRotationY}deg)`;
+                } else {
+                    card.style.transform = `perspective(800px) rotateX(${currentRotationX}deg) rotateY(${currentRotationY}deg)`;
+                }
+                
+                startX = e.clientX;
+                startY = e.clientY;
+            });
+
+            // Mouse up handler for drag end
+            document.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                card.style.cursor = 'pointer';
+                card.style.transition = 'transform 0.2s ease-out';
+                
+                // Trigger a mousemove event to update to cursor position
+                if (lastMouseX && lastMouseY) {
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const mouseX = lastMouseX - centerX;
+                    const mouseY = lastMouseY - centerY;
+                    
+                    const rotateY = baseRotation + (mouseX / (rect.width / 2)) * maxRotation;
+                    const rotateX = baseRotation - (mouseY / (rect.height / 2)) * maxRotation;
+                    const translateX = -(mouseX / (rect.width / 2)) * maxTranslate;
+                    const translateY = -(mouseY / (rect.height / 2)) * maxTranslate;
+                    
+                    if (index === 1) {
+                        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${-rotateY}deg) translate(${translateX}px, ${translateY}px)`;
+                    } else {
+                        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${translateX}px, ${translateY}px)`;
+                    }
+                }
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) return;
+                if (index === 1) {
+                    card.style.transform = `perspective(800px) rotateX(${baseRotation}deg) rotateY(${-baseRotation}deg) translate(0, 0)`;
+                } else {
+                    card.style.transform = `perspective(800px) rotateX(${baseRotation}deg) rotateY(${baseRotation}deg) translate(0, 0)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
