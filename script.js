@@ -1,27 +1,38 @@
+// ===== GREETING ANIMATION FUNCTION =====
+// This function creates an interactive greeting animation on the profile image
+// When the user hovers over the profile image, it cycles through different greetings
 document.addEventListener('DOMContentLoaded', function () {
-    const greetings = ['Yo!', 'Hi!', 'Hey', 'Sup', 'Hoy', 'Hi!', ' 👋 '];
-    let currentIndex = 0;
+    // Array of different greeting messages to cycle through
+    const greetings = ['Yo!', 'Hi!', 'Hey', 'Sup', 'Hoy', 'Hi!', ' 👋 '];
+    let currentIndex = 0; // Track which greeting is currently displayed
 
+    // Get references to the profile image and the greeting text element inside it
     const profileImage = document.querySelector('.profile-image');
     const greetingText = profileImage.querySelector('p');
 
+    // Add mouse enter event listener to the profile image
     profileImage.addEventListener('mouseenter', function () {
-      currentIndex = (currentIndex + 1) % greetings.length;
-      greetingText.textContent = greetings[currentIndex];
+        // Cycle to the next greeting in the array (loop back to 0 when reaching the end)
+        currentIndex = (currentIndex + 1) % greetings.length;
+        // Update the greeting text with the new message
+        greetingText.textContent = greetings[currentIndex];
     });
-  });
+});
 
-  document.addEventListener('DOMContentLoaded', function() {
+// ===== CORNER LINES ANIMATION FUNCTION =====
+// This function adds decorative corner lines to all links on the page
+// Creates a visual effect with corner elements that can be styled with CSS
+document.addEventListener('DOMContentLoaded', function() {
     // Select all links on the page
     const links = document.querySelectorAll('a');
     
-    // Iterate through each link
+    // Iterate through each link to add corner decorations
     links.forEach(link => {
-        // Create the wrapper div
+        // Create a wrapper div to contain the corner elements
         const wrapper = document.createElement('div');
         wrapper.className = 'CornerLinesWrapper';
         
-        // Create the corner spans
+        // Create four corner span elements for decorative purposes
         const topLeft = document.createElement('span');
         topLeft.className = 'CornerLinesTopLeft';
         
@@ -34,85 +45,42 @@ document.addEventListener('DOMContentLoaded', function () {
         const bottomRight = document.createElement('span');
         bottomRight.className = 'CornerLinesBottomRight';
         
-        // Clone the link's content
+        // Clone the link's content to preserve it
         const linkContent = link.cloneNode(true);
     
         
-        // Add all elements to the wrapper
+        // Add all corner elements to the wrapper
         wrapper.appendChild(topLeft);
         wrapper.appendChild(topRight);
         wrapper.appendChild(bottomLeft);
         wrapper.appendChild(bottomRight);
         
-        // Add the wrapper to the link
+        // Add the wrapper with corner elements to the original link
         link.appendChild(wrapper);
     });
 });
 
+// ===== PROFILE IMAGE ANIMATION FUNCTION =====
+// This function adds a delayed animation to the profile image
+// Creates a subtle entrance effect after the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    const projectImage = document.querySelector('.DSitems');
-    const projectGrid = document.querySelector('.DSgrid');
-    const container = document.querySelector('#zoomFrame');
-    
-    // Set initial styles
-    container.style.overflow = 'hidden';
-    projectImage.style.transition = 'transform 0.2s ease-out';
-    projectImage.style.width = '100%';
-    projectImage.style.height = '100%';
-    projectImage.style.objectFit = 'cover';
-    projectImage.style.transform = 'scale(1.05)';
-
-    projectGrid.style.transition = 'transform 0.2s ease-out';
-    projectGrid.style.width = '100%';
-    projectGrid.style.height = '100%';
-    projectGrid.style.objectFit = 'cover';
-    projectGrid.style.transform = 'scale(1.05)';
-    
-    // Add event listener to the window instead of the container
-    window.addEventListener('mousemove', function(e) {
-        // Get window dimensions
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        
-        // Calculate mouse position relative to window (0 to 1)
-        const xPos = e.clientX / windowWidth;
-        const yPos = e.clientY / windowHeight;
-        
-        // Calculate movement range (in pixels)
-        const moveRange = -35;
-        const moveRangeFar = -20;
-        
-        // Calculate translation values
-        const xMove = (xPos - 0.5) * moveRange;
-        const yMove = (yPos - 0.5) * (moveRange * 0.6);
-
-        const xMoveFar = (xPos - 0.5) * moveRangeFar;
-        const yMoveFar = (yPos - 0.5) * (moveRangeFar * 0.6);
-        
-        // Apply transform
-        projectImage.style.transform = `scale(1.05) translate(${-xMove}px, ${-yMove}px)`;
-        projectGrid.style.transform = `scale(1.05) translate(${-xMoveFar}px, ${-yMoveFar}px)`;
-    });
-    
-    // No need to reset on mouseleave since we're tracking the whole window
-    // But we can add a resize listener to ensure everything works when the window is resized
-    window.addEventListener('resize', function() {
-        // Reset position on resize to avoid jumps
-        projectImage.style.transform = 'scale(1.05) translate(0, 0)';
-        projectGrid.style.transform = 'scale(1.05) translate(0, 0)';
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
+    // Get reference to the profile image element
     const element = document.querySelector('.profile-image');
+    
+    // Set a timeout to delay the animation start
     setTimeout(function() {
+        // Add animation classes to trigger the entrance effect
         element.classList.add('animate-profile-img');
         element.classList.add('animate-profile-img-speed');
+        
+        // Remove the main animation class after 2.5 seconds
         setTimeout(function() {
             element.classList.remove('animate-profile-img');
         }, 2500);
+        
+        // Remove the speed animation class after 3 seconds
         setTimeout(function() {
             element.classList.remove('animate-profile-img-speed');
         }, 3000);
-    }, 5000);
+    }, 5000); // Wait 5 seconds before starting the animation
 });

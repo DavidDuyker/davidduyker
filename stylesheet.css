@@ -13,7 +13,7 @@
   --outline: #00000054;
 
   --width-text: 38rem;
-  --width-content: 60rem;
+  --width-content: 72rem;
   --text-size: clamp(1rem, 0.85rem + 0.7vw, 1.1rem);
   --text-size-modify-large: 1.5;
 }
@@ -215,7 +215,16 @@ a:hover, a:focus {
 }
 
 .open-new::after {
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256'%3E%3Cpath d='M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z'%3E%3C/path%3E%3C/svg%3E");
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256'%3E%3Cpath d='M128,64V192a8,8,0,0,1-16,0V64a8,8,0,0,1,16,0ZM88,168L128,208L168,168a8,8,0,0,0-11.32,11.32L128,224L99.32,179.32A8,8,0,0,0,88,168Z'%3E%3C/path%3E%3C/svg%3E");
+  aria-label: "Open in new tab";
+  position: absolute;
+  right: -1.2ch;
+  transition-duration: 150ms;
+}
+
+.work-link::after {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256'%3E%3Cpath d='M128,64V192a8,8,0,0,1-16,0V64a8,8,0,0,1,16,0ZM88,168L128,208L168,168a8,8,0,0,0-11.32,11.32L128,224L99.32,179.32A8,8,0,0,0,88,168Z'%3E%3C/path%3E%3C/svg%3E");
+  aria-label: "Open in new tab";
   position: absolute;
   right: -1.2ch;
   transition-duration: 150ms;
@@ -225,10 +234,18 @@ a:hover, a:focus {
   .open-new::after {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 256 256'%3E%3Cpath d='M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z'%3E%3C/path%3E%3C/svg%3E");
   }
+
+  .work-link::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 256 256'%3E%3Cpath d='M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z'%3E%3C/path%3E%3C/svg%3E");
+  }
 }
 
 a:hover::after {
   right: -1.5ch;
+}
+
+a:focus::after {
+  right: -1.8ch;
 }
 
 .inline-link {
@@ -259,7 +276,7 @@ ul {
   background-color: var(--background-secondary);
   height: fit-content;
   text-wrap: nowrap;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: calc(var(--text-size) * 0.8);
   line-height: 1;
 }
@@ -404,24 +421,42 @@ ul {
 /* __________ Projects __________ */
 #projects {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
+  flex-direction: row;
+  align-items: start;
+
+  
+  gap: 1.5rem;
 }
 
 .project {
-  position: relative;
+  border: 1px solid var(--outline);
+  border-radius: 1.8rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
   width: 100%;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  background: var(--background);
+}
+
+.project:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 
+    0 4px 12px rgba(59, 130, 246, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 .project > img {
   border: solid 1px var(--outline);
   border-radius: 12px;
   filter: drop-shadow(0px 4px 2px #00000011);
+  max-height: 50vh;
 }
 
 .project > div {
@@ -480,6 +515,7 @@ ul {
 /* color Contrast plugin try me */
 
 .project .try-it {
+  display: none;
   border: none;
   position: absolute;
   left: 0;
