@@ -9,11 +9,21 @@
   --hover-corners: #00000088;
   --background: #f2f2f2;
   --background-secondary: #d6d6d6;
+  --surface: #ffffff;
+  --drop-shadow: #0000002f;
   --divider: #00000016;
-  --outline: #00000054;
+  --outline: #00000025;
+
+  /* Card highlight colors */
+  --highlight-blue-bg: hsl(205, 87%, 95%);
+  --highlight-blue-border: hsl(211, 100%, 50%);
+  --highlight-yellow-bg: hsl(46, 100%, 94%);
+  --highlight-yellow-border: hsl(45, 100%, 51%);
+  --highlight-purple-bg: hsl(292, 44%, 95%);
+  --highlight-purple-border: hsl(300, 100%, 37%);
 
   --width-text: 38rem;
-  --width-content: 60rem;
+  --width-content: 80rem;
   --text-size: clamp(1rem, 0.85rem + 0.7vw, 1.1rem);
   --text-size-modify-large: 1.5;
 }
@@ -28,8 +38,14 @@
     --hover-corners: #aaaaaa;
     --background: #090909;
     --background-secondary: #333333;
+    --surface: #2f2f2f;
     --divider: #686868;
     --outline: #0c0c0c82;
+
+    /* Dark mode card highlight colors */
+    --highlight-blue-bg: hsl(235, 33%, 20%);
+    --highlight-yellow-bg: hsl(29, 33%, 20%);
+    --highlight-purple-bg: hsl(267, 33%, 20%);
   }
 }
 
@@ -126,7 +142,7 @@ body {
 
 .content-flow {
   margin: 144px auto;
-  width: 100%;
+  width: 95%;
   max-width: var(--width-content);
   display: flex;
   flex-direction: column;
@@ -190,10 +206,15 @@ ul a {
 }
 
 a {
+  position: relative;
+}
+
+.button-link, .inline-link, .link {
   color: var(--text);
   padding: 0.125rem 0.25rem;
   margin: -0.125rem -0.25rem;
   transition-duration: 150ms;
+  text-decoration: underline;
   transition: text-decoration-color 0ms;
   text-decoration-color: var(--text-underline);
   text-decoration-thickness: 2px;
@@ -202,12 +223,12 @@ a {
   text-wrap-mode: nowrap;
 }
 
-a:focus {
+.button-link:focus, .inline-link:focus {
   outline-offset: 3px;
   outline: 2px solid var(--hover-corners);
 }
 
-a:hover, a:focus {
+.button-link:hover, .button-link:focus, .inline-link:hover, .inline-link:focus {
   border-radius: 4px;
   text-decoration-thickness: 1px;
   text-decoration-color: var(--hover-corners);
@@ -227,7 +248,7 @@ a:hover, a:focus {
   }
 }
 
-a:hover::after {
+.open-new:hover::after {
   right: -1.5ch;
 }
 
@@ -247,6 +268,12 @@ a:hover::after {
 
 .inline-link span {
   display: none;
+}
+
+.home-button {
+  position: absolute;
+  top: 24px;
+  left: 24px;
 }
 
 ul {
@@ -270,7 +297,6 @@ ul {
   flex-wrap: wrap;
   gap: 0.6rem;
   flex: 0 2 auto;
-  justify-content: flex-end;
 }
 
 #plugin iframe {
@@ -404,9 +430,22 @@ ul {
 /* __________ Projects __________ */
 #projects {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding-top: 20vh;
+  margin-top: -20vh;
+}
+
+#projects:has(.project:hover) .project, #projects:has(.project:focus) .project {
+  filter: brightness(0.9);
+}
+
+/* When any project card is hovered, apply a darkening filter to all other projects */
+.project:hover, .project:focus{
+  filter: brightness(1) !important;
 }
 
 .project {
@@ -414,13 +453,139 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  width: 100%;
+  gap: 1rem;
+  flex-basis: 22rem;
+  min-width: 16rem;
+  background-color: var(--surface);
+  border: solid 1px var(--outline);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0px 4px 2px var(--drop-shadow);
+  transition: transform 0.2s ease, z-index 0.15s ease, box-shadow 0.2s ease, margin 0.1s ease-in-out, background-color 0.2s ease, border-color 0.2s ease, filter 0.2s ease;
+  z-index: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* When a specific project is hovered, bring it to the front */
+#projects .project:hover, #projects .project:focus {
+  z-index: 20;
+  box-shadow: 0 8px 30px var(--drop-shadow);
+  background-color: var(--surface);
+}
+
+#projects .project:nth-child(1) {
+  transform: rotate(var(--card-left-initial-rotate));
+  animation: slideInReverse 0.2s ease paused;
+  transform-origin: top right;
+}
+
+#projects .project:nth-child(2) {
+  transform: translateX(4px) rotate(1deg);
+  z-index: 15;
+  transform-origin: top right;
+}
+
+#projects .project:nth-child(3) {
+  transform: rotate(var(--card-right-initial-rotate));
+  animation: slideInRightReverse 0.2s ease paused;
+  transform-origin: top left;
+}
+
+/* Animate the middle object when hovered */
+#projects .project:nth-child(2):hover, #projects .project:nth-child(2):focus {
+  transform: translateY(-15px);
+  margin: 0 -6px;
+  z-index: 20;
+}
+
+.project {
+  --card-left-initial-x: -10px;
+  --card-left-initial-rotate: -4deg;
+  --card-left-active-x: 15px;
+  --card-left-active-rotate: 0deg;
+  --card-left-active-y: -15px;
+  
+  --card-right-initial-x: 10px;
+  --card-right-initial-y: 10px;
+  --card-right-initial-rotate: 4deg;
+  --card-right-active-x: -15px;
+  --card-right-active-rotate: 0deg;
+  --card-right-active-y: -10px;
+}
+
+/* Animate the first and last object when hovered */
+@keyframes slideIn {
+  0% {
+    transform: translateX(var(--card-left-initial-x)) rotate(var(--card-left-initial-rotate));
+  }
+  50% {
+    transform: translateX(-15px) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(var(--card-left-active-x))  translateY(var(--card-left-active-y))  rotate(var(--card-left-active-rotate));
+  }
+}
+
+@keyframes slideInReverse {
+  0% {
+    transform: translateX(var(--card-left-active-x)) translateY(var(--card-left-active-y)) rotate(var(--card-left-active-rotate));
+  }
+  70% {
+    transform: translateX(-10px) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(var(--card-left-initial-x)) rotate(var(--card-left-initial-rotate));
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(var(--card-right-initial-x)) translateY(var(--card-right-initial-y)) rotate(var(--card-right-initial-rotate));
+  }
+  50% {
+    transform: translateX(16px) translateY(-4px) rotate(1deg);
+  }
+  100% {
+    transform: translateX(var(--card-right-active-x)) translateY(var(--card-right-active-y)) rotate(var(--card-right-active-rotate));
+  }
+}
+
+@keyframes slideInRightReverse {
+  0% {
+    transform: translateX(var(--card-right-active-x)) translateY(var(--card-right-active-y)) rotate(var(--card-right-active-rotate));
+  }
+  50% {
+    transform: translateX(16px) translateY(-4px) rotate(1deg);
+  }
+  100% {
+    transform: translateX(var(--card-right-initial-x)) translateY(var(--card-right-initial-y)) rotate(var(--card-right-initial-rotate));
+  }
+}
+
+/* Hover states - run animations forward */
+#projects .project:nth-child(1):hover, #projects:has(.project:focus) .project:nth-child(1):focus {
+  animation: slideIn 0.2s ease-in-out forwards;
+  z-index: 20;
+}
+
+#projects .project:nth-child(3):hover, #projects:has(.project:focus) .project:nth-child(3):focus {
+  animation: slideInRight 0.2s ease-in-out forwards;
+  z-index: 20;
+}
+
+/* Non-hover states - run reverse animations */
+#projects .project:nth-child(1):not(:hover), #projects:has(.project:focus) .project:nth-child(1):not(:focus) {
+  animation: slideInReverse 0.2s ease-in-out forwards;
+}
+
+#projects .project:nth-child(3):not(:hover), #projects:has(.project:focus) .project:nth-child(3):not(:focus) {
+  animation: slideInRightReverse 0.2s ease-in-out forwards;
 }
 
 .project > img {
   border: solid 1px var(--outline);
-  border-radius: 12px;
+  border-radius: 8px;
   filter: drop-shadow(0px 4px 2px #00000011);
 }
 
@@ -432,65 +597,8 @@ ul {
 
 .project-title {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-}
-
-#zoomFrame {
-  position: relative;
-  border: solid 1px var(--outline);
-  border-radius: 12px;
-  filter: drop-shadow(0px 4px 2px #00000011);
-  overflow: hidden;
-  background-color: #fff;
-  background: radial-gradient(
-    bottom,
-    rgba(16, 115, 235, 0.0673) 0%,
-    rgba(16, 115, 235, 0) 100%
-  );
-  background-position: 0px 0px;
-}
-
-#zoomFrame .DSgrid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  opacity: 0.7;
-}
-
-.DSitems {
-  filter: drop-shadow(0px 4px 4px hsla(0, 0%, 0%, 0.06));
-}
-
-#zoomFrame::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -100;
-  mix-blend-mode: luminosity;
-  opacity: 50%;
-  background: url("data:image/svg+xml,%3Csvg viewBox=%270 0 369 369%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%271.5%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E");
-  pointer-events: none;
-}
-
-/* color Contrast plugin try me */
-
-.project .try-it {
-  border: none;
-  position: absolute;
-  left: 0;
-  top: 25%;
-  margin-left: -118px;
-}
-
-@media (width < calc(60rem + 244px)) {
-  .try-it {
-    display: none;
-  }
 }
 
 /* _______ Links _________ */
@@ -500,10 +608,6 @@ ul {
 }
 
 /* ___________ button/link corners ?__________*/
-
-a {
-  position: relative;
-}
 
 .CornerLinesWrapper {
   position: absolute;
@@ -567,4 +671,81 @@ span.CornerLinesBottomRight {
   border-top: none;
   border-left: none;
   border-bottom-right-radius: 4px;
+}
+
+/* _______ Interactive Hover Interactions _________ */
+
+/* Base styles for all trigger text */
+.system-design-trigger,
+.design-research-trigger,
+.ui-excellence-trigger {
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  padding: 0.125rem 0.25rem;
+  margin: -0.125rem -0.25rem;
+}
+
+/* Hover states for trigger text */
+.system-design-trigger:hover {
+  background-color: var(--hover-background-light);
+}
+
+.design-research-trigger:hover {
+  background-color: rgba(255, 193, 7, 0.2);
+}
+
+.ui-excellence-trigger:hover {
+  background-color: rgba(128, 0, 128, 0.2);
+}
+
+/* Modern approach using :has() selector for cross-section interactions */
+@supports (selector(:has(*))) {
+  /* System Design -> Design System Card (Blue) */
+  .content-flow:has(.system-design-trigger:hover) .design-system-card {
+    background-color: var(--highlight-blue-bg);
+    border-color: var(--highlight-blue-border);
+    transform: scale(1.02);
+  }
+
+  /* Design Research -> Data Reporting Tool (Yellow) */
+  .content-flow:has(.design-research-trigger:hover) .design-research-card {
+    background-color: var(--highlight-yellow-bg);
+    border-color: var(--highlight-yellow-border);
+    transform: scale(1.02);
+  }
+
+  /* UI Excellence -> Design System + Figma Plugin Cards (Purple) */
+  .content-flow:has(.ui-excellence-trigger:hover) .ui-excellence-card {
+    background-color: var(--highlight-purple-bg);
+    border-color: var(--highlight-purple-border);
+    transform: scale(1.02);
+  }
+}
+
+/* Apply transitions to all cards */
+.design-system-card,
+.design-research-card,
+.ui-excellence-card {
+  transition-duration: 150ms;
+}
+
+/* Case study page styles */
+.case-study-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project-image {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.project-image img {
+  max-width: 100%;
+  height: auto;
+  border: solid 1px var(--outline);
+  border-radius: 8px;
+  filter: drop-shadow(0px 4px 2px #00000011);
 }
