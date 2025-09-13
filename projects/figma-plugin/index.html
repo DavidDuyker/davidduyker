@@ -26,7 +26,8 @@
   <!-- OpenGraph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Figma Color Plugin @ USCIS | David Duyker">
-  <meta property="og:description" content="Designed and developed a tool to make accessible color choices easy for designers working on government software.">
+  <meta property="og:description"
+    content="Designed and developed a tool to make accessible color choices easy for designers working on government software.">
   <meta property="og:image" content="assets/preview.jpg">
 
   <!-- CSS -->
@@ -88,65 +89,71 @@
 
 <body>
   <div class="texture"></div>
-  <div class="content-flow">
-    <p><a class="button-link home-button" href="/">Back to Home</a></p>
+  <div class="content-flow project-page">
     <div class="section width-text">
-      <div class="header">
-        <h1>Figma Color Plugin @ USCIS</h1>
-      </div>
-      
-      <div class="chip-bag">
-        <p class="chip">Design</p>
-        <p class="chip">Development</p>
-        <p class="chip">2024</p>
-        <p class="chip">Figma Plugin</p>
-        <p class="chip">Accessibility</p>
-      </div>
+      <a class="button-link home-button" href="/">Back to Home</a>
+      <h1>Figma Color Plugin @ USCIS</h1>
+      <p>A simple tool to make accessible color choices easy for designers working on government software</p>
+      <p><a class="button-link open-new"
+          href="https://www.figma.com/community/plugin/1424903377958488950/contrast-wcag-apca">Try in Figma</a></p>
+    </div>
+    <div class="section project-hero width-medium">
+      <iframe src="/colorcontrast/index.html" width="100%" height="700" frameborder="0"
+        title="Color Contrast Tool"></iframe>
+    </div>
+    <div class="section width-text">
+      <h2>Summary</h2>
+      <p>
+        Designed and Developed a tool to make accessible color choices easy for designers working on government software
+        in US Citizenship and Immigration Services.
+      </p>
+    </div>
 
-      <div class="intro-paragraph">
-        <p>
-          Designed and Developed a tool to make accessible color choices easy for designers working on government software in US Citizenship and Immigration Services.
-        </p>
-      </div>
+    <hr>
+    <!-- 
+    <div class="section width-text">
+      <h2>Challenge</h2>
+      <p>
+        Government software must meet strict accessibility standards, including WCAG 2.1 AA compliance for color
+        contrast. Designers at USCIS needed a way to quickly validate and select accessible color combinations without
+        constantly checking contrast ratios manually.
+      </p>
 
-      <div class="project-image">
-        <img src="/assets/Rcover.jpg" alt="Figma Color Plugin interface" />
-      </div>
+      <h2>Solution</h2>
+      <p>
+        I designed and developed a Figma plugin that:
+      </p>
+      <ul>
+        <li>Automatically checks color contrast ratios in real-time</li>
+        <li>Provides accessible color suggestions based on selected colors</li>
+        <li>Integrates with USCIS design system color tokens</li>
+        <li>Shows WCAG compliance status for different text sizes</li>
+        <li>Allows bulk color validation across multiple elements</li>
+      </ul>
 
-      <div class="case-study-content">
-        <h2>Challenge</h2>
-        <p>
-          Government software must meet strict accessibility standards, including WCAG 2.1 AA compliance for color contrast. Designers at USCIS needed a way to quickly validate and select accessible color combinations without constantly checking contrast ratios manually.
-        </p>
+      <h2>Technical Implementation</h2>
+      <p>
+        The plugin was built using Figma's Plugin API with:
+      </p>
+      <ul>
+        <li>Real-time contrast calculation using WCAG formulas</li>
+        <li>Integration with USCIS color palette and design tokens</li>
+        <li>Intuitive UI that fits seamlessly into Figma's interface</li>
+        <li>Batch processing for multiple selected elements</li>
+      </ul>
 
-        <h2>Solution</h2>
-        <p>
-          I designed and developed a Figma plugin that:
-        </p>
-        <ul>
-          <li>Automatically checks color contrast ratios in real-time</li>
-          <li>Provides accessible color suggestions based on selected colors</li>
-          <li>Integrates with USCIS design system color tokens</li>
-          <li>Shows WCAG compliance status for different text sizes</li>
-          <li>Allows bulk color validation across multiple elements</li>
-        </ul>
+      <h2>Impact</h2>
+      <p>
+        The plugin reduced accessibility review time by 60% and helped ensure all USCIS designs met government
+        accessibility standards from the start. Designers could now focus on creative work rather than manual contrast
+        checking.
+      </p>
+    </div> -->
+    <hr>
 
-        <h2>Technical Implementation</h2>
-        <p>
-          The plugin was built using Figma's Plugin API with:
-        </p>
-        <ul>
-          <li>Real-time contrast calculation using WCAG formulas</li>
-          <li>Integration with USCIS color palette and design tokens</li>
-          <li>Intuitive UI that fits seamlessly into Figma's interface</li>
-          <li>Batch processing for multiple selected elements</li>
-        </ul>
-
-        <h2>Impact</h2>
-        <p>
-          The plugin reduced accessibility review time by 60% and helped ensure all USCIS designs met government accessibility standards from the start. Designers could now focus on creative work rather than manual contrast checking.
-        </p>
-      </div>
+    <div class="project-footer">
+      <a href="/projects/data-reporting/" class="button-link">Data Reporting Tools</a>
+      <a href="/projects/design-system/" class="button-link">Design System</a>
     </div>
   </div>
 </body>
