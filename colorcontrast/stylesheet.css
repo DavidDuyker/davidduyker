@@ -417,6 +417,16 @@
       border: none
     }
 
+    /* Firefox-specific styles */
+    input[type=color]::-moz-color-swatch {
+      border: none
+    }
+
+    input[type=color]::-moz-focus-inner {
+      border: none;
+      padding: 0
+    }
+
     .section {
       padding: 8px 0
     }
