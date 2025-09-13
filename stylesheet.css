@@ -284,7 +284,20 @@ a {
 
 .home-button {
   position: absolute;
-  top: 5rem;
+  top: 4rem;
+}
+
+.home-button::before {
+  content: "← ";
+  position: absolute;
+  left: -2ch;
+  opacity: 0;
+  transition-duration: 150ms;
+}
+
+.home-button:hover::before {
+  opacity: 1;
+  left: -2.5ch;
 }
 
 ul {
@@ -663,7 +676,7 @@ ul {
   gap: 0.5rem;
 }
 
-.project p {
+.project > div > p {
   margin-top: 0.5rem;
 }
 
