@@ -69,6 +69,7 @@ body {
   line-height: 1.5;
   /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
 /* 5. Improve media defaults */
@@ -155,6 +156,8 @@ body {
 
 .section {
   margin: auto;
+  padding-top: 7rem;
+  margin-top: -7rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -284,9 +287,15 @@ a {
   display: none;
 }
 
-.home-button {
-  margin: 1rem auto 1rem auto;
-  display: inline-block;
+nav {
+  margin: 1rem auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: var(--width-text);
+  max-width: var(--width-text);
 }
 
 .home-button::before {
@@ -488,12 +497,10 @@ ul {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 0;
-  padding-top: 20vh;
-  margin-top: -20vh;
   z-index: 0;
   /* Card entrance animations */
   opacity: 0;
-  transform: translateY(100px);
+  transform: translateY(50px);
   animation: slideUpFromBottom 0.3s ease-out 0.2s forwards;
 }
 
@@ -833,12 +840,7 @@ span.CornerLinesBottomRight {
 /* Case study page styles */
 
 .project-page  {
-  background-color: var(--surface);
-  border: solid 1px var(--outline);
-  box-shadow: 0px 4px 2px var(--drop-shadow);
-  border-radius: 24px;
-  padding: 128px 0;
-  margin: 2rem auto;
+  
 }
 
 .project-page h1 {
@@ -859,12 +861,12 @@ span.CornerLinesBottomRight {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 1rem;
   width: 100%;
   max-width: var(--width-text);
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem 2rem;
 }
 
 .project-footer a:nth-child(1)::before {
