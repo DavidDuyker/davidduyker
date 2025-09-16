@@ -129,6 +129,8 @@ body {
   background-color: var(--background);
   transition-duration: 150ms;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .texture {
@@ -143,7 +145,7 @@ body {
 
 .content-flow {
   margin: 144px auto;
-  width: 95%;
+  width: 100%;
   max-width: var(--width-content);
   display: flex;
   flex-direction: column;
@@ -283,8 +285,8 @@ a {
 }
 
 .home-button {
-  position: absolute;
-  top: 4rem;
+  margin: 1rem auto 1rem auto;
+  display: inline-block;
 }
 
 .home-button::before {
@@ -498,11 +500,13 @@ ul {
 .project-container {
   padding-bottom: 2.2rem;
   transition: all 0.1s ease;
+  display: flex;
 }
 
 /* Card wrappers for hover interactions */
 .project-container:nth-child(1) {
-  padding-left: 2.5rem;
+  padding-left: 5rem;
+  justify-content: flex-end;
 }
 
 .project-container:nth-child(2) {
@@ -512,7 +516,8 @@ ul {
 }
 
 .project-container:nth-child(3) {
-  padding-right: 2.9rem;
+  padding-right: 5rem;
+  justify-content: flex-start;
 }
 
 .project-container .project {
@@ -583,52 +588,74 @@ ul {
   margin-right: -8px;
 }
 
+#projects:has(.project-container:hover) .project-container:nth-child(1),
+#projects:has(.project:focus) .project-container:nth-child(1) {
+  padding-left: calc(5rem + 8px);
+}
+
+#projects:has(.project-container:hover) .project-container:nth-child(3),
+#projects:has(.project:focus) .project-container:nth-child(3) {
+  padding-right: calc(5rem + 8px);
+}
+
 /* Animated transitions for cards */
 @keyframes swapInFirst {
   0% {
     margin-right: -16px;
+    margin-left: 0;
   }
   50% {
     margin-right: 16px;
+    margin-left: -32px;
   }
   100% {
     margin-right: -8px;
+    margin-left: -8px;
   }
 }
 
 @keyframes swapOutFirst {
   0% {
     margin-right: -8px;
+    margin-left: -8px;
   }
   50% {
     margin-right: 16px;
+    margin-left: -32px;
   }
   100% {
     margin-right: -16px;
+    margin-left: 0;
   }
 }
 
 @keyframes swapInLast {
   0% {
-    margin-left: -24px;
+    margin-left: -28px;
+    margin-right: 0;
   }
   50% {
     margin-left: 16px;
+    margin-right: -44px;
   }
   100% {
     margin-left: -16px;
+    margin-right: -12px;
   }
 }
 
 @keyframes swapOutLast {
   0% {
     margin-left: -16px;
+    margin-right: -12px;
   }
   50% {
     margin-left: 16px;
+    margin-right: -44px;
   }
   100% {
-    margin-left: -24px;
+    margin-left: -28px;
+    margin-right: 0;
   }
 }
 
@@ -806,6 +833,12 @@ span.CornerLinesBottomRight {
 /* Case study page styles */
 
 .project-page  {
+  background-color: var(--surface);
+  border: solid 1px var(--outline);
+  box-shadow: 0px 4px 2px var(--drop-shadow);
+  border-radius: 24px;
+  padding: 128px 0;
+  margin: 2rem auto;
 }
 
 .project-page h1 {
@@ -856,33 +889,17 @@ span.CornerLinesBottomRight {
   right: -2.5ch;
 }
 
-/* Resume hover effect */
-.resume-link {
-  position: relative;
-}
-
-.resume-thumb-crop {
-  position: fixed;
-  visibility: hidden;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-
-.resume-thumb {
-  transform: translateX(0) translateY(0) rotate(20deg);
-  width: auto;
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-.resume-link:hover .resume-thumb {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0) translateY(0) rotate(5deg);
+/* mobile adjustments */
+@media (width < 50rem) {
+  #projects {
+    gap: 2rem;
+  }
+  .project-container {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .project-container .project {
+    transform: rotate(0deg) !important;
+    animation: none !important;
+  }
 }
