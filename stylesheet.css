@@ -328,6 +328,7 @@ ul {
 
 .chip-bag {
   display: flex;
+  /* display: none; */
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.6rem;
@@ -845,6 +846,7 @@ span.CornerLinesBottomRight {
 
 .project-page h1 {
   font-family: "Rubik", sans-serif;
+  font-size: calc(var(--text-size) * var(--text-size-modify-large) * var(--text-size-modify-large));
 }
 
 .project-hero {
