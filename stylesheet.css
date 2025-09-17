@@ -69,6 +69,7 @@ body {
   line-height: 1.5;
   /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
 /* 5. Improve media defaults */
@@ -129,6 +130,8 @@ body {
   background-color: var(--background);
   transition-duration: 150ms;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .texture {
@@ -143,7 +146,7 @@ body {
 
 .content-flow {
   margin: 144px auto;
-  width: 95%;
+  width: 100%;
   max-width: var(--width-content);
   display: flex;
   flex-direction: column;
@@ -153,6 +156,8 @@ body {
 
 .section {
   margin: auto;
+  padding-top: 7rem;
+  margin-top: -7rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -282,9 +287,15 @@ a {
   display: none;
 }
 
-.home-button {
-  position: absolute;
-  top: 4rem;
+nav {
+  margin: 1rem auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: var(--width-text);
+  max-width: var(--width-text);
 }
 
 .home-button::before {
@@ -317,6 +328,7 @@ ul {
 
 .chip-bag {
   display: flex;
+  /* display: none; */
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.6rem;
@@ -486,23 +498,23 @@ ul {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 0;
-  padding-top: 20vh;
-  margin-top: -20vh;
   z-index: 0;
   /* Card entrance animations */
   opacity: 0;
-  transform: translateY(100px);
+  transform: translateY(50px);
   animation: slideUpFromBottom 0.3s ease-out 0.2s forwards;
 }
 
 .project-container {
   padding-bottom: 2.2rem;
   transition: all 0.1s ease;
+  display: flex;
 }
 
 /* Card wrappers for hover interactions */
 .project-container:nth-child(1) {
-  padding-left: 2.5rem;
+  padding-left: 5rem;
+  justify-content: flex-end;
 }
 
 .project-container:nth-child(2) {
@@ -512,7 +524,8 @@ ul {
 }
 
 .project-container:nth-child(3) {
-  padding-right: 2.9rem;
+  padding-right: 5rem;
+  justify-content: flex-start;
 }
 
 .project-container .project {
@@ -583,52 +596,74 @@ ul {
   margin-right: -8px;
 }
 
+#projects:has(.project-container:hover) .project-container:nth-child(1),
+#projects:has(.project:focus) .project-container:nth-child(1) {
+  padding-left: calc(5rem + 8px);
+}
+
+#projects:has(.project-container:hover) .project-container:nth-child(3),
+#projects:has(.project:focus) .project-container:nth-child(3) {
+  padding-right: calc(5rem + 8px);
+}
+
 /* Animated transitions for cards */
 @keyframes swapInFirst {
   0% {
     margin-right: -16px;
+    margin-left: 0;
   }
   50% {
     margin-right: 16px;
+    margin-left: -32px;
   }
   100% {
     margin-right: -8px;
+    margin-left: -8px;
   }
 }
 
 @keyframes swapOutFirst {
   0% {
     margin-right: -8px;
+    margin-left: -8px;
   }
   50% {
     margin-right: 16px;
+    margin-left: -32px;
   }
   100% {
     margin-right: -16px;
+    margin-left: 0;
   }
 }
 
 @keyframes swapInLast {
   0% {
-    margin-left: -24px;
+    margin-left: -28px;
+    margin-right: 0;
   }
   50% {
     margin-left: 16px;
+    margin-right: -44px;
   }
   100% {
     margin-left: -16px;
+    margin-right: -12px;
   }
 }
 
 @keyframes swapOutLast {
   0% {
     margin-left: -16px;
+    margin-right: -12px;
   }
   50% {
     margin-left: 16px;
+    margin-right: -44px;
   }
   100% {
-    margin-left: -24px;
+    margin-left: -28px;
+    margin-right: 0;
   }
 }
 
@@ -806,10 +841,12 @@ span.CornerLinesBottomRight {
 /* Case study page styles */
 
 .project-page  {
+  
 }
 
 .project-page h1 {
   font-family: "Rubik", sans-serif;
+  font-size: calc(var(--text-size) * var(--text-size-modify-large) * var(--text-size-modify-large));
 }
 
 .project-hero {
@@ -826,12 +863,12 @@ span.CornerLinesBottomRight {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 1rem;
   width: 100%;
   max-width: var(--width-text);
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem 2rem;
 }
 
 .project-footer a:nth-child(1)::before {
@@ -856,33 +893,17 @@ span.CornerLinesBottomRight {
   right: -2.5ch;
 }
 
-/* Resume hover effect */
-.resume-link {
-  position: relative;
-}
-
-.resume-thumb-crop {
-  position: fixed;
-  visibility: hidden;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-
-.resume-thumb {
-  transform: translateX(0) translateY(0) rotate(20deg);
-  width: auto;
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-.resume-link:hover .resume-thumb {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0) translateY(0) rotate(5deg);
+/* mobile adjustments */
+@media (width < 50rem) {
+  #projects {
+    gap: 2rem;
+  }
+  .project-container {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .project-container .project {
+    transform: rotate(0deg) !important;
+    animation: none !important;
+  }
 }
